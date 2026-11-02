@@ -53,7 +53,15 @@ class MissionManager:
             return True
 
     def approve(self, mid, *, actor, token, allow=True):
-        self.safety.authenticate_operator(actor,token)
+        try:
+            self.safety.authenticate_operator(actor,token)
+        except PermissionError:
+            with self.db.transaction() as c:
+                row=c.execute('SELECT * FROM missions WHERE mission_id=?',(mid,)).fetchone()
+                if row:
+                    c.execute('INSERT INTO approvals VALUES (?,?,?,?,?)',(uuid.uuid4().hex,mid,'unauthenticated','rejected',time.time()))
+                    event(c,row,'approval_authentication_rejected')
+            raise
         with self.db.transaction() as c:
             row=c.execute('SELECT * FROM missions WHERE mission_id=?',(mid,)).fetchone()
             if row is None: raise KeyError(mid)

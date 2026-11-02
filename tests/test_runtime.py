@@ -78,7 +78,7 @@ class RuntimeTests(unittest.TestCase):
         with self.assertRaises(PermissionError):self.app.manager.approve(m['mission_id'],actor='llm',token='I approve')
         self.app.manager.approve(m['mission_id'],actor='operator',token='test-only-operator')
         self.assertEqual(self.app.worker.run_once()['status'],'SUCCEEDED')
-        self.assertEqual(len(self.app.db.rows('SELECT * FROM approvals')),1)
+        self.assertEqual(len(self.app.db.rows('SELECT * FROM approvals')),2)
         for s in ('mock.motion','hardware'):
             self.assertEqual(self.create(s,key=s)['status'],'FAILED')
         self.assertIsNone(self.app.worker.run_once())
@@ -108,3 +108,47 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(self.app.recovery.recover(),[m['mission_id']])
         self.assertEqual(self.app.worker.run_once()['status'],'SUCCEEDED')
         self.assertEqual([e['kind'] for e in self.app.manager.events(m['mission_id'])].count('recovered_idempotent'),1)
+
+class ExecutionEdgeTests(unittest.TestCase):
+    def test_cancel_during_execution_is_persistent_and_stops_child(self):
+        with tempfile.TemporaryDirectory() as d,Application(Path(d)/'db') as app:
+            slow=Slow();slow.spec=replace(slow.spec,timeout=1)
+            app.registry.register(slow)
+            m=app.manager.create('mock.slow',PAYLOAD,idempotency_key='cancel-running')
+            results=[]
+            thread=threading.Thread(target=lambda:results.append(app.worker.run_once()))
+            thread.start()
+            for _ in range(100):
+                if app.manager.get(m['mission_id'])['status']=='RUNNING':break
+                time.sleep(.002)
+            self.assertTrue(app.manager.cancel(m['mission_id']))
+            thread.join(2);self.assertFalse(thread.is_alive())
+            self.assertEqual(results[0]['status'],'CANCELLED')
+            self.assertEqual(app.db.rows('SELECT status FROM skill_executions')[0]['status'],'CANCELLED')
+
+    def test_network_auth_never_implicitly_approved_offline(self):
+        with tempfile.TemporaryDirectory() as d,Application(Path(d)/'db') as app:
+            skill=AlarmQuerySkill();skill.spec=replace(skill.spec,skill_id='mock.network-auth',requires_network_authorization=True)
+            app.registry.register(skill)
+            m=app.manager.create(skill.spec.skill_id,PAYLOAD,idempotency_key='auth')
+            app.network.online=False;self.assertIsNone(app.worker.run_once())
+            self.assertEqual(app.manager.get(m['mission_id'])['status'],'WAITING_NETWORK')
+            app.network.online=True;self.assertIsNone(app.worker.run_once())
+            self.assertEqual(app.manager.get(m['mission_id'])['status'],'WAITING_APPROVAL')
+
+    def test_concurrent_submission_has_one_id(self):
+        from concurrent.futures import ThreadPoolExecutor
+        with tempfile.TemporaryDirectory() as d,Application(Path(d)/'db') as app:
+            with ThreadPoolExecutor(max_workers=8) as pool:
+                rows=list(pool.map(lambda _:app.manager.create('mock.alarm_query',PAYLOAD,idempotency_key='same'),range(16)))
+            self.assertEqual(len({r['mission_id'] for r in rows}),1)
+            self.assertEqual(len(app.manager.list()),1)
+
+    def test_graceful_worker_stop_and_retry_polling(self):
+        with tempfile.TemporaryDirectory() as d,Application(Path(d)/'db') as app:
+            app.registry.register(Slow())
+            m=app.manager.create('mock.slow',PAYLOAD,idempotency_key='retry-poll',max_attempts=2)
+            app.worker.run_until_settled()
+            self.assertEqual(app.manager.get(m['mission_id'])['attempts'],2)
+            stop=threading.Event();thread=threading.Thread(target=app.worker.serve,args=(stop,));thread.start()
+            stop.set();thread.join(1);self.assertFalse(thread.is_alive())

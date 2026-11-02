@@ -32,5 +32,7 @@ def charts(report,folder):
         d=distribution([s['seconds'] for s in report['semantic_spans'] if s['stage']==stage])
         for p in ('p50','p95','p99'):phases.append((stage+' '+p,d[p] or 0))
     bars(folder/'stage-distributions.svg','Measured stage distributions (seconds, inclusive semantic validation)',phases)
+    bars(folder/'provider-comparison.svg','Mock/Rules total semantic response latency (seconds); real Qwen unmeasured',
+         [(r['provider']+' '+p,r['summary']['latency_seconds'][p]) for r in report['model_comparison'] for p in ('p50','p95','p99')])
     bars(folder/'network-recovery.svg','Mock task completions before and after network recovery (counts)',
          [(f'c={r["concurrency"]} latency={r["network_latency"]} {phase}',r[phase].get('SUCCEEDED',0)) for r in report['runs'] for phase in ('before_recovery','after_recovery')])

@@ -56,3 +56,19 @@ class Worker:
             if result is None: break
             results.append(result)
         return results
+
+    def serve(self,stop_event,*,poll_interval=.05):
+        """Cooperative graceful stop: finish current bounded Skill, then stop polling."""
+        while not stop_event.is_set():
+            if self.run_once() is None:stop_event.wait(poll_interval)
+
+    def run_until_settled(self,*,timeout=10):
+        """Wait for bounded retries; network/approval waits remain explicitly pending."""
+        deadline=time.monotonic()+timeout
+        while time.monotonic()<deadline:
+            result=self.run_once()
+            if result is None:
+                pending=[m for m in self.manager.list() if m['status'] in ('QUEUED','RETRY_WAIT')]
+                if not pending:return
+                time.sleep(.01)
+        raise TimeoutError('worker settle deadline exceeded; persisted state retained')

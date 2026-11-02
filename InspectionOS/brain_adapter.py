@@ -36,6 +36,8 @@ class BrainAdapter:
         with self.recorder.span('semantic_total',ctx):result=self.engine.analyze(text,mode=mode,now=now)
         if result.get('llm_inference_seconds') is not None:
             self.recorder.records.append({**ctx.fields(),'stage':'llm_provider','seconds':result['llm_inference_seconds'],'error':result['error']})
+        for stage,value in getattr(self.engine.provider,'timings',{}).items():
+            self.recorder.records.append({**ctx.fields(),'stage':stage,'seconds':value,'error':None})
         return self.submit_result(result,idempotency_key=idempotency_key,context=ctx)
 
     def submit_result(self,result,*,idempotency_key,context=None):

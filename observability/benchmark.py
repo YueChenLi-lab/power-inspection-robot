@@ -44,7 +44,13 @@ def run(output,n=20):
         for i in range(5):adapter.submit_text('查询3号断路器的上周告警。',idempotency_key=f'sem-{i}')
         app.worker.drain()
         semantic_records=adapter.recorder.records
-    report={'is_mock':True,'real_model_tested':False,'asr_tested':False,'runs':runs,'semantic_spans':semantic_records}
+    from tools.brain_smoke import evaluate, summarize
+    from brain_v3.config import ProviderConfig
+    comparison=[]
+    for provider in ('mock','rules'):
+        measured=evaluate(ProviderConfig(provider=provider))
+        comparison.append({'provider':provider,'is_real_llm':False,'summary':summarize(measured)})
+    report={'model_comparison':comparison,'real_model_comparison':None,'is_mock':True,'real_model_tested':False,'asr_tested':False,'runs':runs,'semantic_spans':semantic_records}
     (folder/'measurements.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
     from observability.report import charts
     charts(report,folder)

@@ -20,6 +20,7 @@ class OllamaTests(unittest.TestCase):
         self.mutate = lambda x: x
         self.content = None
         self.delay = 0
+        self.envelope = None
         class Handler(BaseHTTPRequestHandler):
             def log_message(self, *a): pass
             def do_POST(self):
@@ -28,7 +29,7 @@ class OllamaTests(unittest.TestCase):
                 evidence = json.loads(outer.request['messages'][1]['content'])['evidence']
                 evidence['structured_task_draft']['reasoning_source'] = 'llm_candidate'
                 content = outer.content if outer.content is not None else json.dumps(outer.mutate(evidence))
-                body = json.dumps({'model':'mock-http-not-real-qwen','done':True,'message':{'content':content}}).encode()
+                body = json.dumps(outer.envelope if outer.envelope is not None else {'model':'mock-http-not-real-qwen','done':True,'message':{'content':content}}).encode()
                 time.sleep(outer.delay)
                 try:
                     self.send_response(200); self.end_headers(); self.wfile.write(body)
@@ -93,3 +94,11 @@ class OllamaTests(unittest.TestCase):
             self.assertEqual(c.model,'qwen3:4b-instruct');self.assertEqual(c.timeout_seconds,60)
             self.assertFalse(c.enabled)
         self.assertEqual(ProviderConfig().provider,'rules')
+
+    def test_invalid_envelope_truncation_and_tool_calls_rejected(self):
+        for body in ([],{'done':False,'message':{'content':'{}'}}, {'done':True,'message':[]},
+                     {'done':True,'message':{'content':'{}','tool_calls':[{'name':'move'}]}}):
+            self.envelope=body
+            result=self.analyze('查询3号断路器告警')
+            self.assertEqual(result['status'],'provider_unavailable')
+            self.assertIn('json_parse_seconds',self.provider.timings)

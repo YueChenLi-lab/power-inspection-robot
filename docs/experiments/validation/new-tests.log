@@ -1,0 +1,38 @@
+test_a_cli_brain_to_evidence_and_sync (test_e2e.EndToEndTests.test_a_cli_brain_to_evidence_and_sync) ... ok
+test_b_weak_network_and_c_inflight_crash (test_e2e.EndToEndTests.test_b_weak_network_and_c_inflight_crash) ... ok
+test_e1_e7 (test_faults.FaultTests.test_e1_e7) ... ok
+test_loss_sequence_reproducible_and_network_restore (test_faults.FaultTests.test_loss_sequence_reproducible_and_network_restore) ... ok
+test_real_sqlite_failure_is_not_success_and_resumes (test_faults.FaultTests.test_real_sqlite_failure_is_not_success_and_resumes) ... ok
+test_adapter_rejects_motion_ambiguity_and_forgery (test_observability.ObservabilityTests.test_adapter_rejects_motion_ambiguity_and_forgery) ... ok
+test_brain_end_to_end_trace_persistence (test_observability.ObservabilityTests.test_brain_end_to_end_trace_persistence) ... ok
+test_percentiles_and_missing_measurements (test_observability.ObservabilityTests.test_percentiles_and_missing_measurements) ... ok
+test_disabled_and_environment_compatibility (test_ollama.OllamaTests.test_disabled_and_environment_compatibility) ... ok
+test_invalid_envelope_truncation_and_tool_calls_rejected (test_ollama.OllamaTests.test_invalid_envelope_truncation_and_tool_calls_rejected) ... ok
+test_t1_t2_t3_http_schema_and_original (test_ollama.OllamaTests.test_t1_t2_t3_http_schema_and_original) ... ok
+test_t4_invalid_json_and_schema (test_ollama.OllamaTests.test_t4_invalid_json_and_schema) ... ok
+test_t5_semantic_conflicts (test_ollama.OllamaTests.test_t5_semantic_conflicts) ... ok
+test_timeout_fallback_is_explicit (test_ollama.OllamaTests.test_timeout_fallback_is_explicit) ... ok
+test_bounded_buffer_no_silent_drop_and_atomic_retry (test_pipeline.PipelineTests.test_bounded_buffer_no_silent_drop_and_atomic_retry) ... ok
+test_capacity_retains_buffer_and_audit (test_pipeline.PipelineTests.test_capacity_retains_buffer_and_audit) ... ok
+test_collect_task_trace_and_delayed_sync (test_pipeline.PipelineTests.test_collect_task_trace_and_delayed_sync) ... ok
+test_retention_only_explicit_non_audit_files (test_pipeline.PipelineTests.test_retention_only_explicit_non_audit_files) ... ok
+test_single_batch_measurements_have_actual_records (test_pipeline.PipelineTests.test_single_batch_measurements_have_actual_records) ... ok
+test_cancel_during_execution_is_persistent_and_stops_child (test_runtime.ExecutionEdgeTests.test_cancel_during_execution_is_persistent_and_stops_child) ... /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=4618) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+ok
+test_concurrent_submission_has_one_id (test_runtime.ExecutionEdgeTests.test_concurrent_submission_has_one_id) ... ok
+test_graceful_worker_stop_and_retry_polling (test_runtime.ExecutionEdgeTests.test_graceful_worker_stop_and_retry_polling) ... ok
+test_network_auth_never_implicitly_approved_offline (test_runtime.ExecutionEdgeTests.test_network_auth_never_implicitly_approved_offline) ... ok
+test_independent_approval_and_motion_always_denied (test_runtime.RuntimeTests.test_independent_approval_and_motion_always_denied) ... ok
+test_nonidempotent_not_retried_and_recovery_review (test_runtime.RuntimeTests.test_nonidempotent_not_retried_and_recovery_review) ... ok
+test_priority_fifo_idempotency_and_completed_no_reexecution (test_runtime.RuntimeTests.test_priority_fifo_idempotency_and_completed_no_reexecution) ... ok
+test_restart_and_exclusive_worker (test_runtime.RuntimeTests.test_restart_and_exclusive_worker) ... ok
+test_state_machine_and_transaction_rollback (test_runtime.RuntimeTests.test_state_machine_and_transaction_rollback) ... ok
+test_three_skills_and_data_provenance (test_runtime.RuntimeTests.test_three_skills_and_data_provenance) ... ok
+test_timeout_bounded_retry_and_cancellation (test_runtime.RuntimeTests.test_timeout_bounded_retry_and_cancellation) ... ok
+test_unknown_and_invalid_contract_rejected (test_runtime.RuntimeTests.test_unknown_and_invalid_contract_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 4.057s
+
+OK

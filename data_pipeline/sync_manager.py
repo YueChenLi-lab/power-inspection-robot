@@ -37,7 +37,7 @@ class SyncManager:
             try:
                 self.network.request('outbox-send')
                 self.remote.receive(row['event_id'],json.loads(row['payload']))
-            except ConnectionError as exc:error=str(exc)
+            except (ConnectionError,sqlite3.Error) as exc:error=type(exc).__name__+": "+str(exc)
             with self.db.transaction() as c:
                 c.execute('UPDATE '+row['table']+' SET attempts=attempts+1,status=?,last_error=? WHERE event_id=?',
                           ('PENDING' if error else 'SENT',error,row['event_id']))

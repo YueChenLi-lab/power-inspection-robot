@@ -1,0 +1,29 @@
+{
+  "experiment": "E7",
+  "conditions": {
+    "max_missions": 1,
+    "policy": "admission cap; protect audit, not fill disk"
+  },
+  "steps": [
+    "Set deterministic mission capacity",
+    "Complete first mission",
+    "Attempt second admission",
+    "Verify evidence retained"
+  ],
+  "expected": {
+    "blocked": true,
+    "audit_retained": true,
+    "missions": 1
+  },
+  "actual": {
+    "blocked": true,
+    "audit_retained": true,
+    "missions": 1
+  },
+  "passed": true,
+  "raw_logs": [
+    "events.jsonl",
+    "network.jsonl"
+  ],
+  "is_mock": true
+}

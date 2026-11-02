@@ -39,10 +39,12 @@ def main():
             adapter=BrainAdapter(app.manager,config=config)
             mission=adapter.submit_text(args.text,idempotency_key=args.idempotency_key or uuid.uuid4().hex,
                                         mode='v2_rules' if args.provider=='rules' else 'v3_llm')
-            app.worker.drain()
+            app.worker.run_until_settled()
             buf=Buffer();collector=Collector(buf)
             collector.collect('transcript',{'text':args.text,'input_source':'manual'},trace_id=mission['trace_id'],source='manual')
             collector.ingest_mission(app.manager,mission['mission_id'])
+            for span in adapter.recorder.records:
+                collector.collect('task_log',span,trace_id=mission['trace_id'],source='observability')
             BatchWriter(app.db,buf).flush()
             remote=MockRemote(str(args.db)+'.remote.db')
             try:sync=SyncManager(app.db,app.network,remote).sync()

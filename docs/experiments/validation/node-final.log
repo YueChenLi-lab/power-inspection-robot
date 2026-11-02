@@ -1,0 +1,27 @@
+✔ v3 defaults to rules and sends authoritative audio ID without a reference; raw and v2 UI remain unchanged (1.767781ms)
+✔ unavailable model is explicit; auto fallback never looks like LLM success (0.349975ms)
+✔ failed validation is shown separately from untrusted model candidate (0.343035ms)
+✔ old service, request failure, and changing audio keep old v2/ref/ASR usable (0.459489ms)
+✔ full app upload flows into v3 panel through current saved audio, not copied JSON or reference (6.006508ms)
+✔ reported response already reaches raw ASR via the existing upload path (5.954891ms)
+✔ successful WAV displays model/time and three stages; quick analysis uses audio ID without a confirmed reference (4.518656ms)
+✔ recording and retranscription update the same display and bind analysis to the latest audio (6.33427ms)
+✔ optional metadata cannot block raw text; domain failure preserves successful recognition (3.38711ms)
+✔ ASR error or empty success never reuses prior transcription or enables quick analysis (3.290615ms)
+✔ analysis upgrades to scoring without recording again; reference and audio stay intact and aggregates refresh (4.699948ms)
+✔ repeated analysis, refresh, score and switch changes keep one independent sample (5.369743ms)
+✔ model failure still permits manual analysis and explicit confirmed scoring (4.139307ms)
+✔ a server without runtime version metadata is explicitly identified, not labelled as the disk version (2.658376ms)
+✔ WAV is mono PCM16 at 16kHz and clips without wraparound (1.678517ms)
+✔ 48k and 44.1k capture resamples to a bounded 16k frame count (11.796331ms)
+✔ chunk joining and base64 preserve original byte order (0.356845ms)
+✔ AudioWorklet averages channels and flushes the final partial buffer exactly once (8.566482ms)
+✔ page records microphone WAV, keeps unconfigured ASR null, saves manual evaluation and releases tracks (14.055068ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 154.160852

@@ -1,0 +1,8 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "machine": "x86_64",
+  "logical_cpus": 5,
+  "is_robot_hardware": false,
+  "dataset": "mock-fixture-v1"
+}

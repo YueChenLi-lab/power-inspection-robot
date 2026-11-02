@@ -1,4 +1,6 @@
-# 电力巡检机器人总体架构
+# 电力巡检机器人总体架构（初始规划快照）
+
+> 本文保留新增任务运行时之前的规划状态。当前 Mock 内核、数据管线与验证边界请以[系统架构](SYSTEM_ARCHITECTURE.md)和[验收报告](VALIDATION_REPORT.md)为准；下文“规划中”属于历史上下文，不表示当前 Mock 代码仍缺失。
 
 [返回项目首页](../README.md) · [工博会复盘](EXHIBITION_REVIEW.md)
 

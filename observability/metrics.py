@@ -30,6 +30,6 @@ def snapshot(app,elapsed):
             'retry_count':sum(max(0,m['attempts']-1) for m in missions),
             'worker_utilization':sum(durations)/elapsed if elapsed else None,
             'network_timeout_rate':sum(r['timeout'] for r in network)/len(network) if network else None,
-            'outbox_backlog':app.db.rows("SELECT count(*) n FROM outbox_events WHERE status='PENDING'")[0]['n'],
+            'outbox_backlog':sum(app.db.rows("SELECT count(*) n FROM "+table+" WHERE status='PENDING'")[0]['n'] for table in ('outbox_events','evidence_outbox')),
             'unconnected_stages':{'asr':None,'real_qwen3':None},
             'observation_seconds':elapsed}

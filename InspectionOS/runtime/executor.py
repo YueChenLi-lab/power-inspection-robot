@@ -34,8 +34,10 @@ class Executor:
                 if cancelled(): raise ExecutionCancelled('mission cancelled')
                 if time.monotonic()-started>=skill.spec.timeout: raise ExecutionTimeout('skill deadline exceeded')
                 if not process.is_alive(): raise ExecutionError('skill process exited without result')
+            if time.monotonic()-started>=skill.spec.timeout: raise ExecutionTimeout('skill deadline exceeded')
             try: status,result=parent.recv()
             except EOFError: raise ExecutionError('skill process pipe closed') from None
+            if time.monotonic()-started>=skill.spec.timeout: raise ExecutionTimeout('skill deadline exceeded')
             if status!='ok': raise ExecutionError(result)
             if cancelled(): raise ExecutionCancelled('mission cancelled')
             self.registry.validate_output(mission['skill_id'],result)
