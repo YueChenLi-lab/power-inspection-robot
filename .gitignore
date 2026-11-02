@@ -43,3 +43,9 @@ reports/
 *.sqlite3-wal
 *.sqlite3-shm
 *.worker.lock
+
+# Private local LLM evaluation: raw outputs, annotations and reports stay local
+.local-evaluation/
+!InspectionBrain/evaluation/reports/
+InspectionBrain/evaluation/reports/*
+!InspectionBrain/evaluation/reports/README.md
