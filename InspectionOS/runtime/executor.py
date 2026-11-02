@@ -40,7 +40,7 @@ class Executor:
             if time.monotonic()-started>=skill.spec.timeout: raise ExecutionTimeout('skill deadline exceeded')
             if status!='ok': raise ExecutionError(result)
             if cancelled(): raise ExecutionCancelled('mission cancelled')
-            self.registry.validate_output(mission['skill_id'],result)
+            self.registry.validate_output(mission['skill_id'],mission['payload'],result)
             return result
         finally:
             if process.is_alive(): process.terminate()

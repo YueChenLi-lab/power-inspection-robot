@@ -12,5 +12,5 @@ class SafetySupervisor:
         return 'ALLOW'
 
     def authenticate_operator(self, actor, token):
-        if not actor or not isinstance(token,str) or not self._operator_token or not hmac.compare_digest(token,self._operator_token):
+        if not isinstance(actor,str) or not actor.strip() or not isinstance(token,str) or not token.strip() or not self._operator_token or not hmac.compare_digest(token,self._operator_token):
             raise PermissionError('independent local operator credential required')

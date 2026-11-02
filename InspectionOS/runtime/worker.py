@@ -3,7 +3,8 @@ from contextlib import contextmanager
 import fcntl
 import time
 from InspectionOS.storage.repositories import encode, transition
-from .executor import Executor, ExecutionCancelled
+from .executor import Executor
+from .retry_policy import retry_decision
 
 
 @contextmanager
@@ -44,9 +45,12 @@ class Worker:
             elif result is not None:
                 transition(c,mission['mission_id'],'SUCCEEDED',kind='completed',result=encode(result),error=None)
             else:
-                retry=spec.retryable and spec.idempotent and mission['attempts']<mission['max_attempts']
-                transition(c,mission['mission_id'],'RETRY_WAIT' if retry else ('WAITING_APPROVAL' if not spec.idempotent else 'FAILED'),kind='execution_failed',
-                           error=error,retry_at=time.time()+.05*2**(mission['attempts']-1),data={'error':error,'retry':retry})
+                policy=retry_decision(spec,current,self.manager.safety)
+                target='RETRY_WAIT' if policy.allowed else ('WAITING_APPROVAL' if policy.needs_review else 'FAILED')
+                transition(c,mission['mission_id'],target,kind='execution_failed',
+                           error=error,retry_at=time.time()+.05*2**(mission['attempts']-1),
+                           approved=0 if policy.needs_review else current['approved'],
+                           data={'error':error,'retry':policy.allowed,'retry_reason':policy.reason})
         return self.manager.get(mission['mission_id'])
 
     def drain(self,limit=100):

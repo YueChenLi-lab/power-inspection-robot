@@ -14,5 +14,14 @@ class SkillRegistry:
 
     def list(self): return [s.spec for s in self._skills.values()]
 
-    def validate_input(self, skill_id, payload): validate(payload, self.get(skill_id).spec.input_schema)
-    def validate_output(self, skill_id, result): validate(result, self.get(skill_id).spec.output_schema)
+    def validate_input(self, skill_id, payload):
+        skill=self.get(skill_id)
+        validate(payload, skill.spec.input_schema)
+        validator=getattr(skill,'validate_request',None)
+        if validator is not None:validator(payload)
+
+    def validate_output(self, skill_id, input_payload, output_payload):
+        skill=self.get(skill_id)
+        validate(output_payload, skill.spec.output_schema)
+        validator=getattr(skill,'validate_result',None)
+        if validator is not None:validator(input_payload,output_payload)

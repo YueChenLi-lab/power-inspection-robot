@@ -21,6 +21,7 @@ def run_scenario(number,folder):
     net=NetworkSimulator(seed=11)
     app=Application(db,network=net)
     remote=MockRemote(str(folder/'remote.db'))
+    names={'E5':'任务领取后运行时重建','E6':'Worker 执行期间进程强制终止'}
     conditions={};expected='';steps=[]
     def create(key,skill='mock.alarm_query'):
         return app.manager.create(skill,PAYLOAD,idempotency_key=key)
@@ -59,7 +60,7 @@ def run_scenario(number,folder):
             expected={'same_id':True,'missions':1,'executions':1};passed=actual==expected
             steps=['Submit same key twice','Complete','Resubmit completed key']
         elif number in ('E5','E6'):
-            conditions={'process_exit':'SIGKILL inside mock Skill' if number=='E6' else 'worker object discarded after durable claim'}
+            conditions={'process_exit':'SIGKILL inside mock Skill' if number=='E6' else 'runtime closed and reinitialized after durable claim; no process kill'}
             if number=='E6':
                 from .fault_injector import CrashDuringSkill
                 app.registry.register(CrashDuringSkill())
@@ -76,7 +77,9 @@ def run_scenario(number,folder):
             actual={'recovered':len(recovered),'status':app.manager.get(m['mission_id'])['status'],
                     'execution_statuses':[e['status'] for e in app.db.rows('SELECT status FROM skill_executions ORDER BY rowid')]}
             expected={'recovered':1,'status':'SUCCEEDED','execution_statuses':['UNKNOWN','SUCCEEDED']}
-            steps=['Persist RUNNING and execution-start','Exit unexpectedly','Reopen database','Explicit recovery under lock','Drain']
+            steps=['Persist RUNNING and execution-start',
+                   'SIGKILL worker process inside Skill execute' if number=='E6' else 'Close runtime object and create a new runtime; same parent process',
+                   'Reopen database','Explicit recovery under lock with shared retry policy','Drain']
             passed=actual==expected
         elif number=='E7':
             conditions={'max_missions':1,'policy':'admission cap; protect audit, not fill disk'};app.db.max_missions=1
@@ -90,7 +93,7 @@ def run_scenario(number,folder):
         events=app.db.rows('SELECT * FROM mission_events ORDER BY rowid')
         (folder/'events.jsonl').write_text(''.join(json.dumps(e,ensure_ascii=False)+'\n' for e in events))
         (folder/'network.jsonl').write_text(''.join(json.dumps(e)+'\n' for e in net.records))
-        report={'experiment':number,'conditions':conditions,'steps':steps,'expected':expected,'actual':actual,'passed':bool(passed),
+        report={'experiment':number,'name':names.get(number,number),'definition_revision':'followup-v1','conditions':conditions,'steps':steps,'expected':expected,'actual':actual,'passed':bool(passed),
                 'raw_logs':['events.jsonl','network.jsonl'],'is_mock':True}
         (folder/'result.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
         return report
