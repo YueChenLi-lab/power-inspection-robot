@@ -140,5 +140,8 @@ class OpenAICompatibleProvider:
 
 
 def make_provider(config):
+    if config.provider == "ollama":
+        from .ollama import OllamaProvider
+        return OllamaProvider(config)
     return {"rules": RulesFallbackProvider, "mock": MockProvider,
             "openai_compatible": lambda: OpenAICompatibleProvider(config)}[config.provider]()
