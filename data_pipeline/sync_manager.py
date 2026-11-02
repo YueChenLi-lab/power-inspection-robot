@@ -28,7 +28,10 @@ class SyncManager:
 
     def sync(self,limit=100):
         sent,failed=0,0
-        rows=self.db.rows("SELECT * FROM outbox_events WHERE status='PENDING' ORDER BY rowid LIMIT ?",(limit,))
+        rows=[]
+        for table in ('outbox_events','evidence_outbox'):
+            for row in self.db.rows("SELECT * FROM "+table+" WHERE status='PENDING' ORDER BY rowid LIMIT ?",(max(0,limit-len(rows)),)):
+                row['table']=table;rows.append(row)
         for row in rows:
             error=None
             try:
@@ -36,8 +39,8 @@ class SyncManager:
                 self.remote.receive(row['event_id'],json.loads(row['payload']))
             except ConnectionError as exc:error=str(exc)
             with self.db.transaction() as c:
-                c.execute('UPDATE outbox_events SET attempts=attempts+1,status=?,last_error=? WHERE event_id=?',
+                c.execute('UPDATE '+row['table']+' SET attempts=attempts+1,status=?,last_error=? WHERE event_id=?',
                           ('PENDING' if error else 'SENT',error,row['event_id']))
             if error:failed+=1
             else:sent+=1
-        return {'sent':sent,'failed':failed,'pending':self.db.rows("SELECT count(*) n FROM outbox_events WHERE status='PENDING'")[0]['n']}
+        return {'sent':sent,'failed':failed,'pending':sum(self.db.rows("SELECT count(*) n FROM "+table+" WHERE status='PENDING'")[0]['n'] for table in ('outbox_events','evidence_outbox'))}

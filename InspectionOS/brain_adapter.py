@@ -65,6 +65,8 @@ class BrainAdapter:
         types={i['type'] for i in candidate['intents'] if i['request_kind']!='negated_request'}
         allowed={'temperature_alarm_query','thermometry_history','temperature_measurement_query','temperature_comparison','reinspection_recommendation'}
         if not types or types-allowed:raise ValueError('unsupported intent; no partial execution')
+        groups=sum(bool(types & group) for group in ({'temperature_alarm_query'}, {'thermometry_history','temperature_measurement_query','temperature_comparison'}, {'reinspection_recommendation'}))
+        if groups>1:raise ValueError('multiple skills require explicit decomposition; no partial execution')
         if 'reinspection_recommendation' in types:skill='mock.reinspection'
         elif types & {'thermometry_history','temperature_comparison','temperature_measurement_query'}:skill='mock.temperature_query'
         else:skill='mock.alarm_query'

@@ -21,6 +21,7 @@ def snapshot(app,elapsed):
     network=app.network.records
     return {'mission_latency_seconds':distribution([m['updated_at']-m['created_at'] for m in completed]),
             'queue_seconds':distribution(queue),'skill_seconds':distribution(durations),
+            'storage_read_seconds':distribution(app.db.read_seconds),
             'storage_write_seconds':distribution(app.db.write_seconds),
             'network_seconds':distribution([r['duration'] for r in network]),
             'throughput_per_second':len(completed)/elapsed if elapsed else None,

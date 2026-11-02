@@ -94,7 +94,7 @@ class RuntimeTests(unittest.TestCase):
     def test_nonidempotent_not_retried_and_recovery_review(self):
         skill=Slow();skill.spec=replace(skill.spec,idempotent=False)
         self.app.registry.register(skill);m=self.create('mock.slow')
-        self.assertEqual(self.app.worker.run_once()['status'],'FAILED')
+        self.assertEqual(self.app.worker.run_once()['status'],'WAITING_APPROVAL')
         other=self.create('mock.slow',key='uncertain');self.app.scheduler.claim()
         self.app.recovery.recover()
         self.assertEqual(self.app.manager.get(other['mission_id'])['status'],'WAITING_APPROVAL')

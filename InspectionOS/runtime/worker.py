@@ -45,7 +45,7 @@ class Worker:
                 transition(c,mission['mission_id'],'SUCCEEDED',kind='completed',result=encode(result),error=None)
             else:
                 retry=spec.retryable and spec.idempotent and mission['attempts']<mission['max_attempts']
-                transition(c,mission['mission_id'],'RETRY_WAIT' if retry else 'FAILED',kind='execution_failed',
+                transition(c,mission['mission_id'],'RETRY_WAIT' if retry else ('WAITING_APPROVAL' if not spec.idempotent else 'FAILED'),kind='execution_failed',
                            error=error,retry_at=time.time()+.05*2**(mission['attempts']-1),data={'error':error,'retry':retry})
         return self.manager.get(mission['mission_id'])
 

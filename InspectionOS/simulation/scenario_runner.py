@@ -59,14 +59,19 @@ def run_scenario(number,folder):
             expected={'same_id':True,'missions':1,'executions':1};passed=actual==expected
             steps=['Submit same key twice','Complete','Resubmit completed key']
         elif number in ('E5','E6'):
-            conditions={'process_exit':73 if number=='E6' else 'worker object discarded after durable claim'}
-            m=create('crash')
+            conditions={'process_exit':'SIGKILL inside mock Skill' if number=='E6' else 'worker object discarded after durable claim'}
             if number=='E6':
-                script='from InspectionOS.app import Application; from InspectionOS.simulation.fault_injector import crash_after_claim; a=Application(__import__("sys").argv[1]); crash_after_claim(a)'
+                from .fault_injector import CrashDuringSkill
+                app.registry.register(CrashDuringSkill())
+            m=create('crash','mock.crash' if number=='E6' else 'mock.alarm_query')
+            if number=='E6':
+                script='from InspectionOS.app import Application; from InspectionOS.simulation.fault_injector import CrashDuringSkill; a=Application(__import__("sys").argv[1]); a.registry.register(CrashDuringSkill()); a.worker.run_once()'
                 run=subprocess.run([sys.executable,'-c',script,str(db)],capture_output=True,text=True)
-                if run.returncode!=73:raise RuntimeError(run.stderr)
+                if run.returncode!=-9:raise RuntimeError(run.stderr)
             else:app.scheduler.claim()
             app.close();app=Application(db,network=net)
+            if number=='E6':
+                safe=AlarmQuerySkill();safe.spec=replace(safe.spec,skill_id='mock.crash');app.registry.register(safe)
             recovered=app.recovery.recover();app.worker.drain()
             actual={'recovered':len(recovered),'status':app.manager.get(m['mission_id'])['status'],
                     'execution_statuses':[e['status'] for e in app.db.rows('SELECT status FROM skill_executions ORDER BY rowid')]}

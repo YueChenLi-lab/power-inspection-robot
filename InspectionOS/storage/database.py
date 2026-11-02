@@ -32,6 +32,9 @@ CREATE TABLE IF NOT EXISTS outbox_events (
 CREATE TABLE IF NOT EXISTS evidence (
  evidence_id TEXT PRIMARY KEY, trace_id TEXT NOT NULL, kind TEXT NOT NULL,
  source TEXT NOT NULL, payload TEXT NOT NULL, sha256 TEXT NOT NULL, created_at REAL NOT NULL);
+CREATE TABLE IF NOT EXISTS evidence_outbox (
+ event_id TEXT PRIMARY KEY REFERENCES evidence(evidence_id), payload TEXT NOT NULL,
+ status TEXT NOT NULL DEFAULT 'PENDING', attempts INTEGER NOT NULL DEFAULT 0, last_error TEXT);
 CREATE INDEX IF NOT EXISTS queue_order ON missions(status, priority DESC, created_at);
 CREATE INDEX IF NOT EXISTS event_mission ON mission_events(mission_id, created_at);
 '''
@@ -50,6 +53,7 @@ class Database:
         self.lock = threading.RLock()
         self.max_missions, self.max_bytes = max_missions, max_bytes
         self.write_seconds = []
+        self.read_seconds = []
         self.connection.execute('PRAGMA foreign_keys=ON')
         self.connection.execute('PRAGMA journal_mode=WAL')
         self.connection.execute('PRAGMA synchronous=FULL')
@@ -71,7 +75,11 @@ class Database:
 
     def rows(self, sql, args=()):
         with self.lock:
-            return [dict(r) for r in self.connection.execute(sql, args).fetchall()]
+            started = time.perf_counter()
+            try:
+                return [dict(r) for r in self.connection.execute(sql, args).fetchall()]
+            finally:
+                self.read_seconds.append(time.perf_counter()-started)
 
     def check_capacity(self, connection, incoming_bytes=0):
         # Admission protection, not a filesystem quota. Keep space for audit/terminal events.
