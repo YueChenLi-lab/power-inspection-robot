@@ -1,0 +1,17 @@
+test_ambiguous_case_and_annotation_independence (test_evaluation_lab.LabTests.test_ambiguous_case_and_annotation_independence) ... ok
+test_batch_serial_busy_and_export_filters (test_evaluation_lab.LabTests.test_batch_serial_busy_and_export_filters) ... ok
+test_conditional_denominators_and_missing_metrics (test_evaluation_lab.LabTests.test_conditional_denominators_and_missing_metrics) ... ok
+test_engineering_invalid_layers (test_evaluation_lab.LabTests.test_engineering_invalid_layers) ... ok
+test_native_pipeline_and_ns_conversion (test_evaluation_lab.LabTests.test_native_pipeline_and_ns_conversion) ... ok
+test_reasoning_redaction_and_csv_formula (test_evaluation_lab.LabTests.test_reasoning_redaction_and_csv_formula) ... ok
+test_source_grouping_human_annotation_and_persistence (test_evaluation_lab.LabTests.test_source_grouping_human_annotation_and_persistence) ... ok
+test_unavailable_model_timeout_no_fallback (test_evaluation_lab.LabTests.test_unavailable_model_timeout_no_fallback) ... ok
+test_local_only_csrf_and_no_control_routes (test_evaluation_lab_http.LabHTTPTests.test_local_only_csrf_and_no_control_routes) ... ok
+test_real_http_application_pages_record_statistics_and_export (test_evaluation_lab_http.LabHTTPTests.test_real_http_application_pages_record_statistics_and_export) ... ok
+test_repository_launcher_serves_functional_request_and_stops (test_evaluation_lab_http.LabHTTPTests.test_repository_launcher_serves_functional_request_and_stops) ... ok
+test_request_errors_and_persisted_failed_model_run (test_evaluation_lab_http.LabHTTPTests.test_request_errors_and_persisted_failed_model_run) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 4.797s
+
+OK

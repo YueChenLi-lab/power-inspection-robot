@@ -44,10 +44,11 @@ def main():
     env=os.environ.copy();env['PYTHONPATH']=str(ROOT/'InspectionBrain')+os.pathsep+str(ROOT)
     commands=[([sys.executable,'-m','unittest','discover','-s','tests','-v'],ROOT),
               ([sys.executable,str(Path(__file__).resolve()),'--original-child'],ROOT/'InspectionBrain'),
-              (['node','--test',*[str(p) for p in sorted((ROOT/'InspectionBrain/tests').glob('*.mjs'))]],ROOT/'InspectionBrain')]
+              (['node','--test',*[str(p) for p in sorted((ROOT/'InspectionBrain/tests').glob('*.mjs'))]],ROOT/'InspectionBrain'),
+              (['node','--test',str(ROOT/'tests/test_evaluation_lab_frontend.mjs')],ROOT)]
     for command,cwd in commands:
         results.append(subprocess.run(command,cwd=cwd,env=env).returncode)
-    print('new / original / node exit codes:',results)
+    print('runtime / original / original Node / Evaluation Lab UI exit codes:',results)
     return 0 if all(r==0 for r in results) else 1
 
 

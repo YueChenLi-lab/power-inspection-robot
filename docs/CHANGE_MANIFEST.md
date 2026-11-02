@@ -218,3 +218,46 @@
 | 新增 | `tools/test_assets.py` | 独立证据指标与显式历史资产 CI 前置条件 |
 | 修改 | `tools/validate.py` | 独立证据指标与显式历史资产 CI 前置条件 |
 | 修改 | `docs/CHANGE_MANIFEST.md` | 保留初始清单并追加本轮原因及范围 |
+
+## Evaluation Lab v0.1 文件与影响范围
+
+基线 a2f76b4，继续 feature/edge-task-runtime 分支。新增独立评测平台，复用原生 Provider 和语义校验；原 v2、ASR/voice_lab、InspectionOS 和原测试未修改，历史记录未覆盖。真实模型服务不可用，五类烟测明确 BLOCKED；人工 Gold PENDING。
+
+| 状态 | 文件 | 原因 / 影响 |
+|---|---|---|
+| 修改 | `.github/workflows/mock-runtime.yml` | 普通 CI 增加 Lab 前端检查；Python Job 自动包含 Lab 测试，不下载模型 |
+| 修改 | `InspectionBrain/brain_v3/ollama.py` | 复用原生请求并暴露 Prompt 版本、完整响应和数值 Token/纳秒元数据；禁止请求思维链 |
+| 新增 | `InspectionBrain/evaluation_lab/__init__.py` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/annotation.py` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/app.py` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/dataset.py` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/datasets/electrical_semantic_cases.json` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/metrics.py` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/service.py` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/smoke.py` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/static/app.js` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/static/index.html` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/static/package.json` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/static/style.css` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/evaluation_lab/storage.py` | 独立 Web、模型目录、逐层评测、顺序批量、存储、标注、统计、界面或 pending 数据集 |
+| 新增 | `InspectionBrain/run_evaluation_lab.py` | 仓库启动器或五类真实 Smoke 入口，无自动Mock回退 |
+| 新增 | `InspectionBrain/run_evaluation_smoke.py` | 仓库启动器或五类真实 Smoke 入口，无自动Mock回退 |
+| 修改 | `README.md` | 独立实验室架构、指标分母、启动方法与三种验收状态 |
+| 新增 | `docs/OLLAMA_EVALUATION.md` | 设计、使用、真实执行结果及未完成限制 |
+| 新增 | `docs/OLLAMA_EVALUATION_RESULTS.md` | 设计、使用、真实执行结果及未完成限制 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/batch-evaluation.png` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/browser-result.json` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/frontend-tests.log` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/full-regression.log` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/lab-tests.log` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/mobile.png` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/real-smoke-blocked-initial.json` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/real-smoke-blocked.json` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/single-evaluation.png` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `docs/experiments/evaluation-lab-v0.1/statistics.png` | 本轮实际执行日志、真实 BLOCKED 报告与明确 Mock 的浏览器截图，不覆盖旧实验 |
+| 新增 | `tests/test_evaluation_lab.py` | Lab 工程异常、实际本地 HTTP/启动器、界面交互与失效状态回归 |
+| 新增 | `tests/test_evaluation_lab_frontend.mjs` | Lab 工程异常、实际本地 HTTP/启动器、界面交互与失效状态回归 |
+| 新增 | `tests/test_evaluation_lab_http.py` | Lab 工程异常、实际本地 HTTP/启动器、界面交互与失效状态回归 |
+| 新增 | `tools/evaluation_lab_browser_smoke.cjs` | 统一测试包含 Lab UI，及可选真实浏览器复现脚本 |
+| 修改 | `tools/validate.py` | 统一测试包含 Lab UI，及可选真实浏览器复现脚本 |
+| 修改 | `docs/CHANGE_MANIFEST.md` | 保留旧清单，追加 Lab 文件与影响 |

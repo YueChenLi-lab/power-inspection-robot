@@ -1,0 +1,15 @@
+✔ conditional rate denominators and explicit annotation booleans (1.325448ms)
+✔ edited preset becomes manual input and never sends expected annotations (0.707471ms)
+✔ single run uses backend token, displays layers safely and keeps immutable safety labels (2.855342ms)
+✔ real provider errors remain errors, never become a Mock success (0.739599ms)
+✔ batch progress uses persisted IDs; history and human annotations are explicit (1.594121ms)
+✔ empty dashboard makes no invented metrics and backend errors are surfaced (1.023245ms)
+✔ HTTP failure clears a previous accepted result instead of reusing stale success (0.46655ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82.931329

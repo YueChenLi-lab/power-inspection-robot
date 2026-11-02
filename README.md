@@ -116,6 +116,7 @@ flowchart TD
 | InspectionBrain v3 | Provider、Schema、Validator 原型及 Ollama 原生接入 | Mock HTTP 验收通过；真实 Qwen3 效果待验证 |
 | Qwen3 4B Instruct | Ollama 命令行测试完成，真实项目接入待验证 | 项目成员提供的信息，非本仓库集成验收 |
 | Mission Manager / Skill Registry | 已有独立 Mock 内核实现 | 新模块位于 InspectionOS；原 mission.py 草案协议保留 |
+| Evaluation Lab v0.1 | 浏览器评测平台已实现；真实 Smoke BLOCKED，人工评测 PENDING | 独立存储与逐层检查，未计真实模型效果 |
 | InspectionOS | v0.1 单机 Mock 任务内核可运行 | 非真实硬件 OS、非分布式集群 |
 | 真实设备台账接入 | 待建设 | 当前为 Mock |
 | 真实巡检记录查询 | 待建设 | 当前为 Mock，现场记录展示不等于此仓库已接真实数据 |
@@ -228,6 +229,71 @@ JSON 解析、Schema、完整 Validator 与证据指标分别保存分母；无�
 
 CI 实际执行核心测试，历史资产缺失和外部模型条件单独报告，不把 skipped 当 passed。详细依据见[可靠性修复说明](docs/RELIABILITY_FOLLOWUP.md)、[验收报告](docs/VALIDATION_REPORT.md)和[历史资产说明](docs/HISTORICAL_TEST_ASSETS.md)。
 
+## InspectionBrain v3 · 真实模型评测实验室
+
+规则能保护已知术语与原文证据，但复杂表达、关系和多意图仍需要真实文本模型的可重复验证。Evaluation Lab v0.1 提供本地浏览器实验台，用 Ollama 运行用户已安装的模型；Provider 隔离模型协议，现有 SemanticEngine、Schema、Validator 和 SafetyGuard 保持职责不变，不开发新的 Agent 框架。
+
+```mermaid
+flowchart TD
+    U[用户电力巡检指令] --> E[InspectionBrain v3 SemanticEngine]
+    E --> P[Provider API]
+    P --> M[Mock：显式离线对照]
+    P --> R[Rules：显式规则对照]
+    P --> O[Ollama Native：完整JSON Schema约束]
+    O --> Q[用户选择的已安装Qwen3等文本模型]
+    Q --> J[原始响应 / JSON解析]
+    M --> J
+    R --> J
+    J --> S[JSON Schema]
+    S --> V[原Evidence / Semantic Validator]
+    V --> G[独立SafetyGuard]
+    G --> D[不可执行Task Draft]
+    D --> DB[(独立评测SQLite / 人工标注)]
+    DB --> UI[四页仪表盘 / 历史 / JSON、CSV、Markdown]
+```
+
+Ollama 的 Schema 约束帮助生成结构合法的 JSON，但不能保证业务关系正确。Validator 继续核验原文区间、设备编号、数值/单位、时间、否定、自我修正和依赖；独立 SafetyGuard 强制 `authorized=false`、`executable=false`、`hardware_commands_enabled=false`。ACCEPTED 仅表示通过当前工程检查，既不是人工语义正确结论，也不是任务执行授权。平台不导入 InspectionOS，不提供机器人、审批或执行接口。
+
+平台包含模型连接与已安装模型选择、单条逐层结果、顺序批量进度、按来源/模型配置分组的统计，以及历史筛选、独立人工标注和三种导出。12 条电力领域测试用例的独立期望全部 `pending`，不发送给模型、不自动改写为 Gold。模型不可用会保存 PROVIDER_ERROR，不会自动切换 Mock。
+
+| 指标 | 分母 / 含义 |
+|---|---|
+| Request Success | 完整响应 / 全部请求 |
+| JSON Parse | 成功解析 / 完整响应 |
+| Schema Pass | 结构通过 / 成功解析 |
+| Validator Acceptance | 完整 Validator 接受 / Schema 通过 |
+| 人工 Evidence Consistency | 人工确认一致 / 已标注证据样本 |
+| Semantic Accuracy | 人工确认正确维度 / 已标注维度 |
+| Latency | 实际端到端耗时均值、P50/P95、样本量和分布 |
+
+无分母或无人工标注时显示 `null`，工程证据检查与人工一致性单列。REAL LLM、MOCK、RULES 分组，错误、候选安全违规和实际回退分别计数；规则对照不冒充真实推理。Ollama 原生纳秒耗时正确转为毫秒，记录加载、推理及 Token 数。已知 thinking/reasoning 字段在保存前剔除，原文输入不改写。
+
+从仓库根目录启动（无需新增第三方依赖）：
+
+```bash
+# 必须在后端能够访问本地 Ollama 的机器运行
+# 如不设置 OLLAMA_MODEL，可在页面检查连接后选择已安装模型
+OLLAMA_BASE_URL=http://127.0.0.1:11434 \
+OLLAMA_MODEL=qwen3:4b-instruct \
+python3 InspectionBrain/run_evaluation_lab.py
+```
+
+在本机浏览器输入 `http://127.0.0.1:8891/`，点击“检查 Ollama”，选择已安装模型后运行。前端只请求实验室后端，默认仅监听 loopback，不开放 11434。Ctrl+C 停止；独立评测库位于 `InspectionBrain/runtime/evaluation_lab/`，不覆盖旧语音/语义记录。
+
+```bash
+# 五类真实 Smoke Test：设备纠正、禁止约束、数值、多意图、模糊表达
+OLLAMA_MODEL=qwen3:4b-instruct \
+python3 InspectionBrain/run_evaluation_smoke.py --output /tmp/qwen3-real-smoke-new.json
+```
+
+| 验收层级 | 本次状态 |
+|---|---|
+| 真实模型调用接口、浏览器评测与工程异常处理 | 已实现，Mock HTTP / 本地 Web 测试通过 |
+| 真实 Qwen3 Smoke Test | **BLOCKED**：当前云机 Ollama 不可访问，五类请求无完整响应 |
+| 独立人工语义评测 | **PENDING**：12 条用例未确认 Gold，不计算准确率 |
+
+用户本机已下载模型，不表示本云机的 loopback 服务可访问。平台可在具备 Ollama 和模型的同一机器运行；当前没有训练、微调、GPU 优化或真机集成。设计与步骤见[OLLAMA_EVALUATION](docs/OLLAMA_EVALUATION.md)，实际结果见[OLLAMA_EVALUATION_RESULTS](docs/OLLAMA_EVALUATION_RESULTS.md)。
+
 ## 后续技术路线
 
 1. **Phase 1 · InspectionBrain v3**：接入真实文本模型，验证 Qwen3 结构化 JSON、Schema、原文证据、设备与数值关系、否定、自我修正和条件约束；记录拒绝、回退与实际耗时。
@@ -278,6 +344,7 @@ python3 -m observability.benchmark --output /tmp/inspection-bench --tasks 12
 
 ## 文档导航
 
+- [Evaluation Lab 设计与使用](docs/OLLAMA_EVALUATION.md) · [实际执行结果](docs/OLLAMA_EVALUATION_RESULTS.md)
 - [本轮可靠性修复](docs/RELIABILITY_FOLLOWUP.md) · [历史测试资产与 CI](docs/HISTORICAL_TEST_ASSETS.md)
 - [当前系统架构](docs/SYSTEM_ARCHITECTURE.md) · [模块边界](docs/MODULE_BOUNDARIES.md)
 - [InspectionOS 设计](docs/INSPECTION_OS_DESIGN.md) · [状态机](docs/MISSION_STATE_MACHINE.md) · [Skill 合同](docs/SKILL_CONTRACTS.md)

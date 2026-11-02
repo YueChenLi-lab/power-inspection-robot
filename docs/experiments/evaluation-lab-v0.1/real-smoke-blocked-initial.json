@@ -1,0 +1,989 @@
+{
+  "REAL_LLM_TEST": "BLOCKED",
+  "requested_model": "",
+  "model_service": {
+    "provider": "ollama",
+    "default_model": "",
+    "configuration": {
+      "provider": "ollama",
+      "enabled": true,
+      "base_url": "http://127.0.0.1:11434",
+      "model": "",
+      "model_version": "unspecified",
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "max_output_tokens": 4096,
+      "max_response_bytes": 262144,
+      "allow_external_text": false
+    },
+    "prompt_version": "inspection-semantic-ollama-v1",
+    "schema_version": "inspection-semantic-v3.0",
+    "engine_version": "inspection-brain-v3.0",
+    "last_request_time": null,
+    "status": {
+      "connected": false,
+      "version": null,
+      "models": [],
+      "error": "Ollama连接失败、超时或目录响应无效；未切换为Mock"
+    },
+    "single_request_only": true,
+    "hardware_commands_enabled": false
+  },
+  "case_ids": [
+    "T1",
+    "T5",
+    "T3",
+    "T4",
+    "T8"
+  ],
+  "records": [
+    {
+      "evaluation_id": "f4de73d8e3f6403a881d3e687ec38612",
+      "case_id": "T1",
+      "category": "设备编号自我修正",
+      "original_request": "不是2号断路器，是3号断路器，查询上周告警，不要启动机器人。",
+      "reference_time": "2026-11-02T15:45:18.007147+08:00",
+      "timestamp": "2026-11-02T15:45:18.007155+08:00",
+      "source": "REAL LLM",
+      "provider": "ollama",
+      "requested_model": "",
+      "model_name": "",
+      "model_version": "not_applicable",
+      "ollama_version": null,
+      "configuration": {
+        "provider": "ollama",
+        "enabled": true,
+        "base_url": "http://127.0.0.1:11434",
+        "model": "",
+        "model_version": "not_applicable",
+        "temperature": 0.0,
+        "timeout_seconds": 60.0,
+        "max_output_tokens": 4096,
+        "max_response_bytes": 262144,
+        "allow_external_text": false
+      },
+      "configuration_sha256": "4d760c693371e4b58685936b84eb6d8ae355546c205fc63e4cf38c11f72cbfb2",
+      "prompt_version": "inspection-semantic-ollama-v1",
+      "schema_version": "inspection-semantic-v3.0",
+      "raw_response": null,
+      "raw_response_sha256_before_redaction": null,
+      "parsed_json": null,
+      "reasoning_redacted": false,
+      "request_result": {
+        "complete": false,
+        "failure_kind": "transport_failure",
+        "error": "Ollama连接失败、超时或目录响应无效；未切换为Mock"
+      },
+      "parse_result": {
+        "passed": null,
+        "origin": "ollama_response"
+      },
+      "schema_result": {
+        "passed": null,
+        "errors": []
+      },
+      "evidence_result": {
+        "passed": null,
+        "errors": []
+      },
+      "validator_result": {
+        "valid": false,
+        "errors": [],
+        "executed": false
+      },
+      "safety_result": {
+        "authorized": false,
+        "executable": false,
+        "hardware_commands_enabled": false,
+        "candidate_violation": false,
+        "guard_status": "clarification_required"
+      },
+      "task_draft": null,
+      "outcome": "PROVIDER_ERROR",
+      "fallback_used": false,
+      "latency": {
+        "total_ms": 9.1680389996327,
+        "provider_timings_seconds": {}
+      },
+      "token_metrics": {
+        "total_duration_ns": null,
+        "total_duration_ms": null,
+        "load_duration_ns": null,
+        "load_duration_ms": null,
+        "prompt_eval_duration_ns": null,
+        "prompt_eval_duration_ms": null,
+        "eval_duration_ns": null,
+        "eval_duration_ms": null,
+        "prompt_eval_count": null,
+        "eval_count": null
+      },
+      "annotation": null,
+      "interpretation": "ACCEPTED仅为当前工程校验；草案不可执行、人工语义确认独立。"
+    },
+    {
+      "evaluation_id": "73ec15e6ae7c476b85b450ab77171cdf",
+      "case_id": "T5",
+      "category": "禁止事项",
+      "original_request": "制定巡检计划，但不要启动导航，也不要控制机器人移动。",
+      "reference_time": "2026-11-02T15:45:18.016696+08:00",
+      "timestamp": "2026-11-02T15:45:18.016704+08:00",
+      "source": "REAL LLM",
+      "provider": "ollama",
+      "requested_model": "",
+      "model_name": "",
+      "model_version": "not_applicable",
+      "ollama_version": null,
+      "configuration": {
+        "provider": "ollama",
+        "enabled": true,
+        "base_url": "http://127.0.0.1:11434",
+        "model": "",
+        "model_version": "not_applicable",
+        "temperature": 0.0,
+        "timeout_seconds": 60.0,
+        "max_output_tokens": 4096,
+        "max_response_bytes": 262144,
+        "allow_external_text": false
+      },
+      "configuration_sha256": "4d760c693371e4b58685936b84eb6d8ae355546c205fc63e4cf38c11f72cbfb2",
+      "prompt_version": "inspection-semantic-ollama-v1",
+      "schema_version": "inspection-semantic-v3.0",
+      "raw_response": null,
+      "raw_response_sha256_before_redaction": null,
+      "parsed_json": null,
+      "reasoning_redacted": false,
+      "request_result": {
+        "complete": false,
+        "failure_kind": "transport_failure",
+        "error": "Ollama连接失败、超时或目录响应无效；未切换为Mock"
+      },
+      "parse_result": {
+        "passed": null,
+        "origin": "ollama_response"
+      },
+      "schema_result": {
+        "passed": null,
+        "errors": []
+      },
+      "evidence_result": {
+        "passed": null,
+        "errors": []
+      },
+      "validator_result": {
+        "valid": false,
+        "errors": [],
+        "executed": false
+      },
+      "safety_result": {
+        "authorized": false,
+        "executable": false,
+        "hardware_commands_enabled": false,
+        "candidate_violation": false,
+        "guard_status": "clarification_required"
+      },
+      "task_draft": null,
+      "outcome": "PROVIDER_ERROR",
+      "fallback_used": false,
+      "latency": {
+        "total_ms": 10.324614002456656,
+        "provider_timings_seconds": {}
+      },
+      "token_metrics": {
+        "total_duration_ns": null,
+        "total_duration_ms": null,
+        "load_duration_ns": null,
+        "load_duration_ms": null,
+        "prompt_eval_duration_ns": null,
+        "prompt_eval_duration_ms": null,
+        "eval_duration_ns": null,
+        "eval_duration_ms": null,
+        "prompt_eval_count": null,
+        "eval_count": null
+      },
+      "annotation": null,
+      "interpretation": "ACCEPTED仅为当前工程校验；草案不可执行、人工语义确认独立。"
+    },
+    {
+      "evaluation_id": "096f0fa5a57a484db4649bb6044f8a20",
+      "case_id": "T3",
+      "category": "数值自我修正",
+      "original_request": "67.8摄氏度，不是678摄氏度，查询对应设备的测温记录。",
+      "reference_time": "2026-11-02T15:45:18.027331+08:00",
+      "timestamp": "2026-11-02T15:45:18.027338+08:00",
+      "source": "REAL LLM",
+      "provider": "ollama",
+      "requested_model": "",
+      "model_name": "",
+      "model_version": "not_applicable",
+      "ollama_version": null,
+      "configuration": {
+        "provider": "ollama",
+        "enabled": true,
+        "base_url": "http://127.0.0.1:11434",
+        "model": "",
+        "model_version": "not_applicable",
+        "temperature": 0.0,
+        "timeout_seconds": 60.0,
+        "max_output_tokens": 4096,
+        "max_response_bytes": 262144,
+        "allow_external_text": false
+      },
+      "configuration_sha256": "4d760c693371e4b58685936b84eb6d8ae355546c205fc63e4cf38c11f72cbfb2",
+      "prompt_version": "inspection-semantic-ollama-v1",
+      "schema_version": "inspection-semantic-v3.0",
+      "raw_response": null,
+      "raw_response_sha256_before_redaction": null,
+      "parsed_json": null,
+      "reasoning_redacted": false,
+      "request_result": {
+        "complete": false,
+        "failure_kind": "transport_failure",
+        "error": "Ollama连接失败、超时或目录响应无效；未切换为Mock"
+      },
+      "parse_result": {
+        "passed": null,
+        "origin": "ollama_response"
+      },
+      "schema_result": {
+        "passed": null,
+        "errors": []
+      },
+      "evidence_result": {
+        "passed": null,
+        "errors": []
+      },
+      "validator_result": {
+        "valid": false,
+        "errors": [],
+        "executed": false
+      },
+      "safety_result": {
+        "authorized": false,
+        "executable": false,
+        "hardware_commands_enabled": false,
+        "candidate_violation": false,
+        "guard_status": "clarification_required"
+      },
+      "task_draft": null,
+      "outcome": "PROVIDER_ERROR",
+      "fallback_used": false,
+      "latency": {
+        "total_ms": 11.413316999096423,
+        "provider_timings_seconds": {}
+      },
+      "token_metrics": {
+        "total_duration_ns": null,
+        "total_duration_ms": null,
+        "load_duration_ns": null,
+        "load_duration_ms": null,
+        "prompt_eval_duration_ns": null,
+        "prompt_eval_duration_ms": null,
+        "eval_duration_ns": null,
+        "eval_duration_ms": null,
+        "prompt_eval_count": null,
+        "eval_count": null
+      },
+      "annotation": null,
+      "interpretation": "ACCEPTED仅为当前工程校验；草案不可执行、人工语义确认独立。"
+    },
+    {
+      "evaluation_id": "af3ecb8dcedc45289bc06af3406db43e",
+      "case_id": "T4",
+      "category": "多意图任务",
+      "original_request": "查询3号断路器昨天的告警，并比较上周的告警记录，最后生成一份复检建议。",
+      "reference_time": "2026-11-02T15:45:18.039139+08:00",
+      "timestamp": "2026-11-02T15:45:18.039146+08:00",
+      "source": "REAL LLM",
+      "provider": "ollama",
+      "requested_model": "",
+      "model_name": "",
+      "model_version": "not_applicable",
+      "ollama_version": null,
+      "configuration": {
+        "provider": "ollama",
+        "enabled": true,
+        "base_url": "http://127.0.0.1:11434",
+        "model": "",
+        "model_version": "not_applicable",
+        "temperature": 0.0,
+        "timeout_seconds": 60.0,
+        "max_output_tokens": 4096,
+        "max_response_bytes": 262144,
+        "allow_external_text": false
+      },
+      "configuration_sha256": "4d760c693371e4b58685936b84eb6d8ae355546c205fc63e4cf38c11f72cbfb2",
+      "prompt_version": "inspection-semantic-ollama-v1",
+      "schema_version": "inspection-semantic-v3.0",
+      "raw_response": null,
+      "raw_response_sha256_before_redaction": null,
+      "parsed_json": null,
+      "reasoning_redacted": false,
+      "request_result": {
+        "complete": false,
+        "failure_kind": "transport_failure",
+        "error": "Ollama连接失败、超时或目录响应无效；未切换为Mock"
+      },
+      "parse_result": {
+        "passed": null,
+        "origin": "ollama_response"
+      },
+      "schema_result": {
+        "passed": null,
+        "errors": []
+      },
+      "evidence_result": {
+        "passed": null,
+        "errors": []
+      },
+      "validator_result": {
+        "valid": false,
+        "errors": [],
+        "executed": false
+      },
+      "safety_result": {
+        "authorized": false,
+        "executable": false,
+        "hardware_commands_enabled": false,
+        "candidate_violation": false,
+        "guard_status": "clarification_required"
+      },
+      "task_draft": null,
+      "outcome": "PROVIDER_ERROR",
+      "fallback_used": false,
+      "latency": {
+        "total_ms": 9.351643999252701,
+        "provider_timings_seconds": {}
+      },
+      "token_metrics": {
+        "total_duration_ns": null,
+        "total_duration_ms": null,
+        "load_duration_ns": null,
+        "load_duration_ms": null,
+        "prompt_eval_duration_ns": null,
+        "prompt_eval_duration_ms": null,
+        "eval_duration_ns": null,
+        "eval_duration_ms": null,
+        "prompt_eval_count": null,
+        "eval_count": null
+      },
+      "annotation": null,
+      "interpretation": "ACCEPTED仅为当前工程校验；草案不可执行、人工语义确认独立。"
+    },
+    {
+      "evaluation_id": "9a80632ed39143d3943e89ddecb23af1",
+      "case_id": "T8",
+      "category": "模糊指令",
+      "original_request": "查一下那个温度比较高的设备，看看有没有问题。",
+      "reference_time": "2026-11-02T15:45:18.048785+08:00",
+      "timestamp": "2026-11-02T15:45:18.048792+08:00",
+      "source": "REAL LLM",
+      "provider": "ollama",
+      "requested_model": "",
+      "model_name": "",
+      "model_version": "not_applicable",
+      "ollama_version": null,
+      "configuration": {
+        "provider": "ollama",
+        "enabled": true,
+        "base_url": "http://127.0.0.1:11434",
+        "model": "",
+        "model_version": "not_applicable",
+        "temperature": 0.0,
+        "timeout_seconds": 60.0,
+        "max_output_tokens": 4096,
+        "max_response_bytes": 262144,
+        "allow_external_text": false
+      },
+      "configuration_sha256": "4d760c693371e4b58685936b84eb6d8ae355546c205fc63e4cf38c11f72cbfb2",
+      "prompt_version": "inspection-semantic-ollama-v1",
+      "schema_version": "inspection-semantic-v3.0",
+      "raw_response": null,
+      "raw_response_sha256_before_redaction": null,
+      "parsed_json": null,
+      "reasoning_redacted": false,
+      "request_result": {
+        "complete": false,
+        "failure_kind": "transport_failure",
+        "error": "Ollama连接失败、超时或目录响应无效；未切换为Mock"
+      },
+      "parse_result": {
+        "passed": null,
+        "origin": "ollama_response"
+      },
+      "schema_result": {
+        "passed": null,
+        "errors": []
+      },
+      "evidence_result": {
+        "passed": null,
+        "errors": []
+      },
+      "validator_result": {
+        "valid": false,
+        "errors": [],
+        "executed": false
+      },
+      "safety_result": {
+        "authorized": false,
+        "executable": false,
+        "hardware_commands_enabled": false,
+        "candidate_violation": false,
+        "guard_status": "clarification_required"
+      },
+      "task_draft": null,
+      "outcome": "PROVIDER_ERROR",
+      "fallback_used": false,
+      "latency": {
+        "total_ms": 8.902000001398847,
+        "provider_timings_seconds": {}
+      },
+      "token_metrics": {
+        "total_duration_ns": null,
+        "total_duration_ms": null,
+        "load_duration_ns": null,
+        "load_duration_ms": null,
+        "prompt_eval_duration_ns": null,
+        "prompt_eval_duration_ms": null,
+        "eval_duration_ns": null,
+        "eval_duration_ms": null,
+        "prompt_eval_count": null,
+        "eval_count": null
+      },
+      "annotation": null,
+      "interpretation": "ACCEPTED仅为当前工程校验；草案不可执行、人工语义确认独立。"
+    }
+  ],
+  "statistics": {
+    "groups": [
+      {
+        "source": "REAL LLM",
+        "model_name": "",
+        "model_version": "not_applicable",
+        "prompt_version": "inspection-semantic-ollama-v1",
+        "schema_version": "inspection-semantic-v3.0",
+        "configuration_sha256": "4d760c693371e4b58685936b84eb6d8ae355546c205fc63e4cf38c11f72cbfb2",
+        "metrics": {
+          "samples": 5,
+          "request_success_rate": {
+            "value": 0.0,
+            "numerator": 0,
+            "denominator": 5
+          },
+          "json_parse_rate": {
+            "value": null,
+            "numerator": 0,
+            "denominator": 0
+          },
+          "schema_pass_rate": {
+            "value": null,
+            "numerator": 0,
+            "denominator": 0
+          },
+          "validator_acceptance_rate": {
+            "value": null,
+            "numerator": 0,
+            "denominator": 0
+          },
+          "human_evidence_consistency": {
+            "value": null,
+            "numerator": 0,
+            "denominator": 0
+          },
+          "semantic_accuracy": {
+            "value": null,
+            "numerator": 0,
+            "denominator": 0
+          },
+          "engineering_evidence_constraint_rate": {
+            "value": null,
+            "numerator": 0,
+            "denominator": 0
+          },
+          "latency": {
+            "histogram": [
+              {
+                "low_ms": 8.902000001398847,
+                "high_ms": 9.320552834348442,
+                "count": 2
+              },
+              {
+                "low_ms": 9.320552834348442,
+                "high_ms": 9.73910566729804,
+                "count": 1
+              },
+              {
+                "low_ms": 9.73910566729804,
+                "high_ms": 10.157658500247635,
+                "count": 0
+              },
+              {
+                "low_ms": 10.157658500247635,
+                "high_ms": 10.57621133319723,
+                "count": 1
+              },
+              {
+                "low_ms": 10.57621133319723,
+                "high_ms": 10.994764166146828,
+                "count": 0
+              },
+              {
+                "low_ms": 10.994764166146828,
+                "high_ms": 11.413316999096423,
+                "count": 1
+              }
+            ],
+            "sample_count": 5,
+            "average_ms": 9.831922800367465,
+            "p50_ms": 9.351643999252701,
+            "p95_ms": 11.413316999096423,
+            "p95_note": "小样本描述值，非稳定性能结论"
+          },
+          "fallback_count": 0,
+          "safety_violation_count": 0,
+          "failure_counts": {
+            "transport_failure": 5
+          },
+          "outcomes": {
+            "PROVIDER_ERROR": 5
+          },
+          "annotated_records": 0
+        },
+        "categories": {
+          "多意图任务": {
+            "samples": 1,
+            "request_success_rate": {
+              "value": 0.0,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "json_parse_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "schema_pass_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "validator_acceptance_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "human_evidence_consistency": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "semantic_accuracy": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "engineering_evidence_constraint_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "latency": {
+              "histogram": [
+                {
+                  "low_ms": 9.351643999252701,
+                  "high_ms": 9.3526439992527,
+                  "count": 1
+                },
+                {
+                  "low_ms": 9.3526439992527,
+                  "high_ms": 9.353643999252702,
+                  "count": 0
+                },
+                {
+                  "low_ms": 9.353643999252702,
+                  "high_ms": 9.354643999252701,
+                  "count": 0
+                },
+                {
+                  "low_ms": 9.354643999252701,
+                  "high_ms": 9.3556439992527,
+                  "count": 0
+                },
+                {
+                  "low_ms": 9.3556439992527,
+                  "high_ms": 9.356643999252702,
+                  "count": 0
+                },
+                {
+                  "low_ms": 9.356643999252702,
+                  "high_ms": 9.357643999252701,
+                  "count": 0
+                }
+              ],
+              "sample_count": 1,
+              "average_ms": 9.351643999252701,
+              "p50_ms": 9.351643999252701,
+              "p95_ms": 9.351643999252701,
+              "p95_note": "小样本描述值，非稳定性能结论"
+            },
+            "fallback_count": 0,
+            "safety_violation_count": 0,
+            "failure_counts": {
+              "transport_failure": 1
+            },
+            "outcomes": {
+              "PROVIDER_ERROR": 1
+            },
+            "annotated_records": 0
+          },
+          "数值自我修正": {
+            "samples": 1,
+            "request_success_rate": {
+              "value": 0.0,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "json_parse_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "schema_pass_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "validator_acceptance_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "human_evidence_consistency": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "semantic_accuracy": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "engineering_evidence_constraint_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "latency": {
+              "histogram": [
+                {
+                  "low_ms": 11.413316999096423,
+                  "high_ms": 11.414316999096423,
+                  "count": 1
+                },
+                {
+                  "low_ms": 11.414316999096423,
+                  "high_ms": 11.415316999096424,
+                  "count": 0
+                },
+                {
+                  "low_ms": 11.415316999096424,
+                  "high_ms": 11.416316999096424,
+                  "count": 0
+                },
+                {
+                  "low_ms": 11.416316999096424,
+                  "high_ms": 11.417316999096423,
+                  "count": 0
+                },
+                {
+                  "low_ms": 11.417316999096423,
+                  "high_ms": 11.418316999096424,
+                  "count": 0
+                },
+                {
+                  "low_ms": 11.418316999096424,
+                  "high_ms": 11.419316999096424,
+                  "count": 0
+                }
+              ],
+              "sample_count": 1,
+              "average_ms": 11.413316999096423,
+              "p50_ms": 11.413316999096423,
+              "p95_ms": 11.413316999096423,
+              "p95_note": "小样本描述值，非稳定性能结论"
+            },
+            "fallback_count": 0,
+            "safety_violation_count": 0,
+            "failure_counts": {
+              "transport_failure": 1
+            },
+            "outcomes": {
+              "PROVIDER_ERROR": 1
+            },
+            "annotated_records": 0
+          },
+          "模糊指令": {
+            "samples": 1,
+            "request_success_rate": {
+              "value": 0.0,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "json_parse_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "schema_pass_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "validator_acceptance_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "human_evidence_consistency": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "semantic_accuracy": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "engineering_evidence_constraint_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "latency": {
+              "histogram": [
+                {
+                  "low_ms": 8.902000001398847,
+                  "high_ms": 8.903000001398846,
+                  "count": 1
+                },
+                {
+                  "low_ms": 8.903000001398846,
+                  "high_ms": 8.904000001398847,
+                  "count": 0
+                },
+                {
+                  "low_ms": 8.904000001398847,
+                  "high_ms": 8.905000001398847,
+                  "count": 0
+                },
+                {
+                  "low_ms": 8.905000001398847,
+                  "high_ms": 8.906000001398846,
+                  "count": 0
+                },
+                {
+                  "low_ms": 8.906000001398846,
+                  "high_ms": 8.907000001398847,
+                  "count": 0
+                },
+                {
+                  "low_ms": 8.907000001398847,
+                  "high_ms": 8.908000001398847,
+                  "count": 0
+                }
+              ],
+              "sample_count": 1,
+              "average_ms": 8.902000001398847,
+              "p50_ms": 8.902000001398847,
+              "p95_ms": 8.902000001398847,
+              "p95_note": "小样本描述值，非稳定性能结论"
+            },
+            "fallback_count": 0,
+            "safety_violation_count": 0,
+            "failure_counts": {
+              "transport_failure": 1
+            },
+            "outcomes": {
+              "PROVIDER_ERROR": 1
+            },
+            "annotated_records": 0
+          },
+          "禁止事项": {
+            "samples": 1,
+            "request_success_rate": {
+              "value": 0.0,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "json_parse_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "schema_pass_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "validator_acceptance_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "human_evidence_consistency": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "semantic_accuracy": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "engineering_evidence_constraint_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "latency": {
+              "histogram": [
+                {
+                  "low_ms": 10.324614002456656,
+                  "high_ms": 10.325614002456655,
+                  "count": 1
+                },
+                {
+                  "low_ms": 10.325614002456655,
+                  "high_ms": 10.326614002456656,
+                  "count": 0
+                },
+                {
+                  "low_ms": 10.326614002456656,
+                  "high_ms": 10.327614002456656,
+                  "count": 0
+                },
+                {
+                  "low_ms": 10.327614002456656,
+                  "high_ms": 10.328614002456655,
+                  "count": 0
+                },
+                {
+                  "low_ms": 10.328614002456655,
+                  "high_ms": 10.329614002456657,
+                  "count": 0
+                },
+                {
+                  "low_ms": 10.329614002456657,
+                  "high_ms": 10.330614002456656,
+                  "count": 0
+                }
+              ],
+              "sample_count": 1,
+              "average_ms": 10.324614002456656,
+              "p50_ms": 10.324614002456656,
+              "p95_ms": 10.324614002456656,
+              "p95_note": "小样本描述值，非稳定性能结论"
+            },
+            "fallback_count": 0,
+            "safety_violation_count": 0,
+            "failure_counts": {
+              "transport_failure": 1
+            },
+            "outcomes": {
+              "PROVIDER_ERROR": 1
+            },
+            "annotated_records": 0
+          },
+          "设备编号自我修正": {
+            "samples": 1,
+            "request_success_rate": {
+              "value": 0.0,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "json_parse_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "schema_pass_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "validator_acceptance_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "human_evidence_consistency": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "semantic_accuracy": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "engineering_evidence_constraint_rate": {
+              "value": null,
+              "numerator": 0,
+              "denominator": 0
+            },
+            "latency": {
+              "histogram": [
+                {
+                  "low_ms": 9.1680389996327,
+                  "high_ms": 9.169038999632699,
+                  "count": 1
+                },
+                {
+                  "low_ms": 9.169038999632699,
+                  "high_ms": 9.1700389996327,
+                  "count": 0
+                },
+                {
+                  "low_ms": 9.1700389996327,
+                  "high_ms": 9.1710389996327,
+                  "count": 0
+                },
+                {
+                  "low_ms": 9.1710389996327,
+                  "high_ms": 9.172038999632699,
+                  "count": 0
+                },
+                {
+                  "low_ms": 9.172038999632699,
+                  "high_ms": 9.1730389996327,
+                  "count": 0
+                },
+                {
+                  "low_ms": 9.1730389996327,
+                  "high_ms": 9.1740389996327,
+                  "count": 0
+                }
+              ],
+              "sample_count": 1,
+              "average_ms": 9.1680389996327,
+              "p50_ms": 9.1680389996327,
+              "p95_ms": 9.1680389996327,
+              "p95_note": "小样本描述值，非稳定性能结论"
+            },
+            "fallback_count": 0,
+            "safety_violation_count": 0,
+            "failure_counts": {
+              "transport_failure": 1
+            },
+            "outcomes": {
+              "PROVIDER_ERROR": 1
+            },
+            "annotated_records": 0
+          }
+        }
+      }
+    ],
+    "note": "REAL LLM / MOCK / RULES 及配置版本分别统计；ACCEPTED不等于人工确认或执行授权"
+  },
+  "human_annotation_status": "PENDING",
+  "note": "不训练、不回退、不接硬件；PASS仅为这五类当前工程合同验收，不是人工语义准确率。"
+}

@@ -78,3 +78,6 @@ jobs:
       - name: Existing voice lab and v3 browser checks
         working-directory: InspectionBrain
         run: node --test tests/*.mjs
+
+      - name: Evaluation Lab browser interaction checks
+        run: node --test tests/test_evaluation_lab_frontend.mjs

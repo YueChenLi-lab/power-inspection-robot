@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>InspectionBrain · Evaluation Lab</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
+<body>
+<header><div><span class="eyebrow">INSPECTIONBRAIN / ENGINEERING LAB 0.1</span><h1>真实模型评测实验室</h1><p>观察模型输出，验证每一层约束。Task Draft 始终不可执行。</p></div><span class="pill">LOCAL · NO ACTUATORS</span></header>
+<nav aria-label="页面"><button data-tab="evaluate" aria-selected="true">01 模型评测</button><button data-tab="batch">02 批量评测</button><button data-tab="statistics">03 评测统计</button><button data-tab="history">04 历史与标注</button></nav>
+<div id="notice" role="status" aria-live="polite"></div>
+<main>
+<section id="page-evaluate" class="page">
+<div class="workspace"><aside class="panel"><h2>输入与配置</h2>
+<label>来源<select id="provider"><option value="ollama">REAL LLM · Ollama</option><option value="mock">MOCK · 离线脚本对照</option><option value="rules">RULES · 显式规则对照</option></select></label>
+<label>已安装模型<select id="model"><option value="">请检查连接后选择模型</option></select></label><button id="check-models" class="secondary">检查 Ollama / 获取模型列表</button>
+<label>测试用例<select id="case"><option value="">手动输入</option></select></label>
+<label>原始指令<textarea id="input" rows="7" placeholder="输入一条电力巡检指令"></textarea></label>
+<label>reference_time（ISO，含时区）<input id="reference-time" placeholder="留空使用当前上海时间"></label>
+<button id="run" class="primary">运行单条评测</button>
+<p class="muted">模型不可用将记录失败，不会自动切换 Mock。合成期望不进入模型请求。</p></aside>
+<div class="results"><article class="panel"><div class="heading"><h2>模型状态</h2><span id="connection" class="badge">未检查</span></div><dl id="model-status"></dl><p id="selected-model-info" class="muted">尚未选择模型</p></article>
+<article class="panel"><div class="heading"><h2>逐层结果</h2><span id="outcome" class="badge">等待输入</span></div><p id="result-source" class="muted"></p>
+<div class="safety"><code>authorized = false</code><code>executable = false</code><code>hardware_commands_enabled = false</code></div><p class="muted">以上为独立安全封装；候选违规会在下方单独标出。ACCEPTED 不等于人工语义确认。</p>
+<div id="layers"></div></article></div></div>
+</section>
+<section id="page-batch" class="page" hidden><article class="panel"><h2>顺序批量评测</h2><p>使用“模型评测”页当前选择的来源、模型和参考时间。一次仅一个推理请求；关闭页面不会把已完成记录丢弃。</p><div id="batch-cases"></div><button id="run-batch" class="primary">顺序运行所选用例</button><progress id="batch-progress" value="0" max="1"></progress><p id="batch-state" role="status">尚未开始</p><div id="batch-results"></div></article></section>
+<section id="page-statistics" class="page" hidden><article class="panel"><div class="heading"><h2>分组评测仪表盘</h2><button id="refresh-statistics" class="secondary">刷新统计</button></div><p class="muted">REAL LLM / MOCK / RULES、模型摘要及配置分别统计。未人工确认的样本不计入语义正确率。P95 显示样本量。</p><div id="statistics"></div></article></section>
+<section id="page-history" class="page" hidden><article class="panel"><div class="heading"><h2>历史记录</h2><button id="refresh-history" class="secondary">刷新</button></div><div class="filters"><label>来源<select id="history-source"><option value="">所有来源（记录列表）</option><option>REAL LLM</option><option>MOCK</option><option>RULES</option></select></label><label>类别<select id="history-category"><option value="">所有类别</option></select></label></div>
+<div class="exports"><a id="export-json" href="/api/export?format=json">JSON</a><a id="export-csv" href="/api/export?format=csv">CSV</a><a id="export-markdown" href="/api/export?format=markdown">Markdown 汇总</a></div><div id="history"></div></article>
+<article id="annotation-panel" class="panel" hidden><h2>独立人工标注</h2><p id="annotation-record"></p><p class="muted">先核对原文与候选。仅明确选择的维度计入统计；这是本地审阅者标签，不是身份认证。</p><div id="annotation-detail"></div><label>审阅者<input id="annotator" maxlength="120"></label><label>原文证据一致性<select id="annotation-evidence"><option value="">未评</option><option value="true">一致</option><option value="false">不一致</option></select></label><div id="annotation-dimensions"></div><label>备注<textarea id="annotation-notes" rows="2" maxlength="2000"></textarea></label><label class="check"><input type="checkbox" id="annotation-confirmed"> 我已独立核查所标维度，确认保存</label><button id="save-annotation" class="primary">保存独立标注</button></article></section>
+</main><footer>InspectionBrain Evaluation Lab · 单机本地评测原型 · 无真实设备台账、无机器人执行接口</footer>
+</body></html>
