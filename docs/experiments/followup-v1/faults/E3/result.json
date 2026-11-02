@@ -1,0 +1,40 @@
+{
+  "experiment": "E3",
+  "name": "E3",
+  "definition_revision": "followup-v1",
+  "conditions": {
+    "disconnect_then_recover": true,
+    "ack_loss": true
+  },
+  "steps": [
+    "Complete local task offline",
+    "Fail sync",
+    "Restore network with ACK loss",
+    "Retry sync with same event IDs"
+  ],
+  "expected": "No loss; pending=0; receiver count equals local event count after ACK-loss retry",
+  "actual": {
+    "offline": {
+      "sent": 0,
+      "failed": 5,
+      "pending": 5
+    },
+    "lost_ack": {
+      "sent": 0,
+      "failed": 5,
+      "pending": 5
+    },
+    "recovered": {
+      "sent": 5,
+      "failed": 0,
+      "pending": 0
+    },
+    "receiver_unique_events": 5
+  },
+  "passed": true,
+  "raw_logs": [
+    "events.jsonl",
+    "network.jsonl"
+  ],
+  "is_mock": true
+}

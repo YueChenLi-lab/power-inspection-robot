@@ -1,0 +1,8 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "logical_cpus": 5,
+  "dataset": "mock-fixture-v1",
+  "code_commit": "55097a0e5a7d83671e430e85e264ddce2c664053",
+  "real_robot": false
+}

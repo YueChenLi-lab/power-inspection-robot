@@ -6,30 +6,24 @@
 
 ```mermaid
 flowchart TD
-    IN[手动文本 / 既有语音实验室] --> B[InspectionBrain v2 / v3]
-    B --> P[规则 / Mock / Ollama原生Provider]
-    P --> V[原Schema与Evidence Validator]
-    V --> G[SafetyGuard：不可执行草案]
-    G --> A[BrainAdapter：重新校验与Mock白名单映射]
+    T[文本 / 既有语音实验室] --> B[InspectionBrain v2 / v3 Provider]
+    B --> V[JSON Schema / 完整语义Validator]
+    V --> G[SafetyGuard：语义输出约束]
+    G --> D[Mission Draft：不可执行草案]
+    D --> A[BrainAdapter：重新验证与Mock设备映射]
     A --> M[Mission Manager / State Machine]
-    M --> S[Scheduler：单Worker，优先级FIFO]
-    S --> SAFE[独立Safety Supervisor]
-    SAFE --> W[Worker / Executor：可终止子进程]
-    W --> K[三个Mock Skill]
-    M --> DB[(SQLite：任务、事件、审批、执行)]
-    K --> DB
-    DB --> O[事务Outbox]
-    O --> N[可复现网络模拟器]
-    N --> R[(Mock远端SQLite inbox去重)]
-    DB --> C[Collector / 有界Buffer / BatchWriter]
-    C --> E[(证据SHA256与Evidence Outbox)]
-    E --> O
-    DB --> T[Trace与Metrics / Benchmark / SVG]
-    DB --> REC[显式Recovery：幂等重试或人工复核]
+    M --> SAFE[独立Safety Supervisor：受理与领取均复核]
+    SAFE --> S[Scheduler：短事务候选快照]
+    S --> N[Network Preflight：写事务之外]
+    N --> C[新事务：状态、版本、审批重新核验与领取]
+    C --> REG[Skill Registry / 单Worker Runtime]
+    REG --> K[三个Mock Skill / 可终止子进程]
+    K --> OVAL[输出Schema / 业务一致性Validator]
+    OVAL --> DB[(SQLite / Event Store / Outbox)]
+    DB --> REC[Recovery：统一重试策略，不绕过审批]
     REC --> M
-    H[真实硬件、真实云端：未接入]
-    classDef external fill:#eeeeee,stroke:#666,stroke-dasharray:5 5;
-    class H external;
+    DB --> SYNC[模拟网络 / Mock远端去重]
+    DB --> OBS[Trace / Metrics / 数据管线]
 ```
 
 执行权来自可信的本地注册元数据和独立操作员审批，不来自 Brain 输出。这里的“执行”只指模拟业务函数；草案原有 `executable=false` 等字段不会变成硬件授权。
@@ -42,3 +36,13 @@ flowchart TD
 - `data_pipeline/`：证据采集、背压、批写、延迟同步、保留策略与 SHA-256。
 
 不支持分布式调度、真实物理副作用、任意复杂语义到任务 DAG 的自动执行或硬件安全认证。跨 Skill 复合请求、未解析时间、未知设备映射和条件请求会明确拒绝并要求进一步分解或澄清。
+
+## Follow-up：事务、恢复与输出合同
+
+Scheduler 已分为候选准备事务、事务外 Network Preflight、重读任务并原子领取的提交事务；网络等待不持有数据库连接互斥锁或 SQLite 写锁。预检查期间取消、撤销审批或其他状态迁移会令快照失效；重新读取状态、updated_at、Skill 版本与审批后才允许 RUNNING。
+
+Worker、Recovery 与 RETRY_WAIT 重新调度共用 retry_decision，显式检查 retryable、幂等、版本、预算、状态与审批。不确定效果还要求可信 Mock 能力声明 recovery_safe；否则进入 WAITING_APPROVAL 复核。恢复不会替模型批准任务。
+
+Skill Registry 验证 JSON 输入输出后，再调用具体 Skill 的 request/result 业务钩子，检查设备允许集合、记录时间和 Mock 来源。Schema 合法但业务错误的结果不能写成成功。审批只接受真正 bool，actor 是本地审计标签而非已认证身份。
+
+完整变更与验证见[可靠性修复说明](RELIABILITY_FOLLOWUP.md)。历史性能、E5/E6 原始记录保留，通过修订说明和新实验目录说明差异。

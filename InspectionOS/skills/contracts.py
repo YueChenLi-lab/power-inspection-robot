@@ -40,23 +40,29 @@ class SkillSpec:
     version: str = '1.0'
     execution_scope: str = 'mock'
     requires_network_authorization: bool = False
+    recovery_safe: bool = False
 
     def __post_init__(self):
         if not self.skill_id or not self.version or not 0 < self.timeout <= 60:
             raise ValueError('invalid skill metadata')
+        for field in ('retryable','idempotent','offline_supported','requires_network_authorization','recovery_safe'):
+            if type(getattr(self,field)) is not bool:
+                raise ValueError(field+' must be bool')
         if self.risk_level not in ('low','high','motion'): raise ValueError('unknown risk')
 
 
 class Skill(Protocol):
     spec: SkillSpec
     def execute(self, payload: dict) -> dict: ...
+    # Optional per-capability cross-field validators are discovered by Registry.
 
 
-INPUT = {'type':'object','required':['device_id'],'additionalProperties':False,'properties':{
+INPUT = {'type':'object','additionalProperties':False,'properties':{
     'device_id':{'type':'string','enum':['MOCK-CB-3','MOCK-TR-1']},
+    'device_ids':{'type':'array','items':{'type':'string','enum':['MOCK-CB-3','MOCK-TR-1']}},
     'start':{'type':'string'},'end':{'type':'string'},'compare':{'type':'boolean'}}}
-OUTPUT = {'type':'object','required':['is_mock','source','device_id','records','summary'],
+OUTPUT = {'type':'object','required':['is_mock','source','records','summary'],
           'additionalProperties':False,'properties':{
               'is_mock':{'type':'boolean','enum':[True]},'source':{'type':'string','enum':['mock-fixture-v1']},
-              'device_id':{'type':'string'},'records':{'type':'array','items':{'type':'object'}},
+              'device_id':{'type':'string'},'device_ids':{'type':'array','items':{'type':'string'}},'records':{'type':'array','items':{'type':'object'}},
               'summary':{'type':'string'}}}

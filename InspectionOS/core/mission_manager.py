@@ -53,6 +53,8 @@ class MissionManager:
             return True
 
     def approve(self, mid, *, actor, token, allow=True):
+        if type(allow) is not bool:
+            raise ValueError('allow must be bool')
         try:
             self.safety.authenticate_operator(actor,token)
         except PermissionError:
@@ -71,4 +73,16 @@ class MissionManager:
             c.execute('INSERT INTO approvals VALUES (?,?,?,?,?)',(uuid.uuid4().hex,mid,actor,'allow' if allow else 'deny',time.time()))
             transition(c,mid,'QUEUED' if allow and decision=='ALLOW' else 'FAILED',kind='operator_review',
                        data={'actor':actor,'allow':allow},approved=int(allow and decision=='ALLOW'))
+        return self.get(mid)
+
+    def revoke_approval(self, mid, *, actor, token):
+        """Local operator can revoke queued/waiting authorization, never a running side effect."""
+        self.safety.authenticate_operator(actor, token)
+        with self.db.transaction() as c:
+            row=c.execute('SELECT * FROM missions WHERE mission_id=?',(mid,)).fetchone()
+            if row is None: raise KeyError(mid)
+            if row['status'] not in ('QUEUED','WAITING_NETWORK','RETRY_WAIT'):
+                raise ValueError('only pending missions can have approval revoked')
+            c.execute('INSERT INTO approvals VALUES (?,?,?,?,?)',(uuid.uuid4().hex,mid,actor,'revoked',time.time()))
+            transition(c,mid,'WAITING_APPROVAL',kind='approval_revoked',approved=0,data={'actor':actor})
         return self.get(mid)

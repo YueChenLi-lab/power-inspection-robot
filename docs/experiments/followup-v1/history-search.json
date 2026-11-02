@@ -1,0 +1,16 @@
+{
+  "checked_at_base": "fdc997e432ee65c524e12556feba013031dbed20",
+  "reachable_commits_at_start": 11,
+  "searched_branches": [
+    "main",
+    "docs/project-overview",
+    "feature/edge-task-runtime"
+  ],
+  "searched_paths": [
+    "voice-evaluation.json",
+    "InspectionBrain/runtime/voice_lab/records/9bf3bee5bf3e48e3b60a3a33d6966bc5.json"
+  ],
+  "matching_commits": [],
+  "matching_reachable_objects": [],
+  "fabricated_assets": false
+}

@@ -11,6 +11,8 @@ from brain_v3.config import ProviderConfig
 from brain_v3.engine import SemanticEngine
 from brain_v3.schema import schema_errors
 from brain_v3.validator import SemanticValidator
+from brain_v3.evidence import build_evidence
+from tools.evidence_metrics import check_evidence
 
 DATASET = json.loads((Path(__file__).resolve().parents[1]/"tests/fixtures/semantic_cases.json").read_text())
 CASES = [c["text"] for c in DATASET["cases"]]
@@ -35,7 +37,12 @@ def evaluate(config):
     for text in CASES:
         engine.validator.timings = {}
         result = engine.analyze(text, mode="v3_llm", now=datetime.fromisoformat("2026-11-02T12:00:00+08:00"))
-        rows.append({"input": text, "result": result, "timings": getattr(engine.validator, "timings", {}),
+        evidence=build_evidence(text,result['v2'],datetime.fromisoformat(result['reference_time']))
+        parsed=result['model_candidate'] if result['model_candidate'] is not None else getattr(engine.provider,'last_candidate',None)
+        diagnostics=getattr(engine.provider,'diagnostics',{})
+        observed=result['model_candidate'] is not None or diagnostics.get('json_parse_success') is True
+        rows.append({"evidence_check":check_evidence(parsed,evidence) if observed else None,
+                     "diagnostics":dict(diagnostics),"parsed_candidate":parsed,"candidate_observed":observed,"input": text, "result": result, "timings": getattr(engine.validator, "timings", {}),
                      "provider_timings": getattr(engine.provider, "timings", {}),
                      "raw_response": getattr(engine.provider, "last_response", None)})
     return rows
@@ -56,12 +63,18 @@ def summarize(rows):
                      (not expected.get('unresolved_target') or any(not t['resolved'] for t in s['temporal_constraints'])))
         fields.append(bool(matched))
     n=len(rows)
+    parses=[r['diagnostics']['json_parse_success'] for r in rows if r.get('diagnostics',{}).get('json_parse_success') is not None]
+    candidates=[r.get('parsed_candidate',r['result'].get('model_candidate')) for r in rows if r.get('candidate_observed',r['result'].get('model_candidate') is not None)]
+    checks=[r['evidence_check'] for r in rows if r.get('evidence_check') is not None]
+    rate=lambda values:sum(values)/len(values) if values else None
+    from collections import Counter
+    failures=Counter(r.get('diagnostics',{}).get('failure_kind') for r in rows if r.get('diagnostics',{}).get('failure_kind'))
     return {'samples':n,'dataset_role':DATASET['dataset_role'],'human_gold_accuracy':None,
-            'json_parse_success_rate':sum(r['result']['model_candidate'] is not None for r in rows)/n,
-            'schema_pass_rate':sum(r['result']['model_candidate'] is not None and not schema_errors(r['result']['model_candidate']) for r in rows)/n,
-            'validator_acceptance_rate':sum((r['result'].get('validation') or {}).get('valid',False) for r in rows)/n,
-            'synthetic_key_fields_accuracy':sum(fields)/n,'fallback_count':sum(r['result']['fallback_used'] for r in rows),
-            'evidence_consistency_acceptance_rate':sum((r['result'].get('validation') or {}).get('valid',False) for r in rows)/n,
+            'json_parse_success_rate':rate(parses),'json_parse_observations':len(parses),
+            'schema_pass_rate':rate([not schema_errors(c) for c in candidates]),'schema_observations':len(candidates),
+            'validator_acceptance_rate':rate([(r['result'].get('validation') or {}).get('valid',False) for r in rows]),'validator_attempts':n,
+            'synthetic_key_fields_match_rate':rate(fields),'fallback_count':sum(r['result']['fallback_used'] for r in rows),
+            'evidence_constraint_pass_rate':rate([c['passed'] for c in checks]),'evidence_observations':len(checks),'failure_counts':dict(failures),
             'real_model_successes':sum(r['result']['model_candidate'] is not None and r['result']['provider']['is_real_llm'] for r in rows),
             'latency_seconds':distribution([r['result']['total_seconds'] for r in rows])}
 

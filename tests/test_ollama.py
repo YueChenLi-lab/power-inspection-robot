@@ -102,3 +102,18 @@ class OllamaTests(unittest.TestCase):
             result=self.analyze('查询3号断路器告警')
             self.assertEqual(result['status'],'provider_unavailable')
             self.assertIn('json_parse_seconds',self.provider.timings)
+
+    def test_failure_diagnostics_separate_transport_timeout_and_json(self):
+        from urllib.error import URLError
+        from unittest.mock import patch
+        from brain_v3.providers import ProviderError
+        provider=OllamaProvider(self.config)
+        for error,kind in [(URLError('simulated connection refused'),'transport_failure'),(TimeoutError('simulated deadline'),'timeout')]:
+            with patch.object(provider.opener,'open',side_effect=error):
+                with self.assertRaises(ProviderError):provider.generate({})
+            self.assertEqual(provider.diagnostics['failure_kind'],kind)
+            self.assertIsNone(provider.diagnostics['json_parse_success'])
+        self.content='{'  # Real local HTTP response carrying invalid model JSON.
+        self.analyze('查询3号断路器告警')
+        self.assertEqual(self.provider.diagnostics['failure_kind'],'json_parse_failure')
+        self.assertIs(self.provider.diagnostics['json_parse_success'],False)

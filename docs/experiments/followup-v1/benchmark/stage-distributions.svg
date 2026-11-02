@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="762" viewBox="0 0 960 762">
+<rect width="100%" height="100%" fill="white"/>
+<text x="20" y="30" font-size="18">Measured stage distributions (seconds, inclusive semantic validation)</text>
+<text x="20" y="74" font-size="12">queue_seconds p50</text>
+<rect x="350" y="60" width="231.19" height="20" fill="#3576ad"/>
+<text x="810" y="74" font-size="12">0.013867</text>
+<text x="20" y="106" font-size="12">queue_seconds p95</text>
+<rect x="350" y="92" width="450.00" height="20" fill="#3576ad"/>
+<text x="810" y="106" font-size="12">0.026992</text>
+<text x="20" y="138" font-size="12">queue_seconds p99</text>
+<rect x="350" y="124" width="450.00" height="20" fill="#3576ad"/>
+<text x="810" y="138" font-size="12">0.026992</text>
+<text x="20" y="170" font-size="12">skill_seconds p50</text>
+<rect x="350" y="156" width="26.79" height="20" fill="#3576ad"/>
+<text x="810" y="170" font-size="12">0.001607</text>
+<text x="20" y="202" font-size="12">skill_seconds p95</text>
+<rect x="350" y="188" width="89.80" height="20" fill="#3576ad"/>
+<text x="810" y="202" font-size="12">0.005386</text>
+<text x="20" y="234" font-size="12">skill_seconds p99</text>
+<rect x="350" y="220" width="89.80" height="20" fill="#3576ad"/>
+<text x="810" y="234" font-size="12">0.005386</text>
+<text x="20" y="266" font-size="12">storage_write_seconds p50</text>
+<rect x="350" y="252" width="2.70" height="20" fill="#3576ad"/>
+<text x="810" y="266" font-size="12">0.000162</text>
+<text x="20" y="298" font-size="12">storage_write_seconds p95</text>
+<rect x="350" y="284" width="27.45" height="20" fill="#3576ad"/>
+<text x="810" y="298" font-size="12">0.001647</text>
+<text x="20" y="330" font-size="12">storage_write_seconds p99</text>
+<rect x="350" y="316" width="39.31" height="20" fill="#3576ad"/>
+<text x="810" y="330" font-size="12">0.002358</text>
+<text x="20" y="362" font-size="12">network_seconds p50</text>
+<rect x="350" y="348" width="1.42" height="20" fill="#3576ad"/>
+<text x="810" y="362" font-size="12">0.000085</text>
+<text x="20" y="394" font-size="12">network_seconds p95</text>
+<rect x="350" y="380" width="2.25" height="20" fill="#3576ad"/>
+<text x="810" y="394" font-size="12">0.000135</text>
+<text x="20" y="426" font-size="12">network_seconds p99</text>
+<rect x="350" y="412" width="2.25" height="20" fill="#3576ad"/>
+<text x="810" y="426" font-size="12">0.000135</text>
+<text x="20" y="458" font-size="12">schema p50</text>
+<rect x="350" y="444" width="3.57" height="20" fill="#3576ad"/>
+<text x="810" y="458" font-size="12">0.000214</text>
+<text x="20" y="490" font-size="12">schema p95</text>
+<rect x="350" y="476" width="5.01" height="20" fill="#3576ad"/>
+<text x="810" y="490" font-size="12">0.000300</text>
+<text x="20" y="522" font-size="12">schema p99</text>
+<rect x="350" y="508" width="5.01" height="20" fill="#3576ad"/>
+<text x="810" y="522" font-size="12">0.000300</text>
+<text x="20" y="554" font-size="12">evidence_semantic_validator p50</text>
+<rect x="350" y="540" width="3.96" height="20" fill="#3576ad"/>
+<text x="810" y="554" font-size="12">0.000238</text>
+<text x="20" y="586" font-size="12">evidence_semantic_validator p95</text>
+<rect x="350" y="572" width="9.07" height="20" fill="#3576ad"/>
+<text x="810" y="586" font-size="12">0.000544</text>
+<text x="20" y="618" font-size="12">evidence_semantic_validator p99</text>
+<rect x="350" y="604" width="9.07" height="20" fill="#3576ad"/>
+<text x="810" y="618" font-size="12">0.000544</text>
+<text x="20" y="650" font-size="12">semantic_total p50</text>
+<rect x="350" y="636" width="24.13" height="20" fill="#3576ad"/>
+<text x="810" y="650" font-size="12">0.001447</text>
+<text x="20" y="682" font-size="12">semantic_total p95</text>
+<rect x="350" y="668" width="147.51" height="20" fill="#3576ad"/>
+<text x="810" y="682" font-size="12">0.008848</text>
+<text x="20" y="714" font-size="12">semantic_total p99</text>
+<rect x="350" y="700" width="147.51" height="20" fill="#3576ad"/>
+<text x="810" y="714" font-size="12">0.008848</text>
+</svg>

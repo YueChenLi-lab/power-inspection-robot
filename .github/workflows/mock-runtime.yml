@@ -1,0 +1,80 @@
+name: Mock runtime reliability
+on:
+  push:
+    branches: [main, feature/edge-task-runtime]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  runtime:
+    name: Mock runtime / Python ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit, integration, concurrency and fault tests
+        env:
+          PYTHONPATH: InspectionBrain:.
+        run: |
+          set -o pipefail
+          mkdir -p runtime/ci
+          python -m unittest discover -s tests -v 2>&1 | tee runtime/ci/runtime-tests.log
+      - name: E1–E7 fault experiments
+        run: python -m InspectionOS.simulation.scenario_runner --output runtime/ci/faults
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mock-runtime-python-${{ matrix.python }}
+          path: runtime/ci/
+  brain-v3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Existing v3 semantic and HTTP regression
+        working-directory: InspectionBrain
+        run: |
+          set -o pipefail
+          python -m unittest discover -s tests -p 'test_v3*.py' -v 2>&1 | tee /tmp/brain-v3.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: brain-v3
+          path: /tmp/brain-v3.log
+  original-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Original suite, explicit historical prerequisites
+        run: |
+          set -o pipefail
+          python tools/validate.py --original-child --asset-policy skip-missing --summary runtime/ci-original-summary.json 2>&1 | tee /tmp/original-regression.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: original-regression-prerequisites
+          path: |
+            /tmp/original-regression.log
+            runtime/ci-original-summary.json
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Existing voice lab and v3 browser checks
+        working-directory: InspectionBrain
+        run: node --test tests/*.mjs

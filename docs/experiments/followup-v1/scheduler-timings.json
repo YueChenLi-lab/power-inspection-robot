@@ -1,0 +1,17 @@
+{
+  "network_wait_seconds": [
+    0.10079304899954877
+  ],
+  "database_transaction_seconds": [
+    0.0004437449988472508,
+    0.000160581001182436,
+    8.77820002642693e-05,
+    0.00018142200133297592
+  ],
+  "submission_seconds": 0.00041518299985909835,
+  "transaction_open_during_preflight": false,
+  "submitted_before_network_release": true,
+  "errors": [],
+  "cancelled_status": "CANCELLED",
+  "original_mission_claim_count": 0
+}

@@ -17,6 +17,8 @@ class OllamaProvider:
         self.opener = build_opener(ProxyHandler({}), NoRedirect())
         self.last_response = None
         self.timings = {}
+        self.diagnostics = {}
+        self.last_candidate = None
 
     def status(self):
         return {"provider": "ollama", "available": self.config.enabled and bool(self.config.model),
@@ -25,7 +27,10 @@ class OllamaProvider:
 
     def generate(self, request):
         self.last_response, self.timings = None, {}
+        self.last_candidate = None
+        self.diagnostics = {'json_parse_success':None,'failure_kind':None}
         if not self.status()["available"]:
+            self.diagnostics["failure_kind"] = "disabled"
             raise ProviderError("Ollama未启用；没有发出请求")
         payload = {"model": self.config.model, "stream": False, "format": SCHEMA,
                    "options": {"temperature": self.config.temperature, "num_predict": self.config.max_output_tokens},
@@ -49,6 +54,7 @@ class OllamaProvider:
             if not isinstance(body, dict):
                 raise ProviderError("Ollama消息封装必须为JSON对象")
             if body.get("done") is not True or body.get("done_reason", "stop") != "stop":
+                self.diagnostics["failure_kind"] = "incomplete_response"
                 raise ProviderError("Ollama响应未完整结束")
             message = body["message"]
             if not isinstance(message, dict):
@@ -56,17 +62,30 @@ class OllamaProvider:
             if message.get("tool_calls"):
                 raise ProviderError("拒绝模型工具调用")
             candidate = strict_json(message["content"])
+            self.last_candidate = candidate
+            self.diagnostics["json_parse_success"] = True
             if not isinstance(candidate, dict):
                 raise ProviderError("模型JSON必须为对象")
             self.timings["json_parse_seconds"] = time.perf_counter() - parse
             return ProviderResult(candidate, body.get("model", self.config.model), self.config.model_version,
                                   time.perf_counter()-start, True, "llm_candidate")
         except HTTPError as exc:
+            self.diagnostics["failure_kind"] = "http_error"
             raise ProviderError(f"Ollama HTTP错误:{exc.code}") from None
-        except (URLError, TimeoutError, OSError):
-            raise ProviderError("Ollama连接失败或超时") from None
-        except (ValueError, KeyError, TypeError, UnicodeError):
-            raise ProviderError("Ollama返回非法JSON或消息结构") from None
+        except (URLError, TimeoutError, OSError) as exc:
+            timeout = isinstance(exc,TimeoutError) or isinstance(getattr(exc,'reason',None),TimeoutError)
+            self.diagnostics["failure_kind"] = "timeout" if timeout else "transport_failure"
+            raise ProviderError("Ollama请求超时" if timeout else "Ollama连接失败") from None
+        except ValueError:
+            self.diagnostics.update(json_parse_success=False,failure_kind='json_parse_failure')
+            raise ProviderError("Ollama返回非法JSON") from None
+        except (KeyError, TypeError):
+            self.diagnostics['failure_kind']='response_contract_failure'
+            raise ProviderError("Ollama返回非法消息结构") from None
+        except ProviderError:
+            if self.diagnostics['failure_kind'] is None:
+                self.diagnostics['failure_kind']='response_contract_failure'
+            raise
         finally:
             self.timings.setdefault("provider_seconds", time.perf_counter()-start)
             if parse is not None:

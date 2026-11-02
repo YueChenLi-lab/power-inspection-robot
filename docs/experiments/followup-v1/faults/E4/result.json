@@ -1,0 +1,29 @@
+{
+  "experiment": "E4",
+  "name": "E4",
+  "definition_revision": "followup-v1",
+  "conditions": {
+    "duplicate_submissions": 2
+  },
+  "steps": [
+    "Submit same key twice",
+    "Complete",
+    "Resubmit completed key"
+  ],
+  "expected": {
+    "same_id": true,
+    "missions": 1,
+    "executions": 1
+  },
+  "actual": {
+    "same_id": true,
+    "missions": 1,
+    "executions": 1
+  },
+  "passed": true,
+  "raw_logs": [
+    "events.jsonl",
+    "network.jsonl"
+  ],
+  "is_mock": true
+}

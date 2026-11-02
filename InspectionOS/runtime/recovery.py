@@ -2,6 +2,7 @@
 import time
 from InspectionOS.storage.repositories import transition
 from .worker import worker_lock
+from .retry_policy import retry_decision
 
 
 class Recovery:
@@ -19,12 +20,13 @@ class Recovery:
                 else:
                     try: spec=self.manager.registry.get(row['skill_id']).spec
                     except ValueError: spec=None
-                    if spec and spec.idempotent and spec.version==row['skill_version'] and row['attempts']<row['max_attempts']:
-                        transition(c,mid,'RETRY_WAIT',kind='recovered_idempotent',retry_at=0,error='worker exit; result unknown')
-                    elif spec and not spec.idempotent:
-                        transition(c,mid,'WAITING_APPROVAL',kind='recovery_manual_review',approved=0,error='non-idempotent result unknown; review required')
-                    else:
-                        transition(c,mid,'FAILED',kind='recovery_exhausted',error='retry budget exhausted or skill unavailable')
+                    policy=retry_decision(spec,row,self.manager.safety)
+                    target='RETRY_WAIT' if policy.allowed else ('WAITING_APPROVAL' if policy.needs_review else 'FAILED')
+                    kind='recovered_idempotent' if policy.allowed else ('recovery_manual_review' if policy.needs_review else 'recovery_rejected')
+                    transition(c,mid,target,kind=kind,retry_at=0,
+                               approved=0 if policy.needs_review else row['approved'],
+                               error='worker exit; result unknown; '+policy.reason,
+                               data={'retry':policy.allowed,'retry_reason':policy.reason,'result_uncertain':True})
                     c.execute("UPDATE skill_executions SET status='UNKNOWN',finished_at=?,error='worker exit; result unknown' WHERE mission_id=? AND status='RUNNING'",(time.time(),mid))
                 recovered.append(mid)
         return recovered
