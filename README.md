@@ -59,19 +59,24 @@
 
 ```mermaid
 flowchart TD
-    T[文本 / 既有语音实验室] --> B[InspectionBrain v2 / v3]
-    B --> P[规则 / Mock / Ollama原生Schema Provider]
-    P --> V[Schema / Evidence Validator / SafetyGuard]
-    V --> D[不可执行任务草案]
+    T[文本 / 既有语音实验室] --> B[InspectionBrain v2 / v3 Provider]
+    B --> V[JSON Schema / 完整语义Validator]
+    V --> G[SafetyGuard：语义输出约束]
+    G --> D[Mission Draft：不可执行草案]
     D --> A[BrainAdapter：重新验证与Mock设备映射]
-    A --> M[InspectionOS Mission Manager / State Machine]
-    M --> S[Scheduler / Skill Registry / Safety Supervisor]
-    S --> W[单Worker / 可终止子进程]
-    W --> K[Mock告警 / 测温比较 / 复检建议]
-    K --> DB[(SQLite任务、事件、执行与证据)]
-    DB --> O[事务Outbox / 模拟网络 / Mock远端去重]
-    DB --> R[Recovery / Trace / Metrics / 数据管线]
-    HW[真实底盘、传感器、业务系统：未接入]
+    A --> M[Mission Manager / State Machine]
+    M --> SAFE[独立Safety Supervisor：受理与领取均复核]
+    SAFE --> S[Scheduler：短事务候选快照]
+    S --> N[Network Preflight：写事务之外]
+    N --> C[新事务：状态、版本、审批重新核验与领取]
+    C --> REG[Skill Registry / 单Worker Runtime]
+    REG --> K[三个Mock Skill / 可终止子进程]
+    K --> OVAL[输出Schema / 业务一致性Validator]
+    OVAL --> DB[(SQLite / Event Store / Outbox)]
+    DB --> REC[Recovery：统一重试策略，不绕过审批]
+    REC --> M
+    DB --> SYNC[模拟网络 / Mock远端去重]
+    DB --> OBS[Trace / Metrics / 数据管线]
 ```
 
 ## 软件模块划分
@@ -115,6 +120,113 @@ flowchart TD
 | 真实设备台账接入 | 待建设 | 当前为 Mock |
 | 真实巡检记录查询 | 待建设 | 当前为 Mock，现场记录展示不等于此仓库已接真实数据 |
 | 完整自主任务执行 | 未实现 | 公开语义链路不能执行机器人动作 |
+
+## 工程设计与可靠性演进
+
+本轮在原任务运行时上修复异常路径与执行合同，仍是单 Worker、全 Mock 的研究原型。下面记录设计为什么变化，以及如何验证；没有新增真机权限或生产身份系统。
+
+### 任务恢复：允许重试不等于重复执行安全
+
+原 Worker 检查 `retryable`，Recovery 却漏查，导致崩溃路径可能重跑明确禁止重试的 Skill。现在 Worker、Recovery 和退避后调度共用 `retry_decision`：`retryable` 表示允许重试，`idempotent` 表示重复执行效果合同；还必须版本一致、预算剩余、状态允许且没有未解决审批。
+
+即使声称幂等，结果不确定也不能自动证明外部副作用安全。本版本只对显式 `recovery_safe=true` 的可信 Mock 只读能力自动恢复；其余不确定结果进入 `WAITING_APPROVAL` 并清除批准位，独立操作员先复核。禁止重试、版本改变或预算耗尽会安全失败，已取消任务不重跑。
+
+```mermaid
+flowchart TD
+    R[失败 / 重启后结果不确定] --> S{状态与安全审批允许?}
+    S -->|否| STOP[失败或等待独立人工复核，记录原因]
+    S -->|是| C{retryable、幂等、版本一致、预算剩余?}
+    C -->|否| STOP
+    C -->|是| E{不确定结果是否显式声明可安全恢复?}
+    E -->|否| REVIEW[WAITING_APPROVAL，清除批准位]
+    E -->|可信Mock只读合同| RETRY[RETRY_WAIT，退避后再次校验]
+```
+
+### Scheduler：网络等待退出写事务
+
+SQLite `BEGIN IMMEDIATE` 持有写锁，事务内请求网络会把一次超时扩散为其他任务无法写入。现在先在短事务中读取候选，再释放事务和连接锁进行 Network Preflight，最后开启新事务重读任务。必须重新检查状态、快照版本 `updated_at`、Skill 版本及审批；网络恢复不代表仍有执行资格。
+
+```mermaid
+flowchart TD
+    T1[事务1：准备候选并读取快照] --> COMMIT1[提交并释放写锁]
+    COMMIT1 --> NET[事务外：网络预检查，可等待 / 超时]
+    NET --> T2[事务2：按任务ID重新读取]
+    T2 --> CHECK{仍排队、快照未失效、版本和审批有效?}
+    CHECK -->|否| SKIP[放弃旧预检查结果，不领取]
+    CHECK -->|是且网络失败| WAIT[WAITING_NETWORK]
+    CHECK -->|是且允许执行| CLAIM[原子RUNNING与execution-start]
+```
+
+并发预检查可以重复，但原子状态核验保证同一任务只领取一次。测试在网络被阻塞时使用另一条 SQLite 连接提交任务，并覆盖期间取消、撤销审批和并发 claim；网络等待、事务时长与提交时长的[实测记录](docs/experiments/followup-v1/scheduler-timings.json)分开保存。
+
+### 审批：严格 bool 与本地凭据边界
+
+Python 的非空字符串 `"false"` 为 truthy，不能代表布尔 False。`approve()` 现在只接受真正的 `bool`；`"false"`、`"true"`、`1`、`None` 在审批逻辑前拒绝。actor 和 token 必须是非空文本，已取消、终态或已处理的任务不能重复批准；批准、拒绝和凭据失败具有审计记录。
+
+actor 是本地调用方给出的审计标签，不等于已经认证的用户身份；token 只验证本地操作员凭据。当前仍是 Mock 审批机制。Safety Supervisor 独立于 LLM，运动或非 Mock scope 始终拒绝，Recovery 不能替模型授予审批。
+
+### Skill 合同：Schema 之后验证业务一致性
+
+JSON Schema 能限制结构与类型，不能独自证明查询对象正确。例如“请求 CB-003、返回 CB-001”可能结构合法，仍必须拒绝；本仓库实际 ID 使用 `MOCK-CB-3` / `MOCK-TR-1`，不冒充真实资产编号。
+
+```text
+输入 device_id=MOCK-CB-3 → 输出 device_id=MOCK-TR-1
+                        → JSON Schema 通过
+                        → 业务 Validator 拒绝：输出设备集合不匹配
+                        → 任务不会 SUCCEEDED
+```
+
+Registry 在输入/输出 Schema 之后调用具体 Skill 的业务校验钩子。单设备身份必须一致，多设备用明确的允许集合，所有记录不得属于未请求设备；记录时间必须落在带时区的 `[start,end)` 内，Mock 输出与每条记录都须保留固定来源。测温比较按设备分组。不同 Skill 家族可以有不同业务字段，不给所有 Skill 强加同一记录格式。
+
+### 模型评测：分层指标与独立证据检查
+
+```text
+模型输出 → JSON Parse → JSON Schema → 完整 Validator
+                                      ↓
+                           独立 Evidence Constraint 检查
+                                      ↓
+                           独立人工 Gold Annotation（如有）
+                                      ↓
+                           人工语义正确率（当前为 null）
+```
+
+JSON 合法不代表语义正确，Schema 通过不代表证据一致，完整 Validator 接受也不代表现场事实成立。本轮移除了重复计算的旧 evidence 指标：新检查独立定位原文 source_span，核对设备编号、数值/单位、时间、否定、自我修正和条件，不复用 `validation.valid`。
+
+JSON 解析、Schema、完整 Validator 与证据指标分别保存分母；无观测返回 `null`。传输失败、模型超时和 JSON 解析失败分别计数。Mock 没有真实传输解析时不填假解析率，也不计为真实模型效果。语义准确率仍需人工确认 Gold，ASR 转写不能充当语义金标准。
+
+### E5 / E6：明确两种故障模型
+
+- **E5：任务领取后运行时重建**。关闭 Application 后在同一父进程重开数据库，验证持久化恢复；没有杀死 Worker 进程。
+- **E6：Worker 执行期间进程强制终止**。在 Mock Skill execute 内 SIGKILL 实验 Worker 子进程，再重启验证恢复。
+
+编号保持不变；历史数据和时间戳保留，通过[修订说明](docs/experiments/faults/REVISION_FOLLOWUP.md)纠正旧文字，新运行另存日志。
+
+### 修改前后对照
+
+| 工程模块 | 原有问题 | 修改后设计 | 验证方式 |
+|---|---|---|---|
+| Recovery | 重试策略不一致 | 统一策略及不确定副作用复核 | Worker/Recovery 同组合矩阵 |
+| Scheduler | 网络请求占用写事务 | 网络预检查与事务解耦，重新核验状态 | 独立连接提交、取消/撤销竞态、并发 claim |
+| Safety Approval | truthy 输入可能被批准 | 严格 bool 与非空凭据、重复/终态拒绝 | 非法类型与审计测试 |
+| Skill Contract | 仅检查 Schema | 设备集合、记录、时间和来源业务校验 | Schema 通过但业务错误的拒绝测试 |
+| Model Evaluation | evidence 与完整 Validator 指标重复 | 独立证据检查、分母和 unavailable | 指标可产生不同结果的测试 |
+| Fault Simulation | E5 文字易误解为进程崩溃 | E5 重建、E6 SIGKILL；保留原始数据 | E1–E7 重新运行 |
+
+### 当前能力边界
+
+| 能力 | 当前状态 |
+|---|---|
+| InspectionBrain v2 | 已实现，原核心行为保留 |
+| InspectionBrain v3 Provider | 接口已实现，真实模型验收另记 |
+| Qwen3 4B | 真实项目效果尚未完成验收 |
+| InspectionOS / SQLite / 单 Worker | Mock 运行时原型，已实现持久化和单 Worker |
+| 多 Worker | 尚未实现 |
+| 弱网模拟 / Outbox | 已实现，模拟远端、至少一次投递 |
+| 进程恢复 | 已实现统一策略；不确定效果先复核 |
+| 真实设备台账 / 真实巡检数据库 | 未接入 |
+| 真机执行 / 生产部署 | 未接入、未验收 |
+
+CI 实际执行核心测试，历史资产缺失和外部模型条件单独报告，不把 skipped 当 passed。详细依据见[可靠性修复说明](docs/RELIABILITY_FOLLOWUP.md)、[验收报告](docs/VALIDATION_REPORT.md)和[历史资产说明](docs/HISTORICAL_TEST_ASSETS.md)。
 
 ## 后续技术路线
 
@@ -162,10 +274,11 @@ python3 -m observability.benchmark --output /tmp/inspection-bench --tasks 12
 (cd InspectionBrain && node --test tests/*.mjs)
 ```
 
-本 checkout 缺少原历史导出与一份记录，原 Python 基线存在 6 项缺文件错误及 4 项真实 ASR 跳过；未伪造文件或改原测试。新增套件与原基线结果分别见[验收记录](docs/VALIDATION_REPORT.md)。真实模型 Smoke Test 见[Qwen3 接入说明](docs/QWEN3_INTEGRATION.md)，当前环境未完成真实推理验收。
+本 checkout 缺少原历史导出与一份记录，严格原 Python 回归仍有 6 项缺文件错误及 4 项真实 ASR 跳过；未伪造文件或改原测试。CI 只对确切缺失资产列出 skipped，其余关键测试照常运行。新增套件与原基线结果分别见[验收记录](docs/VALIDATION_REPORT.md)。真实模型 Smoke Test 见[Qwen3 接入说明](docs/QWEN3_INTEGRATION.md)，当前环境未完成真实推理验收。
 
 ## 文档导航
 
+- [本轮可靠性修复](docs/RELIABILITY_FOLLOWUP.md) · [历史测试资产与 CI](docs/HISTORICAL_TEST_ASSETS.md)
 - [当前系统架构](docs/SYSTEM_ARCHITECTURE.md) · [模块边界](docs/MODULE_BOUNDARIES.md)
 - [InspectionOS 设计](docs/INSPECTION_OS_DESIGN.md) · [状态机](docs/MISSION_STATE_MACHINE.md) · [Skill 合同](docs/SKILL_CONTRACTS.md)
 - [安全模型](docs/SAFETY_MODEL.md) · [弱网自治](docs/OFFLINE_AUTONOMY.md) · [故障实验](docs/FAULT_INJECTION.md)

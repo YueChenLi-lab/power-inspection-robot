@@ -22,3 +22,6 @@ python3 -m observability.benchmark --output /tmp/inspection-benchmark --tasks 12
 并发量 1/4/8 表示并发提交请求，Worker 始终一个；延迟为 0/0.005/0.02 秒，模拟超时 0.01 秒。每组先观察故障前状态，再恢复网络至零延迟后执行余下任务。生成 measurements.json、事件 JSONL 与五份独立 SVG。不同并发度、恢复阶段的时间全部包含在对应任务响应窗口；不能把本机 Mock 吞吐外推为 Xavier、ASR 或真实 LLM 性能。
 
 [本次性能报告](PERFORMANCE_REPORT.md)包含实际数据。运行时 JSONL 和数据库可能包含原文及证据，真实用户数据的导出需要调用方自行管理访问与保留策略。
+
+
+Follow-up 后 Scheduler 网络预检查位于写事务外；性能报告分别列数据库事务时间、网络等待和 Skill 时间，并附独立连接提交时长与并发竞态验证。旧报告和数据另存，不将两轮数字混为同一次实验。

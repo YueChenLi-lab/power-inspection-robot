@@ -12,6 +12,6 @@ Brain SafetyGuard 约束语义输出；OS SafetySupervisor 约束模拟任务执
 
 可信注册方必须正确设置 risk_level / execution_scope；本系统不分析任意 Python 函数的真实副作用。不能把任意硬件函数标为低风险后声称获得沙箱保护。仓库只提供 Mock 执行能力，没有机器人驱动。
 
-审批入口是 `MissionManager.approve(mid, actor=..., token=..., allow=...)`，token 由应用组合根独立注入 `operator_token`，默认为禁用审批。凭据不能放入自然语言、payload、数据库、日志或提交文件；测试里的固定字符串只用于本地单元测试。成功批准、拒绝和认证失败尝试均写审批与事件记录。即使认证成功，policy DENY 仍不可覆盖。
+审批入口是 `MissionManager.approve(mid, actor=..., token=..., allow=...)`，token 由应用组合根独立注入 `operator_token`，默认为禁用审批。凭据不能放入自然语言、payload、数据库、日志或提交文件；测试里的固定字符串只用于本地单元测试。allow 必须 type(allow) is bool，字符串或数字不进入审批逻辑；actor/token 要求非空文本。成功批准、拒绝和凭据失败尝试均写审批与事件记录，重复或终态审批抛错，不新增授权。actor 只是本地审计标签，不是已完成身份认证的用户。即使认证成功，policy DENY 仍不可覆盖。
 
 需要网络授权的 Skill 在离线时等待网络，恢复后仍需独立审批，不因恢复而放宽安全。当前审批是本地进程信任边界，不是具有身份管理、权限撤销和远程认证的生产服务。Supervisor 不代表整机安全认证，现场底层停车逻辑也未在此仓库实现或修改。

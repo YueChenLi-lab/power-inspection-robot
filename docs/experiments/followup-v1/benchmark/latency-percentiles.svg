@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="954" viewBox="0 0 960 954">
+<rect width="100%" height="100%" fill="white"/>
+<text x="20" y="30" font-size="18">Mock mission latency percentiles (seconds)</text>
+<text x="20" y="74" font-size="12">c=1, latency=0 p50</text>
+<rect x="350" y="60" width="28.81" height="20" fill="#3576ad"/>
+<text x="810" y="74" font-size="12">0.015569</text>
+<text x="20" y="106" font-size="12">c=1, latency=0 p95</text>
+<rect x="350" y="92" width="57.35" height="20" fill="#3576ad"/>
+<text x="810" y="106" font-size="12">0.030989</text>
+<text x="20" y="138" font-size="12">c=1, latency=0 p99</text>
+<rect x="350" y="124" width="57.35" height="20" fill="#3576ad"/>
+<text x="810" y="138" font-size="12">0.030989</text>
+<text x="20" y="170" font-size="12">c=1, latency=0.005 p50</text>
+<rect x="350" y="156" width="85.76" height="20" fill="#3576ad"/>
+<text x="810" y="170" font-size="12">0.046339</text>
+<text x="20" y="202" font-size="12">c=1, latency=0.005 p95</text>
+<rect x="350" y="188" width="170.42" height="20" fill="#3576ad"/>
+<text x="810" y="202" font-size="12">0.092080</text>
+<text x="20" y="234" font-size="12">c=1, latency=0.005 p99</text>
+<rect x="350" y="220" width="170.42" height="20" fill="#3576ad"/>
+<text x="810" y="234" font-size="12">0.092080</text>
+<text x="20" y="266" font-size="12">c=1, latency=0.02 p50</text>
+<rect x="350" y="252" width="292.87" height="20" fill="#3576ad"/>
+<text x="810" y="266" font-size="12">0.158240</text>
+<text x="20" y="298" font-size="12">c=1, latency=0.02 p95</text>
+<rect x="350" y="284" width="314.06" height="20" fill="#3576ad"/>
+<text x="810" y="298" font-size="12">0.169693</text>
+<text x="20" y="330" font-size="12">c=1, latency=0.02 p99</text>
+<rect x="350" y="316" width="314.06" height="20" fill="#3576ad"/>
+<text x="810" y="330" font-size="12">0.169693</text>
+<text x="20" y="362" font-size="12">c=4, latency=0 p50</text>
+<rect x="350" y="348" width="35.42" height="20" fill="#3576ad"/>
+<text x="810" y="362" font-size="12">0.019137</text>
+<text x="20" y="394" font-size="12">c=4, latency=0 p95</text>
+<rect x="350" y="380" width="57.88" height="20" fill="#3576ad"/>
+<text x="810" y="394" font-size="12">0.031275</text>
+<text x="20" y="426" font-size="12">c=4, latency=0 p99</text>
+<rect x="350" y="412" width="57.88" height="20" fill="#3576ad"/>
+<text x="810" y="426" font-size="12">0.031275</text>
+<text x="20" y="458" font-size="12">c=4, latency=0.005 p50</text>
+<rect x="350" y="444" width="85.67" height="20" fill="#3576ad"/>
+<text x="810" y="458" font-size="12">0.046287</text>
+<text x="20" y="490" font-size="12">c=4, latency=0.005 p95</text>
+<rect x="350" y="476" width="178.69" height="20" fill="#3576ad"/>
+<text x="810" y="490" font-size="12">0.096549</text>
+<text x="20" y="522" font-size="12">c=4, latency=0.005 p99</text>
+<rect x="350" y="508" width="178.69" height="20" fill="#3576ad"/>
+<text x="810" y="522" font-size="12">0.096549</text>
+<text x="20" y="554" font-size="12">c=4, latency=0.02 p50</text>
+<rect x="350" y="540" width="406.25" height="20" fill="#3576ad"/>
+<text x="810" y="554" font-size="12">0.219505</text>
+<text x="20" y="586" font-size="12">c=4, latency=0.02 p95</text>
+<rect x="350" y="572" width="426.32" height="20" fill="#3576ad"/>
+<text x="810" y="586" font-size="12">0.230348</text>
+<text x="20" y="618" font-size="12">c=4, latency=0.02 p99</text>
+<rect x="350" y="604" width="426.32" height="20" fill="#3576ad"/>
+<text x="810" y="618" font-size="12">0.230348</text>
+<text x="20" y="650" font-size="12">c=8, latency=0 p50</text>
+<rect x="350" y="636" width="32.62" height="20" fill="#3576ad"/>
+<text x="810" y="650" font-size="12">0.017626</text>
+<text x="20" y="682" font-size="12">c=8, latency=0 p95</text>
+<rect x="350" y="668" width="57.01" height="20" fill="#3576ad"/>
+<text x="810" y="682" font-size="12">0.030804</text>
+<text x="20" y="714" font-size="12">c=8, latency=0 p99</text>
+<rect x="350" y="700" width="57.01" height="20" fill="#3576ad"/>
+<text x="810" y="714" font-size="12">0.030804</text>
+<text x="20" y="746" font-size="12">c=8, latency=0.005 p50</text>
+<rect x="350" y="732" width="96.38" height="20" fill="#3576ad"/>
+<text x="810" y="746" font-size="12">0.052074</text>
+<text x="20" y="778" font-size="12">c=8, latency=0.005 p95</text>
+<rect x="350" y="764" width="178.26" height="20" fill="#3576ad"/>
+<text x="810" y="778" font-size="12">0.096315</text>
+<text x="20" y="810" font-size="12">c=8, latency=0.005 p99</text>
+<rect x="350" y="796" width="178.26" height="20" fill="#3576ad"/>
+<text x="810" y="810" font-size="12">0.096315</text>
+<text x="20" y="842" font-size="12">c=8, latency=0.02 p50</text>
+<rect x="350" y="828" width="428.36" height="20" fill="#3576ad"/>
+<text x="810" y="842" font-size="12">0.231451</text>
+<text x="20" y="874" font-size="12">c=8, latency=0.02 p95</text>
+<rect x="350" y="860" width="450.00" height="20" fill="#3576ad"/>
+<text x="810" y="874" font-size="12">0.243141</text>
+<text x="20" y="906" font-size="12">c=8, latency=0.02 p99</text>
+<rect x="350" y="892" width="450.00" height="20" fill="#3576ad"/>
+<text x="810" y="906" font-size="12">0.243141</text>
+</svg>

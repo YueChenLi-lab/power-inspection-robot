@@ -1,0 +1,37 @@
+{
+  "experiment": "E6",
+  "name": "Worker 执行期间进程强制终止",
+  "definition_revision": "followup-v1",
+  "conditions": {
+    "process_exit": "SIGKILL inside mock Skill"
+  },
+  "steps": [
+    "Persist RUNNING and execution-start",
+    "SIGKILL worker process inside Skill execute",
+    "Reopen database",
+    "Explicit recovery under lock with shared retry policy",
+    "Drain"
+  ],
+  "expected": {
+    "recovered": 1,
+    "status": "SUCCEEDED",
+    "execution_statuses": [
+      "UNKNOWN",
+      "SUCCEEDED"
+    ]
+  },
+  "actual": {
+    "recovered": 1,
+    "status": "SUCCEEDED",
+    "execution_statuses": [
+      "UNKNOWN",
+      "SUCCEEDED"
+    ]
+  },
+  "passed": true,
+  "raw_logs": [
+    "events.jsonl",
+    "network.jsonl"
+  ],
+  "is_mock": true
+}

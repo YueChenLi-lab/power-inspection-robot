@@ -1,0 +1,82 @@
+{
+  "tests_run": 121,
+  "passed": 111,
+  "errors": 0,
+  "failures": 0,
+  "skipped": 10,
+  "skip_reasons": [
+    {
+      "test": "test_multi_intent_and_real_cases (test_domain_v2.DomainV2Tests.test_multi_intent_and_real_cases)",
+      "reason": "historical asset unavailable (not passed): voice-evaluation.json"
+    },
+    {
+      "test": "test_real_data_rules_and_switch_are_separate (test_domain_v2.DomainV2Tests.test_real_data_rules_and_switch_are_separate)",
+      "reason": "historical asset unavailable (not passed): voice-evaluation.json"
+    },
+    {
+      "test": "test_real_wav_http_repeated_inference_and_export (test_real_sensevoice.RealSenseVoiceTests.test_real_wav_http_repeated_inference_and_export)",
+      "reason": "需独立.venv-asr及官方模型；不能用手动文本替代真实模型测试"
+    },
+    {
+      "test": "test_system_python_launcher_selects_isolated_environment (test_real_sensevoice.RealSenseVoiceTests.test_system_python_launcher_selects_isolated_environment)",
+      "reason": "需独立.venv-asr及官方模型；不能用手动文本替代真实模型测试"
+    },
+    {
+      "test": "test_actual_export_is_read_and_preserved (test_round2_audit.ActualExportTests.test_actual_export_is_read_and_preserved)",
+      "reason": "historical asset unavailable (not passed): voice-evaluation.json"
+    },
+    {
+      "test": "test_complex_query_does_not_claim_complete_answer_from_one_keyword (test_round2_scoring.Round2ScoringTests.test_complex_query_does_not_claim_complete_answer_from_one_keyword)",
+      "reason": "historical asset unavailable (not passed): voice-evaluation.json"
+    },
+    {
+      "test": "test_import_preserves_history_and_excludes_unbound_old_metrics (test_round2_scoring.Round2ScoringTests.test_import_preserves_history_and_excludes_unbound_old_metrics)",
+      "reason": "historical asset unavailable (not passed): voice-evaluation.json"
+    },
+    {
+      "test": "test_real_user_wav_scoring_upgrade_and_unique_sample (test_scoring_http.ScoringHTTPTests.test_real_user_wav_scoring_upgrade_and_unique_sample)",
+      "reason": "需独立 ASR 环境、本地模型及已有真实 WAV；不使用文本伪造推理"
+    },
+    {
+      "test": "test_actual_record_without_reference_leakage (test_scoring_workflow.HistorySemanticsTests.test_actual_record_without_reference_leakage)",
+      "reason": "historical asset unavailable (not passed): InspectionBrain/runtime/voice_lab/records/9bf3bee5bf3e48e3b60a3a33d6966bc5.json"
+    },
+    {
+      "test": "test_real_wav_sensevoice_v2_mock_validation_and_dedup_http (test_v3_http.SemanticHTTPTests.test_real_wav_sensevoice_v2_mock_validation_and_dedup_http)",
+      "reason": "需已有真实WAV、SenseVoice模型及独立ASR环境；不会伪造真实推理"
+    }
+  ],
+  "missing_historical_assets": [
+    {
+      "test": "test_domain_v2.DomainV2Tests.test_multi_intent_and_real_cases",
+      "asset": "voice-evaluation.json",
+      "outcome": "skipped"
+    },
+    {
+      "test": "test_domain_v2.DomainV2Tests.test_real_data_rules_and_switch_are_separate",
+      "asset": "voice-evaluation.json",
+      "outcome": "skipped"
+    },
+    {
+      "test": "test_round2_audit.ActualExportTests.test_actual_export_is_read_and_preserved",
+      "asset": "voice-evaluation.json",
+      "outcome": "skipped"
+    },
+    {
+      "test": "test_round2_scoring.Round2ScoringTests.test_complex_query_does_not_claim_complete_answer_from_one_keyword",
+      "asset": "voice-evaluation.json",
+      "outcome": "skipped"
+    },
+    {
+      "test": "test_round2_scoring.Round2ScoringTests.test_import_preserves_history_and_excludes_unbound_old_metrics",
+      "asset": "voice-evaluation.json",
+      "outcome": "skipped"
+    },
+    {
+      "test": "test_scoring_workflow.HistorySemanticsTests.test_actual_record_without_reference_leakage",
+      "asset": "InspectionBrain/runtime/voice_lab/records/9bf3bee5bf3e48e3b60a3a33d6966bc5.json",
+      "outcome": "skipped"
+    }
+  ],
+  "asset_policy": "skip-missing"
+}

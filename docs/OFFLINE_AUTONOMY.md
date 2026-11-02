@@ -17,6 +17,6 @@ MockRemote 用持久化 inbox 主键 event_id 去重并检查同 ID 的 payload 
 
 ## 重启
 
-在独占 Worker 锁下显式 `app.recovery.recover()`。运行中任务标记执行结果 UNKNOWN。幂等任务且版本未变、有预算才恢复到 RETRY_WAIT；非幂等转 WAITING_APPROVAL；未注册、版本改变、预算耗尽则 FAILED。WAITING_NETWORK 和 RETRY_WAIT 已持久化，Scheduler 可继续处理。不要在另一个活跃 Worker 旁边扫描并重跑所有 RUNNING 任务。
+在独占 Worker 锁下显式 `app.recovery.recover()`。运行中任务标记执行结果 UNKNOWN。必须同时声明 retryable、idempotent、recovery_safe，且版本未变、预算剩余、状态与审批满足，才恢复到 RETRY_WAIT；非幂等或未声明不确定效果可安全恢复时转 WAITING_APPROVAL 并清除批准位；未注册、版本改变、预算耗尽则 FAILED。WAITING_NETWORK 和 RETRY_WAIT 已持久化，Scheduler 可继续处理。不要在另一个活跃 Worker 旁边扫描并重跑所有 RUNNING 任务。
 
 `Worker.serve(stop_event)` 正常退出完成当前有截止时间的执行后停止领取；SIGKILL 或数据库写入失败可能留下 RUNNING。恢复使用实际持久化状态，不猜执行成功。底层数据库错误向调用方抛出，不能当正常结果。

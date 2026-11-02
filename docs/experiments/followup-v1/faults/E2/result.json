@@ -1,0 +1,27 @@
+{
+  "experiment": "E2",
+  "name": "E2",
+  "definition_revision": "followup-v1",
+  "conditions": {
+    "online": false
+  },
+  "steps": [
+    "Disconnect simulated network",
+    "Submit local and remote tasks",
+    "Drain available work"
+  ],
+  "expected": {
+    "local": "SUCCEEDED",
+    "cloud": "WAITING_NETWORK"
+  },
+  "actual": {
+    "local": "SUCCEEDED",
+    "cloud": "WAITING_NETWORK"
+  },
+  "passed": true,
+  "raw_logs": [
+    "events.jsonl",
+    "network.jsonl"
+  ],
+  "is_mock": true
+}

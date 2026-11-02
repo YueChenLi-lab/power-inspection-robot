@@ -1,0 +1,3107 @@
+{
+  "mock_http": false,
+  "summary": {
+    "samples": 3,
+    "dataset_role": "synthetic_development_contract_NOT_human_gold",
+    "human_gold_accuracy": null,
+    "json_parse_success_rate": null,
+    "json_parse_observations": 0,
+    "schema_pass_rate": 1.0,
+    "schema_observations": 3,
+    "validator_acceptance_rate": 1.0,
+    "validator_attempts": 3,
+    "synthetic_key_fields_match_rate": 1.0,
+    "fallback_count": 0,
+    "evidence_constraint_pass_rate": 1.0,
+    "evidence_observations": 3,
+    "failure_counts": {},
+    "real_model_successes": 0,
+    "latency_seconds": {
+      "count": 3,
+      "mean": 0.004266466999979457,
+      "p50": 0.0023545730000478216,
+      "p95": 0.008410206000917242,
+      "p99": 0.008410206000917242
+    }
+  },
+  "rows": [
+    {
+      "evidence_check": {
+        "passed": true,
+        "errors": []
+      },
+      "diagnostics": {},
+      "parsed_candidate": {
+        "schema_version": "inspection-semantic-v3.0",
+        "original_request": "查询3号断路器的上周告警。",
+        "intents": [
+          {
+            "intent_id": "i1",
+            "type": "temperature_alarm_query",
+            "request_kind": "query",
+            "entity_ids": [
+              "e1"
+            ],
+            "metric_ids": [
+              "m1"
+            ],
+            "time_ids": [
+              "t1"
+            ],
+            "source_span_ids": [
+              "s5"
+            ],
+            "uncertain": false
+          }
+        ],
+        "equipment_entities": [
+          {
+            "entity_id": "e1",
+            "term_id": "circuit_breaker",
+            "standard_name": "断路器",
+            "equipment_category": "circuit_breaker",
+            "device_number": "3",
+            "explicit_identifier": null,
+            "entity_kind": "device",
+            "part_of": null,
+            "status": "active",
+            "identity_status": "unverified",
+            "source_span_ids": [
+              "s2"
+            ]
+          }
+        ],
+        "metric_entities": [
+          {
+            "entity_id": "m1",
+            "kind": "device_number",
+            "raw_value": "3",
+            "normalized_value": "3",
+            "raw_unit": "号",
+            "normalized_unit": "号",
+            "status": "active",
+            "verification_status": "text_only",
+            "owner_id": "e1",
+            "phase_entity_id": null,
+            "source_span_ids": [
+              "s3"
+            ]
+          }
+        ],
+        "temporal_constraints": [
+          {
+            "constraint_id": "t1",
+            "expression": "上周",
+            "role": "target",
+            "start": "2026-10-26T00:00:00+08:00",
+            "end": "2026-11-02T00:00:00+08:00",
+            "resolved": true,
+            "timezone": "Asia/Shanghai",
+            "end_exclusive": true,
+            "source_span_ids": [
+              "s4"
+            ]
+          }
+        ],
+        "negations": [],
+        "self_corrections": [],
+        "conditions": [],
+        "task_dependencies": [],
+        "required_data_sources": [
+          "equipment_registry",
+          "thermometry_records",
+          "alarm_records",
+          "applicable_rules"
+        ],
+        "uncertainties": [
+          "设备编号尚未与真实台账核对",
+          "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断",
+          "原文证据仅为转写文本，设备身份及测量均未现场核验"
+        ],
+        "clarification_requests": [
+          "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。"
+        ],
+        "source_spans": [
+          {
+            "span_id": "s1",
+            "start": 0,
+            "end": 13,
+            "quote": "查询3号断路器的上周告警。"
+          },
+          {
+            "span_id": "s2",
+            "start": 2,
+            "end": 7,
+            "quote": "3号断路器"
+          },
+          {
+            "span_id": "s3",
+            "start": 2,
+            "end": 4,
+            "quote": "3号"
+          },
+          {
+            "span_id": "s4",
+            "start": 8,
+            "end": 10,
+            "quote": "上周"
+          },
+          {
+            "span_id": "s5",
+            "start": 0,
+            "end": 12,
+            "quote": "查询3号断路器的上周告警"
+          }
+        ],
+        "structured_task_draft": {
+          "protocol_version": "inspection-task-draft-v3.0",
+          "status": "draft_requires_review",
+          "target_equipment": [
+            {
+              "entity_id": "e1",
+              "identity_status": "unverified",
+              "requires_registry_resolution": true
+            }
+          ],
+          "business_goals": [
+            "i1"
+          ],
+          "required_data": [
+            "equipment_registry",
+            "thermometry_records",
+            "alarm_records",
+            "applicable_rules"
+          ],
+          "preconditions": [
+            "真实设备身份核验",
+            "所需数据与采样元数据齐备",
+            "适用规程核验",
+            "人工复核草案"
+          ],
+          "task_dependencies": [],
+          "prohibitions": [
+            "本阶段禁止任何硬件执行或授权",
+            "不得据转写推测小数点、设备编号或现场故障"
+          ],
+          "evidence_requirements": [
+            "真实台账",
+            "原始测量及采样时间",
+            "适用规程与来源",
+            "原音频和人工确认"
+          ],
+          "human_confirmation_required": true,
+          "authorized": false,
+          "executable": false,
+          "hardware_commands_enabled": false,
+          "site_conclusion": null,
+          "original_request": "查询3号断路器的上周告警。",
+          "source_span_ids": [
+            "s1"
+          ],
+          "reasoning_source": "mock_script"
+        }
+      },
+      "candidate_observed": true,
+      "input": "查询3号断路器的上周告警。",
+      "result": {
+        "engine_version": "inspection-brain-v3.0",
+        "mode": "v3_llm",
+        "original_request": "查询3号断路器的上周告警。",
+        "v2": {
+          "mode": "offline",
+          "analysis": {
+            "schema_version": 1,
+            "intent": "temperature_alarm_query",
+            "normalization": {
+              "raw_text": "查询3号断路器的上周告警。",
+              "normalized_text": "查询3号断路器的上周告警。",
+              "raw_transcript": "查询3号断路器的上周告警。",
+              "term_normalized_text": "查询3号断路器的上周告警。",
+              "changes": [],
+              "homophone_candidates": [],
+              "correction_candidates": [],
+              "recognized_terms": [
+                {
+                  "term_id": "circuit_breaker",
+                  "standard_name": "断路器",
+                  "category": "equipment",
+                  "equipment_category": "circuit_breaker",
+                  "span": [
+                    4,
+                    7
+                  ],
+                  "surface": "断路器"
+                },
+                {
+                  "term_id": "alarm",
+                  "standard_name": "告警",
+                  "category": "business",
+                  "equipment_category": null,
+                  "span": [
+                    10,
+                    12
+                  ],
+                  "surface": "告警"
+                }
+              ],
+              "operation_text_protected": false,
+              "authorization_granted": false,
+              "lexicon_version": "electrical-v2.3",
+              "lexicon_sha256": "fe43978ba1363d84905c556eb5b50f9da3d494cc7f8d026a7e46de5ba5eb24b7"
+            },
+            "device_entities": [
+              {
+                "term_id": "circuit_breaker",
+                "standard_name": "断路器",
+                "equipment_category": "circuit_breaker",
+                "surface": "断路器",
+                "span": [
+                  4,
+                  7
+                ],
+                "device_number": "3",
+                "number_surface": "3",
+                "device_id": null,
+                "identity_status": "unresolved_registry"
+              }
+            ],
+            "device_ids": [],
+            "time_range": {
+              "expression": "上周",
+              "start": "2026-10-26T00:00:00+08:00",
+              "end": "2026-11-02T00:00:00+08:00",
+              "resolved": true,
+              "timezone": "Asia/Shanghai",
+              "end_exclusive": true,
+              "role": "comparison_baseline"
+            },
+            "reference_time": "2026-11-02T12:00:00+08:00",
+            "required_data_sources": [
+              "equipment_registry",
+              "thermometry_records",
+              "alarm_records",
+              "applicable_rules"
+            ],
+            "uncertainties": [
+              "设备编号尚未与真实台账核对",
+              "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断"
+            ],
+            "operation_proposal": null,
+            "chassis_commands_enabled": false,
+            "hardware_commands_enabled": false,
+            "intents": [
+              {
+                "type": "temperature_alarm_query",
+                "reason": "单项领域问题或禁止约束",
+                "required_data_sources": [
+                  "equipment_registry",
+                  "thermometry_records",
+                  "alarm_records",
+                  "applicable_rules"
+                ],
+                "executable": false,
+                "authorized": false
+              }
+            ],
+            "action_scopes": [],
+            "constraints": [],
+            "conditional_clauses": [],
+            "numeric_entities": [
+              {
+                "kind": "device_number",
+                "raw_value": "3",
+                "raw_unit": "号",
+                "raw_text": "3号",
+                "normalized_value": "3",
+                "normalized_unit": "号",
+                "source_span": [
+                  2,
+                  4
+                ],
+                "uncertainty": [
+                  "文本序号未与真实台账核对；前导零保留"
+                ],
+                "verification_status": "identity_unverified"
+              }
+            ],
+            "comparison_constraints": null,
+            "inspection_parts": [],
+            "measurement_methods": [],
+            "semantic_version": "electrical-semantics-v2.3",
+            "information_needs": [
+              {
+                "subject": "断路器",
+                "term_id": "circuit_breaker",
+                "category": "equipment"
+              },
+              {
+                "subject": "告警",
+                "term_id": "alarm",
+                "category": "business"
+              }
+            ],
+            "raw_transcript": "查询3号断路器的上周告警。",
+            "term_normalized_text": "查询3号断路器的上周告警。",
+            "cleanup_source_text": "查询3号断路器的上周告警。",
+            "cleaned_display_text": "查询3号断路器的上周告警。",
+            "correction_candidates": [],
+            "correction_trace": [],
+            "lexicon_version": "electrical-v2.3",
+            "lexicon_sha256": "fe43978ba1363d84905c556eb5b50f9da3d494cc7f8d026a7e46de5ba5eb24b7"
+          },
+          "result": {
+            "status": "undetermined",
+            "answer": "需要真实设备台账及相应记录。当前只有Mock示例，不能判断该设备的资料、历史结果或温度异常；没有记录不等于正常。",
+            "citations": [],
+            "missing_evidence": [
+              "equipment_registry",
+              "thermometry_records",
+              "alarm_records",
+              "applicable_rules"
+            ],
+            "is_example": false,
+            "site_conclusion": null,
+            "data_preview": {
+              "registry": [
+                {
+                  "status": "not_found",
+                  "devices": [],
+                  "is_example": true,
+                  "reason": "示例映射；不是实际设备身份验证"
+                }
+              ],
+              "records": [],
+              "is_example": true
+            }
+          },
+          "chassis_commands_enabled": false,
+          "hardware_commands_enabled": false,
+          "executed_actions": [],
+          "domain_version": "v2"
+        },
+        "v3": {
+          "status": "draft_requires_review",
+          "authorized": false,
+          "executable": false,
+          "hardware_commands_enabled": false,
+          "human_confirmation_required": true,
+          "site_conclusion": null,
+          "clarification_requests": [
+            "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。"
+          ],
+          "semantic": {
+            "schema_version": "inspection-semantic-v3.0",
+            "original_request": "查询3号断路器的上周告警。",
+            "intents": [
+              {
+                "intent_id": "i1",
+                "type": "temperature_alarm_query",
+                "request_kind": "query",
+                "entity_ids": [
+                  "e1"
+                ],
+                "metric_ids": [
+                  "m1"
+                ],
+                "time_ids": [
+                  "t1"
+                ],
+                "source_span_ids": [
+                  "s5"
+                ],
+                "uncertain": false
+              }
+            ],
+            "equipment_entities": [
+              {
+                "entity_id": "e1",
+                "term_id": "circuit_breaker",
+                "standard_name": "断路器",
+                "equipment_category": "circuit_breaker",
+                "device_number": "3",
+                "explicit_identifier": null,
+                "entity_kind": "device",
+                "part_of": null,
+                "status": "active",
+                "identity_status": "unverified",
+                "source_span_ids": [
+                  "s2"
+                ]
+              }
+            ],
+            "metric_entities": [
+              {
+                "entity_id": "m1",
+                "kind": "device_number",
+                "raw_value": "3",
+                "normalized_value": "3",
+                "raw_unit": "号",
+                "normalized_unit": "号",
+                "status": "active",
+                "verification_status": "text_only",
+                "owner_id": "e1",
+                "phase_entity_id": null,
+                "source_span_ids": [
+                  "s3"
+                ]
+              }
+            ],
+            "temporal_constraints": [
+              {
+                "constraint_id": "t1",
+                "expression": "上周",
+                "role": "target",
+                "start": "2026-10-26T00:00:00+08:00",
+                "end": "2026-11-02T00:00:00+08:00",
+                "resolved": true,
+                "timezone": "Asia/Shanghai",
+                "end_exclusive": true,
+                "source_span_ids": [
+                  "s4"
+                ]
+              }
+            ],
+            "negations": [],
+            "self_corrections": [],
+            "conditions": [],
+            "task_dependencies": [],
+            "required_data_sources": [
+              "equipment_registry",
+              "thermometry_records",
+              "alarm_records",
+              "applicable_rules"
+            ],
+            "uncertainties": [
+              "设备编号尚未与真实台账核对",
+              "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断",
+              "原文证据仅为转写文本，设备身份及测量均未现场核验"
+            ],
+            "clarification_requests": [
+              "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。"
+            ],
+            "source_spans": [
+              {
+                "span_id": "s1",
+                "start": 0,
+                "end": 13,
+                "quote": "查询3号断路器的上周告警。"
+              },
+              {
+                "span_id": "s2",
+                "start": 2,
+                "end": 7,
+                "quote": "3号断路器"
+              },
+              {
+                "span_id": "s3",
+                "start": 2,
+                "end": 4,
+                "quote": "3号"
+              },
+              {
+                "span_id": "s4",
+                "start": 8,
+                "end": 10,
+                "quote": "上周"
+              },
+              {
+                "span_id": "s5",
+                "start": 0,
+                "end": 12,
+                "quote": "查询3号断路器的上周告警"
+              }
+            ],
+            "structured_task_draft": {
+              "protocol_version": "inspection-task-draft-v3.0",
+              "status": "draft_requires_review",
+              "target_equipment": [
+                {
+                  "entity_id": "e1",
+                  "identity_status": "unverified",
+                  "requires_registry_resolution": true
+                }
+              ],
+              "business_goals": [
+                "i1"
+              ],
+              "required_data": [
+                "equipment_registry",
+                "thermometry_records",
+                "alarm_records",
+                "applicable_rules"
+              ],
+              "preconditions": [
+                "真实设备身份核验",
+                "所需数据与采样元数据齐备",
+                "适用规程核验",
+                "人工复核草案"
+              ],
+              "task_dependencies": [],
+              "prohibitions": [
+                "本阶段禁止任何硬件执行或授权",
+                "不得据转写推测小数点、设备编号或现场故障"
+              ],
+              "evidence_requirements": [
+                "真实台账",
+                "原始测量及采样时间",
+                "适用规程与来源",
+                "原音频和人工确认"
+              ],
+              "human_confirmation_required": true,
+              "authorized": false,
+              "executable": false,
+              "hardware_commands_enabled": false,
+              "site_conclusion": null,
+              "original_request": "查询3号断路器的上周告警。",
+              "source_span_ids": [
+                "s1"
+              ],
+              "reasoning_source": "mock_script"
+            }
+          },
+          "structured_task_draft": {
+            "protocol_version": "inspection-task-draft-v3.0",
+            "status": "draft_requires_review",
+            "target_equipment": [
+              {
+                "entity_id": "e1",
+                "identity_status": "unverified",
+                "requires_registry_resolution": true
+              }
+            ],
+            "business_goals": [
+              "i1"
+            ],
+            "required_data": [
+              "equipment_registry",
+              "thermometry_records",
+              "alarm_records",
+              "applicable_rules"
+            ],
+            "preconditions": [
+              "真实设备身份核验",
+              "所需数据与采样元数据齐备",
+              "适用规程核验",
+              "人工复核草案"
+            ],
+            "task_dependencies": [],
+            "prohibitions": [
+              "本阶段禁止任何硬件执行或授权",
+              "不得据转写推测小数点、设备编号或现场故障"
+            ],
+            "evidence_requirements": [
+              "真实台账",
+              "原始测量及采样时间",
+              "适用规程与来源",
+              "原音频和人工确认"
+            ],
+            "human_confirmation_required": true,
+            "authorized": false,
+            "executable": false,
+            "hardware_commands_enabled": false,
+            "site_conclusion": null,
+            "original_request": "查询3号断路器的上周告警。",
+            "source_span_ids": [
+              "s1"
+            ],
+            "reasoning_source": "mock_script"
+          }
+        },
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [
+            "设备唯一身份、数值及现场状况未核验；此结果仅为不可执行语义草案"
+          ],
+          "requires_human_confirmation": true
+        },
+        "model_candidate": {
+          "schema_version": "inspection-semantic-v3.0",
+          "original_request": "查询3号断路器的上周告警。",
+          "intents": [
+            {
+              "intent_id": "i1",
+              "type": "temperature_alarm_query",
+              "request_kind": "query",
+              "entity_ids": [
+                "e1"
+              ],
+              "metric_ids": [
+                "m1"
+              ],
+              "time_ids": [
+                "t1"
+              ],
+              "source_span_ids": [
+                "s5"
+              ],
+              "uncertain": false
+            }
+          ],
+          "equipment_entities": [
+            {
+              "entity_id": "e1",
+              "term_id": "circuit_breaker",
+              "standard_name": "断路器",
+              "equipment_category": "circuit_breaker",
+              "device_number": "3",
+              "explicit_identifier": null,
+              "entity_kind": "device",
+              "part_of": null,
+              "status": "active",
+              "identity_status": "unverified",
+              "source_span_ids": [
+                "s2"
+              ]
+            }
+          ],
+          "metric_entities": [
+            {
+              "entity_id": "m1",
+              "kind": "device_number",
+              "raw_value": "3",
+              "normalized_value": "3",
+              "raw_unit": "号",
+              "normalized_unit": "号",
+              "status": "active",
+              "verification_status": "text_only",
+              "owner_id": "e1",
+              "phase_entity_id": null,
+              "source_span_ids": [
+                "s3"
+              ]
+            }
+          ],
+          "temporal_constraints": [
+            {
+              "constraint_id": "t1",
+              "expression": "上周",
+              "role": "target",
+              "start": "2026-10-26T00:00:00+08:00",
+              "end": "2026-11-02T00:00:00+08:00",
+              "resolved": true,
+              "timezone": "Asia/Shanghai",
+              "end_exclusive": true,
+              "source_span_ids": [
+                "s4"
+              ]
+            }
+          ],
+          "negations": [],
+          "self_corrections": [],
+          "conditions": [],
+          "task_dependencies": [],
+          "required_data_sources": [
+            "equipment_registry",
+            "thermometry_records",
+            "alarm_records",
+            "applicable_rules"
+          ],
+          "uncertainties": [
+            "设备编号尚未与真实台账核对",
+            "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断",
+            "原文证据仅为转写文本，设备身份及测量均未现场核验"
+          ],
+          "clarification_requests": [
+            "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。"
+          ],
+          "source_spans": [
+            {
+              "span_id": "s1",
+              "start": 0,
+              "end": 13,
+              "quote": "查询3号断路器的上周告警。"
+            },
+            {
+              "span_id": "s2",
+              "start": 2,
+              "end": 7,
+              "quote": "3号断路器"
+            },
+            {
+              "span_id": "s3",
+              "start": 2,
+              "end": 4,
+              "quote": "3号"
+            },
+            {
+              "span_id": "s4",
+              "start": 8,
+              "end": 10,
+              "quote": "上周"
+            },
+            {
+              "span_id": "s5",
+              "start": 0,
+              "end": 12,
+              "quote": "查询3号断路器的上周告警"
+            }
+          ],
+          "structured_task_draft": {
+            "protocol_version": "inspection-task-draft-v3.0",
+            "status": "draft_requires_review",
+            "target_equipment": [
+              {
+                "entity_id": "e1",
+                "identity_status": "unverified",
+                "requires_registry_resolution": true
+              }
+            ],
+            "business_goals": [
+              "i1"
+            ],
+            "required_data": [
+              "equipment_registry",
+              "thermometry_records",
+              "alarm_records",
+              "applicable_rules"
+            ],
+            "preconditions": [
+              "真实设备身份核验",
+              "所需数据与采样元数据齐备",
+              "适用规程核验",
+              "人工复核草案"
+            ],
+            "task_dependencies": [],
+            "prohibitions": [
+              "本阶段禁止任何硬件执行或授权",
+              "不得据转写推测小数点、设备编号或现场故障"
+            ],
+            "evidence_requirements": [
+              "真实台账",
+              "原始测量及采样时间",
+              "适用规程与来源",
+              "原音频和人工确认"
+            ],
+            "human_confirmation_required": true,
+            "authorized": false,
+            "executable": false,
+            "hardware_commands_enabled": false,
+            "site_conclusion": null,
+            "original_request": "查询3号断路器的上周告警。",
+            "source_span_ids": [
+              "s1"
+            ],
+            "reasoning_source": "mock_script"
+          }
+        },
+        "provider": {
+          "provider": "mock",
+          "available": true,
+          "is_real_llm": false,
+          "model": "mock-script",
+          "model_version": "1",
+          "label": "Mock脚本演示，非真实LLM"
+        },
+        "llm_inference_seconds": 5.694599894923158e-05,
+        "fallback_used": false,
+        "fallback_success": false,
+        "error": null,
+        "configuration_sha256": "9d030445bb15277e7fccc51f04d38e10849a473b5f715bfebbb717c53caab169",
+        "authorized": false,
+        "executable": false,
+        "hardware_commands_enabled": false,
+        "lexicon_version": "electrical-v2.3",
+        "lexicon_sha256": "fe43978ba1363d84905c556eb5b50f9da3d494cc7f8d026a7e46de5ba5eb24b7",
+        "reference_time": "2026-11-02T12:00:00+08:00",
+        "status": "validated_candidate",
+        "structured_task_draft": {
+          "protocol_version": "inspection-task-draft-v3.0",
+          "status": "draft_requires_review",
+          "target_equipment": [
+            {
+              "entity_id": "e1",
+              "identity_status": "unverified",
+              "requires_registry_resolution": true
+            }
+          ],
+          "business_goals": [
+            "i1"
+          ],
+          "required_data": [
+            "equipment_registry",
+            "thermometry_records",
+            "alarm_records",
+            "applicable_rules"
+          ],
+          "preconditions": [
+            "真实设备身份核验",
+            "所需数据与采样元数据齐备",
+            "适用规程核验",
+            "人工复核草案"
+          ],
+          "task_dependencies": [],
+          "prohibitions": [
+            "本阶段禁止任何硬件执行或授权",
+            "不得据转写推测小数点、设备编号或现场故障"
+          ],
+          "evidence_requirements": [
+            "真实台账",
+            "原始测量及采样时间",
+            "适用规程与来源",
+            "原音频和人工确认"
+          ],
+          "human_confirmation_required": true,
+          "authorized": false,
+          "executable": false,
+          "hardware_commands_enabled": false,
+          "site_conclusion": null,
+          "original_request": "查询3号断路器的上周告警。",
+          "source_span_ids": [
+            "s1"
+          ],
+          "reasoning_source": "mock_script"
+        },
+        "total_seconds": 0.008410206000917242
+      },
+      "timings": {
+        "schema_seconds": 0.00025017500047397334,
+        "evidence_semantic_seconds": 0.00035809700057143345,
+        "schema_valid": true
+      },
+      "provider_timings": {},
+      "raw_response": null
+    },
+    {
+      "evidence_check": {
+        "passed": true,
+        "errors": []
+      },
+      "diagnostics": {},
+      "parsed_candidate": {
+        "schema_version": "inspection-semantic-v3.0",
+        "original_request": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+        "intents": [
+          {
+            "intent_id": "i1",
+            "type": "prohibited_operation",
+            "request_kind": "negated_request",
+            "entity_ids": [
+              "e2"
+            ],
+            "metric_ids": [
+              "m2"
+            ],
+            "time_ids": [
+              "t1"
+            ],
+            "source_span_ids": [
+              "s8"
+            ],
+            "uncertain": true
+          }
+        ],
+        "equipment_entities": [
+          {
+            "entity_id": "e1",
+            "term_id": "circuit_breaker",
+            "standard_name": "断路器",
+            "equipment_category": "circuit_breaker",
+            "device_number": "2",
+            "explicit_identifier": null,
+            "entity_kind": "device",
+            "part_of": null,
+            "status": "negated",
+            "identity_status": "unverified",
+            "source_span_ids": [
+              "s2"
+            ]
+          },
+          {
+            "entity_id": "e2",
+            "term_id": "circuit_breaker",
+            "standard_name": "断路器",
+            "equipment_category": "circuit_breaker",
+            "device_number": "3",
+            "explicit_identifier": null,
+            "entity_kind": "device",
+            "part_of": null,
+            "status": "active",
+            "identity_status": "unverified",
+            "source_span_ids": [
+              "s3"
+            ]
+          }
+        ],
+        "metric_entities": [
+          {
+            "entity_id": "m1",
+            "kind": "device_number",
+            "raw_value": "2",
+            "normalized_value": "2",
+            "raw_unit": "号",
+            "normalized_unit": "号",
+            "status": "negated",
+            "verification_status": "text_only",
+            "owner_id": "e1",
+            "phase_entity_id": null,
+            "source_span_ids": [
+              "s4"
+            ]
+          },
+          {
+            "entity_id": "m2",
+            "kind": "device_number",
+            "raw_value": "3",
+            "normalized_value": "3",
+            "raw_unit": "号",
+            "normalized_unit": "号",
+            "status": "active",
+            "verification_status": "text_only",
+            "owner_id": "e2",
+            "phase_entity_id": null,
+            "source_span_ids": [
+              "s5"
+            ]
+          }
+        ],
+        "temporal_constraints": [
+          {
+            "constraint_id": "t1",
+            "expression": "上周",
+            "role": "target",
+            "start": "2026-10-26T00:00:00+08:00",
+            "end": "2026-11-02T00:00:00+08:00",
+            "resolved": true,
+            "timezone": "Asia/Shanghai",
+            "end_exclusive": true,
+            "source_span_ids": [
+              "s7"
+            ]
+          }
+        ],
+        "negations": [
+          {
+            "relation_id": "n1",
+            "kind": "excluded_entity",
+            "target_ids": [
+              "e1",
+              "m1",
+              "i1"
+            ],
+            "scope_span_ids": [
+              "s9"
+            ]
+          },
+          {
+            "relation_id": "n2",
+            "kind": "prohibition",
+            "target_ids": [
+              "i1"
+            ],
+            "scope_span_ids": [
+              "s8"
+            ]
+          }
+        ],
+        "self_corrections": [
+          {
+            "relation_id": "r1",
+            "kind": "equipment",
+            "rejected_ids": [
+              "e1"
+            ],
+            "accepted_ids": [
+              "e2"
+            ],
+            "source_span_ids": [
+              "s6"
+            ],
+            "requires_confirmation": true
+          }
+        ],
+        "conditions": [],
+        "task_dependencies": [],
+        "required_data_sources": [
+          "legacy_dispatcher",
+          "human_authorization"
+        ],
+        "uncertainties": [
+          "设备编号尚未与真实台账核对",
+          "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断",
+          "原文证据仅为转写文本，设备身份及测量均未现场核验",
+          "明确口头更正已建立关系，但仍须人工核对原音频及对象"
+        ],
+        "clarification_requests": [
+          "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。",
+          "请确认自我修正关系与实际朗读一致。"
+        ],
+        "source_spans": [
+          {
+            "span_id": "s1",
+            "start": 0,
+            "end": 31,
+            "quote": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。"
+          },
+          {
+            "span_id": "s2",
+            "start": 2,
+            "end": 7,
+            "quote": "2号断路器"
+          },
+          {
+            "span_id": "s3",
+            "start": 9,
+            "end": 14,
+            "quote": "3号断路器"
+          },
+          {
+            "span_id": "s4",
+            "start": 2,
+            "end": 4,
+            "quote": "2号"
+          },
+          {
+            "span_id": "s5",
+            "start": 9,
+            "end": 11,
+            "quote": "3号"
+          },
+          {
+            "span_id": "s6",
+            "start": 2,
+            "end": 14,
+            "quote": "2号断路器，是3号断路器"
+          },
+          {
+            "span_id": "s7",
+            "start": 17,
+            "end": 19,
+            "quote": "上周"
+          },
+          {
+            "span_id": "s8",
+            "start": 22,
+            "end": 30,
+            "quote": "但不要启动机器人"
+          },
+          {
+            "span_id": "s9",
+            "start": 0,
+            "end": 7,
+            "quote": "不是2号断路器"
+          }
+        ],
+        "structured_task_draft": {
+          "protocol_version": "inspection-task-draft-v3.0",
+          "status": "draft_requires_review",
+          "target_equipment": [
+            {
+              "entity_id": "e2",
+              "identity_status": "unverified",
+              "requires_registry_resolution": true
+            }
+          ],
+          "business_goals": [],
+          "required_data": [
+            "legacy_dispatcher",
+            "human_authorization"
+          ],
+          "preconditions": [
+            "真实设备身份核验",
+            "所需数据与采样元数据齐备",
+            "适用规程核验",
+            "人工复核草案"
+          ],
+          "task_dependencies": [],
+          "prohibitions": [
+            "本阶段禁止任何硬件执行或授权",
+            "不得据转写推测小数点、设备编号或现场故障",
+            "不是2号断路器",
+            "但不要启动机器人"
+          ],
+          "evidence_requirements": [
+            "真实台账",
+            "原始测量及采样时间",
+            "适用规程与来源",
+            "原音频和人工确认"
+          ],
+          "human_confirmation_required": true,
+          "authorized": false,
+          "executable": false,
+          "hardware_commands_enabled": false,
+          "site_conclusion": null,
+          "original_request": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+          "source_span_ids": [
+            "s1"
+          ],
+          "reasoning_source": "mock_script"
+        }
+      },
+      "candidate_observed": true,
+      "input": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+      "result": {
+        "engine_version": "inspection-brain-v3.0",
+        "mode": "v3_llm",
+        "original_request": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+        "v2": {
+          "mode": "offline",
+          "analysis": {
+            "schema_version": 1,
+            "intent": "prohibited_operation",
+            "normalization": {
+              "raw_text": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+              "normalized_text": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+              "raw_transcript": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+              "term_normalized_text": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+              "changes": [],
+              "homophone_candidates": [],
+              "correction_candidates": [],
+              "recognized_terms": [
+                {
+                  "term_id": "circuit_breaker",
+                  "standard_name": "断路器",
+                  "category": "equipment",
+                  "equipment_category": "circuit_breaker",
+                  "span": [
+                    4,
+                    7
+                  ],
+                  "surface": "断路器"
+                },
+                {
+                  "term_id": "circuit_breaker",
+                  "standard_name": "断路器",
+                  "category": "equipment",
+                  "equipment_category": "circuit_breaker",
+                  "span": [
+                    11,
+                    14
+                  ],
+                  "surface": "断路器"
+                },
+                {
+                  "term_id": "alarm",
+                  "standard_name": "告警",
+                  "category": "business",
+                  "equipment_category": null,
+                  "span": [
+                    19,
+                    21
+                  ],
+                  "surface": "告警"
+                }
+              ],
+              "operation_text_protected": false,
+              "authorization_granted": false,
+              "lexicon_version": "electrical-v2.3",
+              "lexicon_sha256": "fe43978ba1363d84905c556eb5b50f9da3d494cc7f8d026a7e46de5ba5eb24b7"
+            },
+            "device_entities": [
+              {
+                "term_id": "circuit_breaker",
+                "standard_name": "断路器",
+                "equipment_category": "circuit_breaker",
+                "surface": "断路器",
+                "span": [
+                  4,
+                  7
+                ],
+                "device_number": "2",
+                "number_surface": "2",
+                "device_id": null,
+                "identity_status": "unresolved_registry"
+              },
+              {
+                "term_id": "circuit_breaker",
+                "standard_name": "断路器",
+                "equipment_category": "circuit_breaker",
+                "surface": "断路器",
+                "span": [
+                  11,
+                  14
+                ],
+                "device_number": "3",
+                "number_surface": "3",
+                "device_id": null,
+                "identity_status": "unresolved_registry"
+              }
+            ],
+            "device_ids": [],
+            "time_range": {
+              "expression": "上周",
+              "start": "2026-10-26T00:00:00+08:00",
+              "end": "2026-11-02T00:00:00+08:00",
+              "resolved": true,
+              "timezone": "Asia/Shanghai",
+              "end_exclusive": true,
+              "role": "comparison_baseline"
+            },
+            "reference_time": "2026-11-02T12:00:00+08:00",
+            "required_data_sources": [
+              "legacy_dispatcher",
+              "human_authorization"
+            ],
+            "uncertainties": [
+              "设备编号尚未与真实台账核对",
+              "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断"
+            ],
+            "operation_proposal": null,
+            "chassis_commands_enabled": false,
+            "hardware_commands_enabled": false,
+            "intents": [
+              {
+                "type": "prohibited_operation",
+                "reason": "单项领域问题或禁止约束",
+                "required_data_sources": [
+                  "legacy_dispatcher",
+                  "human_authorization"
+                ],
+                "executable": false,
+                "authorized": false
+              }
+            ],
+            "action_scopes": [
+              {
+                "action": "启动",
+                "source_span": [
+                  25,
+                  27
+                ],
+                "scope_text": "不要启动机器人。",
+                "polarity": "prohibited",
+                "reason": "局部否定/未经授权约束，不能解释为肯定命令",
+                "authorized": false,
+                "executable": false
+              }
+            ],
+            "constraints": [
+              {
+                "action": "启动",
+                "source_span": [
+                  25,
+                  27
+                ],
+                "scope_text": "不要启动机器人。",
+                "polarity": "prohibited",
+                "reason": "局部否定/未经授权约束，不能解释为肯定命令",
+                "authorized": false,
+                "executable": false
+              }
+            ],
+            "conditional_clauses": [],
+            "numeric_entities": [
+              {
+                "kind": "device_number",
+                "raw_value": "2",
+                "raw_unit": "号",
+                "raw_text": "2号",
+                "normalized_value": "2",
+                "normalized_unit": "号",
+                "source_span": [
+                  2,
+                  4
+                ],
+                "uncertainty": [
+                  "文本序号未与真实台账核对；前导零保留"
+                ],
+                "verification_status": "identity_unverified"
+              },
+              {
+                "kind": "device_number",
+                "raw_value": "3",
+                "raw_unit": "号",
+                "raw_text": "3号",
+                "normalized_value": "3",
+                "normalized_unit": "号",
+                "source_span": [
+                  9,
+                  11
+                ],
+                "uncertainty": [
+                  "文本序号未与真实台账核对；前导零保留"
+                ],
+                "verification_status": "identity_unverified"
+              }
+            ],
+            "comparison_constraints": null,
+            "inspection_parts": [],
+            "measurement_methods": [],
+            "semantic_version": "electrical-semantics-v2.3",
+            "information_needs": [
+              {
+                "subject": "断路器",
+                "term_id": "circuit_breaker",
+                "category": "equipment"
+              },
+              {
+                "subject": "断路器",
+                "term_id": "circuit_breaker",
+                "category": "equipment"
+              },
+              {
+                "subject": "告警",
+                "term_id": "alarm",
+                "category": "business"
+              }
+            ],
+            "raw_transcript": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+            "term_normalized_text": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+            "cleanup_source_text": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+            "cleaned_display_text": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+            "correction_candidates": [],
+            "correction_trace": [],
+            "lexicon_version": "electrical-v2.3",
+            "lexicon_sha256": "fe43978ba1363d84905c556eb5b50f9da3d494cc7f8d026a7e46de5ba5eb24b7"
+          },
+          "result": {
+            "status": "prohibition_preserved",
+            "answer": "已保留禁止执行约束，没有肯定操作请求；本模块无硬件执行能力。",
+            "citations": [],
+            "missing_evidence": [],
+            "is_example": false,
+            "site_conclusion": null
+          },
+          "chassis_commands_enabled": false,
+          "hardware_commands_enabled": false,
+          "executed_actions": [],
+          "domain_version": "v2"
+        },
+        "v3": {
+          "status": "draft_requires_review",
+          "authorized": false,
+          "executable": false,
+          "hardware_commands_enabled": false,
+          "human_confirmation_required": true,
+          "site_conclusion": null,
+          "clarification_requests": [
+            "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。",
+            "请确认自我修正关系与实际朗读一致。"
+          ],
+          "semantic": {
+            "schema_version": "inspection-semantic-v3.0",
+            "original_request": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+            "intents": [
+              {
+                "intent_id": "i1",
+                "type": "prohibited_operation",
+                "request_kind": "negated_request",
+                "entity_ids": [
+                  "e2"
+                ],
+                "metric_ids": [
+                  "m2"
+                ],
+                "time_ids": [
+                  "t1"
+                ],
+                "source_span_ids": [
+                  "s8"
+                ],
+                "uncertain": true
+              }
+            ],
+            "equipment_entities": [
+              {
+                "entity_id": "e1",
+                "term_id": "circuit_breaker",
+                "standard_name": "断路器",
+                "equipment_category": "circuit_breaker",
+                "device_number": "2",
+                "explicit_identifier": null,
+                "entity_kind": "device",
+                "part_of": null,
+                "status": "negated",
+                "identity_status": "unverified",
+                "source_span_ids": [
+                  "s2"
+                ]
+              },
+              {
+                "entity_id": "e2",
+                "term_id": "circuit_breaker",
+                "standard_name": "断路器",
+                "equipment_category": "circuit_breaker",
+                "device_number": "3",
+                "explicit_identifier": null,
+                "entity_kind": "device",
+                "part_of": null,
+                "status": "active",
+                "identity_status": "unverified",
+                "source_span_ids": [
+                  "s3"
+                ]
+              }
+            ],
+            "metric_entities": [
+              {
+                "entity_id": "m1",
+                "kind": "device_number",
+                "raw_value": "2",
+                "normalized_value": "2",
+                "raw_unit": "号",
+                "normalized_unit": "号",
+                "status": "negated",
+                "verification_status": "text_only",
+                "owner_id": "e1",
+                "phase_entity_id": null,
+                "source_span_ids": [
+                  "s4"
+                ]
+              },
+              {
+                "entity_id": "m2",
+                "kind": "device_number",
+                "raw_value": "3",
+                "normalized_value": "3",
+                "raw_unit": "号",
+                "normalized_unit": "号",
+                "status": "active",
+                "verification_status": "text_only",
+                "owner_id": "e2",
+                "phase_entity_id": null,
+                "source_span_ids": [
+                  "s5"
+                ]
+              }
+            ],
+            "temporal_constraints": [
+              {
+                "constraint_id": "t1",
+                "expression": "上周",
+                "role": "target",
+                "start": "2026-10-26T00:00:00+08:00",
+                "end": "2026-11-02T00:00:00+08:00",
+                "resolved": true,
+                "timezone": "Asia/Shanghai",
+                "end_exclusive": true,
+                "source_span_ids": [
+                  "s7"
+                ]
+              }
+            ],
+            "negations": [
+              {
+                "relation_id": "n1",
+                "kind": "excluded_entity",
+                "target_ids": [
+                  "e1",
+                  "m1",
+                  "i1"
+                ],
+                "scope_span_ids": [
+                  "s9"
+                ]
+              },
+              {
+                "relation_id": "n2",
+                "kind": "prohibition",
+                "target_ids": [
+                  "i1"
+                ],
+                "scope_span_ids": [
+                  "s8"
+                ]
+              }
+            ],
+            "self_corrections": [
+              {
+                "relation_id": "r1",
+                "kind": "equipment",
+                "rejected_ids": [
+                  "e1"
+                ],
+                "accepted_ids": [
+                  "e2"
+                ],
+                "source_span_ids": [
+                  "s6"
+                ],
+                "requires_confirmation": true
+              }
+            ],
+            "conditions": [],
+            "task_dependencies": [],
+            "required_data_sources": [
+              "legacy_dispatcher",
+              "human_authorization"
+            ],
+            "uncertainties": [
+              "设备编号尚未与真实台账核对",
+              "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断",
+              "原文证据仅为转写文本，设备身份及测量均未现场核验",
+              "明确口头更正已建立关系，但仍须人工核对原音频及对象"
+            ],
+            "clarification_requests": [
+              "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。",
+              "请确认自我修正关系与实际朗读一致。"
+            ],
+            "source_spans": [
+              {
+                "span_id": "s1",
+                "start": 0,
+                "end": 31,
+                "quote": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。"
+              },
+              {
+                "span_id": "s2",
+                "start": 2,
+                "end": 7,
+                "quote": "2号断路器"
+              },
+              {
+                "span_id": "s3",
+                "start": 9,
+                "end": 14,
+                "quote": "3号断路器"
+              },
+              {
+                "span_id": "s4",
+                "start": 2,
+                "end": 4,
+                "quote": "2号"
+              },
+              {
+                "span_id": "s5",
+                "start": 9,
+                "end": 11,
+                "quote": "3号"
+              },
+              {
+                "span_id": "s6",
+                "start": 2,
+                "end": 14,
+                "quote": "2号断路器，是3号断路器"
+              },
+              {
+                "span_id": "s7",
+                "start": 17,
+                "end": 19,
+                "quote": "上周"
+              },
+              {
+                "span_id": "s8",
+                "start": 22,
+                "end": 30,
+                "quote": "但不要启动机器人"
+              },
+              {
+                "span_id": "s9",
+                "start": 0,
+                "end": 7,
+                "quote": "不是2号断路器"
+              }
+            ],
+            "structured_task_draft": {
+              "protocol_version": "inspection-task-draft-v3.0",
+              "status": "draft_requires_review",
+              "target_equipment": [
+                {
+                  "entity_id": "e2",
+                  "identity_status": "unverified",
+                  "requires_registry_resolution": true
+                }
+              ],
+              "business_goals": [],
+              "required_data": [
+                "legacy_dispatcher",
+                "human_authorization"
+              ],
+              "preconditions": [
+                "真实设备身份核验",
+                "所需数据与采样元数据齐备",
+                "适用规程核验",
+                "人工复核草案"
+              ],
+              "task_dependencies": [],
+              "prohibitions": [
+                "本阶段禁止任何硬件执行或授权",
+                "不得据转写推测小数点、设备编号或现场故障",
+                "不是2号断路器",
+                "但不要启动机器人"
+              ],
+              "evidence_requirements": [
+                "真实台账",
+                "原始测量及采样时间",
+                "适用规程与来源",
+                "原音频和人工确认"
+              ],
+              "human_confirmation_required": true,
+              "authorized": false,
+              "executable": false,
+              "hardware_commands_enabled": false,
+              "site_conclusion": null,
+              "original_request": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+              "source_span_ids": [
+                "s1"
+              ],
+              "reasoning_source": "mock_script"
+            }
+          },
+          "structured_task_draft": {
+            "protocol_version": "inspection-task-draft-v3.0",
+            "status": "draft_requires_review",
+            "target_equipment": [
+              {
+                "entity_id": "e2",
+                "identity_status": "unverified",
+                "requires_registry_resolution": true
+              }
+            ],
+            "business_goals": [],
+            "required_data": [
+              "legacy_dispatcher",
+              "human_authorization"
+            ],
+            "preconditions": [
+              "真实设备身份核验",
+              "所需数据与采样元数据齐备",
+              "适用规程核验",
+              "人工复核草案"
+            ],
+            "task_dependencies": [],
+            "prohibitions": [
+              "本阶段禁止任何硬件执行或授权",
+              "不得据转写推测小数点、设备编号或现场故障",
+              "不是2号断路器",
+              "但不要启动机器人"
+            ],
+            "evidence_requirements": [
+              "真实台账",
+              "原始测量及采样时间",
+              "适用规程与来源",
+              "原音频和人工确认"
+            ],
+            "human_confirmation_required": true,
+            "authorized": false,
+            "executable": false,
+            "hardware_commands_enabled": false,
+            "site_conclusion": null,
+            "original_request": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+            "source_span_ids": [
+              "s1"
+            ],
+            "reasoning_source": "mock_script"
+          }
+        },
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [
+            "设备唯一身份、数值及现场状况未核验；此结果仅为不可执行语义草案",
+            "自我修正须人工核对原音频；不构成设备执行授权"
+          ],
+          "requires_human_confirmation": true
+        },
+        "model_candidate": {
+          "schema_version": "inspection-semantic-v3.0",
+          "original_request": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+          "intents": [
+            {
+              "intent_id": "i1",
+              "type": "prohibited_operation",
+              "request_kind": "negated_request",
+              "entity_ids": [
+                "e2"
+              ],
+              "metric_ids": [
+                "m2"
+              ],
+              "time_ids": [
+                "t1"
+              ],
+              "source_span_ids": [
+                "s8"
+              ],
+              "uncertain": true
+            }
+          ],
+          "equipment_entities": [
+            {
+              "entity_id": "e1",
+              "term_id": "circuit_breaker",
+              "standard_name": "断路器",
+              "equipment_category": "circuit_breaker",
+              "device_number": "2",
+              "explicit_identifier": null,
+              "entity_kind": "device",
+              "part_of": null,
+              "status": "negated",
+              "identity_status": "unverified",
+              "source_span_ids": [
+                "s2"
+              ]
+            },
+            {
+              "entity_id": "e2",
+              "term_id": "circuit_breaker",
+              "standard_name": "断路器",
+              "equipment_category": "circuit_breaker",
+              "device_number": "3",
+              "explicit_identifier": null,
+              "entity_kind": "device",
+              "part_of": null,
+              "status": "active",
+              "identity_status": "unverified",
+              "source_span_ids": [
+                "s3"
+              ]
+            }
+          ],
+          "metric_entities": [
+            {
+              "entity_id": "m1",
+              "kind": "device_number",
+              "raw_value": "2",
+              "normalized_value": "2",
+              "raw_unit": "号",
+              "normalized_unit": "号",
+              "status": "negated",
+              "verification_status": "text_only",
+              "owner_id": "e1",
+              "phase_entity_id": null,
+              "source_span_ids": [
+                "s4"
+              ]
+            },
+            {
+              "entity_id": "m2",
+              "kind": "device_number",
+              "raw_value": "3",
+              "normalized_value": "3",
+              "raw_unit": "号",
+              "normalized_unit": "号",
+              "status": "active",
+              "verification_status": "text_only",
+              "owner_id": "e2",
+              "phase_entity_id": null,
+              "source_span_ids": [
+                "s5"
+              ]
+            }
+          ],
+          "temporal_constraints": [
+            {
+              "constraint_id": "t1",
+              "expression": "上周",
+              "role": "target",
+              "start": "2026-10-26T00:00:00+08:00",
+              "end": "2026-11-02T00:00:00+08:00",
+              "resolved": true,
+              "timezone": "Asia/Shanghai",
+              "end_exclusive": true,
+              "source_span_ids": [
+                "s7"
+              ]
+            }
+          ],
+          "negations": [
+            {
+              "relation_id": "n1",
+              "kind": "excluded_entity",
+              "target_ids": [
+                "e1",
+                "m1",
+                "i1"
+              ],
+              "scope_span_ids": [
+                "s9"
+              ]
+            },
+            {
+              "relation_id": "n2",
+              "kind": "prohibition",
+              "target_ids": [
+                "i1"
+              ],
+              "scope_span_ids": [
+                "s8"
+              ]
+            }
+          ],
+          "self_corrections": [
+            {
+              "relation_id": "r1",
+              "kind": "equipment",
+              "rejected_ids": [
+                "e1"
+              ],
+              "accepted_ids": [
+                "e2"
+              ],
+              "source_span_ids": [
+                "s6"
+              ],
+              "requires_confirmation": true
+            }
+          ],
+          "conditions": [],
+          "task_dependencies": [],
+          "required_data_sources": [
+            "legacy_dispatcher",
+            "human_authorization"
+          ],
+          "uncertainties": [
+            "设备编号尚未与真实台账核对",
+            "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断",
+            "原文证据仅为转写文本，设备身份及测量均未现场核验",
+            "明确口头更正已建立关系，但仍须人工核对原音频及对象"
+          ],
+          "clarification_requests": [
+            "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。",
+            "请确认自我修正关系与实际朗读一致。"
+          ],
+          "source_spans": [
+            {
+              "span_id": "s1",
+              "start": 0,
+              "end": 31,
+              "quote": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。"
+            },
+            {
+              "span_id": "s2",
+              "start": 2,
+              "end": 7,
+              "quote": "2号断路器"
+            },
+            {
+              "span_id": "s3",
+              "start": 9,
+              "end": 14,
+              "quote": "3号断路器"
+            },
+            {
+              "span_id": "s4",
+              "start": 2,
+              "end": 4,
+              "quote": "2号"
+            },
+            {
+              "span_id": "s5",
+              "start": 9,
+              "end": 11,
+              "quote": "3号"
+            },
+            {
+              "span_id": "s6",
+              "start": 2,
+              "end": 14,
+              "quote": "2号断路器，是3号断路器"
+            },
+            {
+              "span_id": "s7",
+              "start": 17,
+              "end": 19,
+              "quote": "上周"
+            },
+            {
+              "span_id": "s8",
+              "start": 22,
+              "end": 30,
+              "quote": "但不要启动机器人"
+            },
+            {
+              "span_id": "s9",
+              "start": 0,
+              "end": 7,
+              "quote": "不是2号断路器"
+            }
+          ],
+          "structured_task_draft": {
+            "protocol_version": "inspection-task-draft-v3.0",
+            "status": "draft_requires_review",
+            "target_equipment": [
+              {
+                "entity_id": "e2",
+                "identity_status": "unverified",
+                "requires_registry_resolution": true
+              }
+            ],
+            "business_goals": [],
+            "required_data": [
+              "legacy_dispatcher",
+              "human_authorization"
+            ],
+            "preconditions": [
+              "真实设备身份核验",
+              "所需数据与采样元数据齐备",
+              "适用规程核验",
+              "人工复核草案"
+            ],
+            "task_dependencies": [],
+            "prohibitions": [
+              "本阶段禁止任何硬件执行或授权",
+              "不得据转写推测小数点、设备编号或现场故障",
+              "不是2号断路器",
+              "但不要启动机器人"
+            ],
+            "evidence_requirements": [
+              "真实台账",
+              "原始测量及采样时间",
+              "适用规程与来源",
+              "原音频和人工确认"
+            ],
+            "human_confirmation_required": true,
+            "authorized": false,
+            "executable": false,
+            "hardware_commands_enabled": false,
+            "site_conclusion": null,
+            "original_request": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+            "source_span_ids": [
+              "s1"
+            ],
+            "reasoning_source": "mock_script"
+          }
+        },
+        "provider": {
+          "provider": "mock",
+          "available": true,
+          "is_real_llm": false,
+          "model": "mock-script",
+          "model_version": "1",
+          "label": "Mock脚本演示，非真实LLM"
+        },
+        "llm_inference_seconds": 8.33550002425909e-05,
+        "fallback_used": false,
+        "fallback_success": false,
+        "error": null,
+        "configuration_sha256": "9d030445bb15277e7fccc51f04d38e10849a473b5f715bfebbb717c53caab169",
+        "authorized": false,
+        "executable": false,
+        "hardware_commands_enabled": false,
+        "lexicon_version": "electrical-v2.3",
+        "lexicon_sha256": "fe43978ba1363d84905c556eb5b50f9da3d494cc7f8d026a7e46de5ba5eb24b7",
+        "reference_time": "2026-11-02T12:00:00+08:00",
+        "status": "validated_candidate",
+        "structured_task_draft": {
+          "protocol_version": "inspection-task-draft-v3.0",
+          "status": "draft_requires_review",
+          "target_equipment": [
+            {
+              "entity_id": "e2",
+              "identity_status": "unverified",
+              "requires_registry_resolution": true
+            }
+          ],
+          "business_goals": [],
+          "required_data": [
+            "legacy_dispatcher",
+            "human_authorization"
+          ],
+          "preconditions": [
+            "真实设备身份核验",
+            "所需数据与采样元数据齐备",
+            "适用规程核验",
+            "人工复核草案"
+          ],
+          "task_dependencies": [],
+          "prohibitions": [
+            "本阶段禁止任何硬件执行或授权",
+            "不得据转写推测小数点、设备编号或现场故障",
+            "不是2号断路器",
+            "但不要启动机器人"
+          ],
+          "evidence_requirements": [
+            "真实台账",
+            "原始测量及采样时间",
+            "适用规程与来源",
+            "原音频和人工确认"
+          ],
+          "human_confirmation_required": true,
+          "authorized": false,
+          "executable": false,
+          "hardware_commands_enabled": false,
+          "site_conclusion": null,
+          "original_request": "不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。",
+          "source_span_ids": [
+            "s1"
+          ],
+          "reasoning_source": "mock_script"
+        },
+        "total_seconds": 0.0023545730000478216
+      },
+      "timings": {
+        "schema_seconds": 0.00034636999953363556,
+        "evidence_semantic_seconds": 0.00035266899976704735,
+        "schema_valid": true
+      },
+      "provider_timings": {},
+      "raw_response": null
+    },
+    {
+      "evidence_check": {
+        "passed": true,
+        "errors": []
+      },
+      "diagnostics": {},
+      "parsed_candidate": {
+        "schema_version": "inspection-semantic-v3.0",
+        "original_request": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+        "intents": [
+          {
+            "intent_id": "i1",
+            "type": "thermometry_history",
+            "request_kind": "query",
+            "entity_ids": [
+              "e1"
+            ],
+            "metric_ids": [
+              "m1"
+            ],
+            "time_ids": [
+              "t1",
+              "t2"
+            ],
+            "source_span_ids": [
+              "s6"
+            ],
+            "uncertain": false
+          },
+          {
+            "intent_id": "i2",
+            "type": "temperature_comparison",
+            "request_kind": "query",
+            "entity_ids": [
+              "e1"
+            ],
+            "metric_ids": [
+              "m1"
+            ],
+            "time_ids": [
+              "t1",
+              "t2"
+            ],
+            "source_span_ids": [
+              "s7"
+            ],
+            "uncertain": false
+          }
+        ],
+        "equipment_entities": [
+          {
+            "entity_id": "e1",
+            "term_id": "circuit_breaker",
+            "standard_name": "断路器",
+            "equipment_category": "circuit_breaker",
+            "device_number": "3",
+            "explicit_identifier": null,
+            "entity_kind": "device",
+            "part_of": null,
+            "status": "active",
+            "identity_status": "unverified",
+            "source_span_ids": [
+              "s2"
+            ]
+          }
+        ],
+        "metric_entities": [
+          {
+            "entity_id": "m1",
+            "kind": "device_number",
+            "raw_value": "3",
+            "normalized_value": "3",
+            "raw_unit": "号",
+            "normalized_unit": "号",
+            "status": "active",
+            "verification_status": "text_only",
+            "owner_id": "e1",
+            "phase_entity_id": null,
+            "source_span_ids": [
+              "s3"
+            ]
+          }
+        ],
+        "temporal_constraints": [
+          {
+            "constraint_id": "t1",
+            "expression": "最近",
+            "role": "target",
+            "start": null,
+            "end": null,
+            "resolved": false,
+            "timezone": "Asia/Shanghai",
+            "end_exclusive": true,
+            "source_span_ids": [
+              "s4"
+            ]
+          },
+          {
+            "constraint_id": "t2",
+            "expression": "上周",
+            "role": "comparison_baseline",
+            "start": "2026-10-26T00:00:00+08:00",
+            "end": "2026-11-02T00:00:00+08:00",
+            "resolved": true,
+            "timezone": "Asia/Shanghai",
+            "end_exclusive": true,
+            "source_span_ids": [
+              "s5"
+            ]
+          }
+        ],
+        "negations": [],
+        "self_corrections": [],
+        "conditions": [],
+        "task_dependencies": [
+          {
+            "before_intent_id": "i1",
+            "after_intent_id": "i2",
+            "kind": "data_prerequisite",
+            "source_span_ids": [
+              "s1"
+            ]
+          }
+        ],
+        "required_data_sources": [
+          "equipment_registry",
+          "thermometry_records",
+          "sampling_metadata"
+        ],
+        "uncertainties": [
+          "时间范围未明确，请指定起止日期或最近几天",
+          "设备编号尚未与真实台账核对",
+          "待比较记录的目标时间范围未明确；上周只是比较基准，不默认本周",
+          "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断",
+          "原文证据仅为转写文本，设备身份及测量均未现场核验"
+        ],
+        "clarification_requests": [
+          "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。",
+          "请确认待比较记录的目标时间范围。"
+        ],
+        "source_spans": [
+          {
+            "span_id": "s1",
+            "start": 0,
+            "end": 28,
+            "quote": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。"
+          },
+          {
+            "span_id": "s2",
+            "start": 2,
+            "end": 7,
+            "quote": "3号断路器"
+          },
+          {
+            "span_id": "s3",
+            "start": 2,
+            "end": 4,
+            "quote": "3号"
+          },
+          {
+            "span_id": "s4",
+            "start": 19,
+            "end": 21,
+            "quote": "最近"
+          },
+          {
+            "span_id": "s5",
+            "start": 7,
+            "end": 9,
+            "quote": "上周"
+          },
+          {
+            "span_id": "s6",
+            "start": 0,
+            "end": 16,
+            "quote": "查询3号断路器上周的红外测温记录"
+          },
+          {
+            "span_id": "s7",
+            "start": 17,
+            "end": 27,
+            "quote": "比较最近两次测温结果"
+          }
+        ],
+        "structured_task_draft": {
+          "protocol_version": "inspection-task-draft-v3.0",
+          "status": "draft_requires_review",
+          "target_equipment": [
+            {
+              "entity_id": "e1",
+              "identity_status": "unverified",
+              "requires_registry_resolution": true
+            }
+          ],
+          "business_goals": [
+            "i1",
+            "i2"
+          ],
+          "required_data": [
+            "equipment_registry",
+            "thermometry_records",
+            "sampling_metadata"
+          ],
+          "preconditions": [
+            "真实设备身份核验",
+            "所需数据与采样元数据齐备",
+            "适用规程核验",
+            "人工复核草案"
+          ],
+          "task_dependencies": [
+            {
+              "before_intent_id": "i1",
+              "after_intent_id": "i2",
+              "kind": "data_prerequisite",
+              "source_span_ids": [
+                "s1"
+              ]
+            }
+          ],
+          "prohibitions": [
+            "本阶段禁止任何硬件执行或授权",
+            "不得据转写推测小数点、设备编号或现场故障"
+          ],
+          "evidence_requirements": [
+            "真实台账",
+            "原始测量及采样时间",
+            "适用规程与来源",
+            "原音频和人工确认"
+          ],
+          "human_confirmation_required": true,
+          "authorized": false,
+          "executable": false,
+          "hardware_commands_enabled": false,
+          "site_conclusion": null,
+          "original_request": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+          "source_span_ids": [
+            "s1"
+          ],
+          "reasoning_source": "mock_script"
+        }
+      },
+      "candidate_observed": true,
+      "input": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+      "result": {
+        "engine_version": "inspection-brain-v3.0",
+        "mode": "v3_llm",
+        "original_request": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+        "v2": {
+          "mode": "offline",
+          "analysis": {
+            "schema_version": 1,
+            "intent": "thermometry_history",
+            "normalization": {
+              "raw_text": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+              "normalized_text": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+              "raw_transcript": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+              "term_normalized_text": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+              "changes": [],
+              "homophone_candidates": [],
+              "correction_candidates": [],
+              "recognized_terms": [
+                {
+                  "term_id": "circuit_breaker",
+                  "standard_name": "断路器",
+                  "category": "equipment",
+                  "equipment_category": "circuit_breaker",
+                  "span": [
+                    4,
+                    7
+                  ],
+                  "surface": "断路器"
+                },
+                {
+                  "term_id": "infrared_thermometry_record",
+                  "standard_name": "红外测温记录",
+                  "category": "business",
+                  "equipment_category": null,
+                  "span": [
+                    10,
+                    16
+                  ],
+                  "surface": "红外测温记录"
+                }
+              ],
+              "operation_text_protected": false,
+              "authorization_granted": false,
+              "lexicon_version": "electrical-v2.3",
+              "lexicon_sha256": "fe43978ba1363d84905c556eb5b50f9da3d494cc7f8d026a7e46de5ba5eb24b7"
+            },
+            "device_entities": [
+              {
+                "term_id": "circuit_breaker",
+                "standard_name": "断路器",
+                "equipment_category": "circuit_breaker",
+                "surface": "断路器",
+                "span": [
+                  4,
+                  7
+                ],
+                "device_number": "3",
+                "number_surface": "3",
+                "device_id": null,
+                "identity_status": "unresolved_registry"
+              }
+            ],
+            "device_ids": [],
+            "time_range": {
+              "expression": "最近",
+              "start": null,
+              "end": null,
+              "resolved": false
+            },
+            "reference_time": "2026-11-02T12:00:00+08:00",
+            "required_data_sources": [
+              "equipment_registry",
+              "thermometry_records",
+              "sampling_metadata"
+            ],
+            "uncertainties": [
+              "时间范围未明确，请指定起止日期或最近几天",
+              "设备编号尚未与真实台账核对",
+              "待比较记录的目标时间范围未明确；上周只是比较基准，不默认本周",
+              "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断"
+            ],
+            "operation_proposal": null,
+            "chassis_commands_enabled": false,
+            "hardware_commands_enabled": false,
+            "intents": [
+              {
+                "type": "thermometry_history",
+                "reason": "测温历史记录查询，不等于异常或告警查询",
+                "required_data_sources": [
+                  "equipment_registry",
+                  "thermometry_records",
+                  "sampling_metadata"
+                ],
+                "executable": false,
+                "authorized": false
+              },
+              {
+                "type": "temperature_comparison",
+                "reason": "识别测温需求前后出现的比较词，比较基准与目标时间分开",
+                "required_data_sources": [
+                  "equipment_registry",
+                  "thermometry_records",
+                  "sampling_metadata"
+                ],
+                "executable": false,
+                "authorized": false
+              }
+            ],
+            "action_scopes": [],
+            "constraints": [],
+            "conditional_clauses": [],
+            "numeric_entities": [
+              {
+                "kind": "device_number",
+                "raw_value": "3",
+                "raw_unit": "号",
+                "raw_text": "3号",
+                "normalized_value": "3",
+                "normalized_unit": "号",
+                "source_span": [
+                  2,
+                  4
+                ],
+                "uncertainty": [
+                  "文本序号未与真实台账核对；前导零保留"
+                ],
+                "verification_status": "identity_unverified"
+              }
+            ],
+            "comparison_constraints": {
+              "operator": "compare",
+              "baseline": {
+                "expression": "上周",
+                "start": "2026-10-26T00:00:00+08:00",
+                "end": "2026-11-02T00:00:00+08:00",
+                "resolved": true,
+                "timezone": "Asia/Shanghai",
+                "end_exclusive": true,
+                "role": "comparison_baseline"
+              },
+              "target": {
+                "expression": "最近",
+                "start": null,
+                "end": null,
+                "resolved": false
+              }
+            },
+            "inspection_parts": [],
+            "measurement_methods": [
+              "infrared_thermometry"
+            ],
+            "semantic_version": "electrical-semantics-v2.3",
+            "information_needs": [
+              {
+                "subject": "断路器",
+                "term_id": "circuit_breaker",
+                "category": "equipment"
+              },
+              {
+                "subject": "红外测温记录",
+                "term_id": "infrared_thermometry_record",
+                "category": "business"
+              }
+            ],
+            "raw_transcript": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+            "term_normalized_text": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+            "cleanup_source_text": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+            "cleaned_display_text": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+            "correction_candidates": [],
+            "correction_trace": [],
+            "lexicon_version": "electrical-v2.3",
+            "lexicon_sha256": "fe43978ba1363d84905c556eb5b50f9da3d494cc7f8d026a7e46de5ba5eb24b7"
+          },
+          "result": {
+            "status": "undetermined",
+            "answer": "已拆解多个业务需求；真实记录与规程未接入，各项分析/建议均需证据和人工复核。",
+            "citations": [],
+            "missing_evidence": [
+              "equipment_registry",
+              "thermometry_records",
+              "sampling_metadata"
+            ],
+            "is_example": false,
+            "site_conclusion": null,
+            "subresults": [
+              {
+                "intent": "thermometry_history",
+                "status": "needs_evidence",
+                "required_data_sources": [
+                  "equipment_registry",
+                  "thermometry_records",
+                  "sampling_metadata"
+                ]
+              },
+              {
+                "intent": "temperature_comparison",
+                "status": "needs_evidence",
+                "required_data_sources": [
+                  "equipment_registry",
+                  "thermometry_records",
+                  "sampling_metadata"
+                ]
+              }
+            ]
+          },
+          "chassis_commands_enabled": false,
+          "hardware_commands_enabled": false,
+          "executed_actions": [],
+          "domain_version": "v2"
+        },
+        "v3": {
+          "status": "draft_requires_review",
+          "authorized": false,
+          "executable": false,
+          "hardware_commands_enabled": false,
+          "human_confirmation_required": true,
+          "site_conclusion": null,
+          "clarification_requests": [
+            "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。",
+            "请确认待比较记录的目标时间范围。"
+          ],
+          "semantic": {
+            "schema_version": "inspection-semantic-v3.0",
+            "original_request": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+            "intents": [
+              {
+                "intent_id": "i1",
+                "type": "thermometry_history",
+                "request_kind": "query",
+                "entity_ids": [
+                  "e1"
+                ],
+                "metric_ids": [
+                  "m1"
+                ],
+                "time_ids": [
+                  "t1",
+                  "t2"
+                ],
+                "source_span_ids": [
+                  "s6"
+                ],
+                "uncertain": false
+              },
+              {
+                "intent_id": "i2",
+                "type": "temperature_comparison",
+                "request_kind": "query",
+                "entity_ids": [
+                  "e1"
+                ],
+                "metric_ids": [
+                  "m1"
+                ],
+                "time_ids": [
+                  "t1",
+                  "t2"
+                ],
+                "source_span_ids": [
+                  "s7"
+                ],
+                "uncertain": false
+              }
+            ],
+            "equipment_entities": [
+              {
+                "entity_id": "e1",
+                "term_id": "circuit_breaker",
+                "standard_name": "断路器",
+                "equipment_category": "circuit_breaker",
+                "device_number": "3",
+                "explicit_identifier": null,
+                "entity_kind": "device",
+                "part_of": null,
+                "status": "active",
+                "identity_status": "unverified",
+                "source_span_ids": [
+                  "s2"
+                ]
+              }
+            ],
+            "metric_entities": [
+              {
+                "entity_id": "m1",
+                "kind": "device_number",
+                "raw_value": "3",
+                "normalized_value": "3",
+                "raw_unit": "号",
+                "normalized_unit": "号",
+                "status": "active",
+                "verification_status": "text_only",
+                "owner_id": "e1",
+                "phase_entity_id": null,
+                "source_span_ids": [
+                  "s3"
+                ]
+              }
+            ],
+            "temporal_constraints": [
+              {
+                "constraint_id": "t1",
+                "expression": "最近",
+                "role": "target",
+                "start": null,
+                "end": null,
+                "resolved": false,
+                "timezone": "Asia/Shanghai",
+                "end_exclusive": true,
+                "source_span_ids": [
+                  "s4"
+                ]
+              },
+              {
+                "constraint_id": "t2",
+                "expression": "上周",
+                "role": "comparison_baseline",
+                "start": "2026-10-26T00:00:00+08:00",
+                "end": "2026-11-02T00:00:00+08:00",
+                "resolved": true,
+                "timezone": "Asia/Shanghai",
+                "end_exclusive": true,
+                "source_span_ids": [
+                  "s5"
+                ]
+              }
+            ],
+            "negations": [],
+            "self_corrections": [],
+            "conditions": [],
+            "task_dependencies": [
+              {
+                "before_intent_id": "i1",
+                "after_intent_id": "i2",
+                "kind": "data_prerequisite",
+                "source_span_ids": [
+                  "s1"
+                ]
+              }
+            ],
+            "required_data_sources": [
+              "equipment_registry",
+              "thermometry_records",
+              "sampling_metadata"
+            ],
+            "uncertainties": [
+              "时间范围未明确，请指定起止日期或最近几天",
+              "设备编号尚未与真实台账核对",
+              "待比较记录的目标时间范围未明确；上周只是比较基准，不默认本周",
+              "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断",
+              "原文证据仅为转写文本，设备身份及测量均未现场核验"
+            ],
+            "clarification_requests": [
+              "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。",
+              "请确认待比较记录的目标时间范围。"
+            ],
+            "source_spans": [
+              {
+                "span_id": "s1",
+                "start": 0,
+                "end": 28,
+                "quote": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。"
+              },
+              {
+                "span_id": "s2",
+                "start": 2,
+                "end": 7,
+                "quote": "3号断路器"
+              },
+              {
+                "span_id": "s3",
+                "start": 2,
+                "end": 4,
+                "quote": "3号"
+              },
+              {
+                "span_id": "s4",
+                "start": 19,
+                "end": 21,
+                "quote": "最近"
+              },
+              {
+                "span_id": "s5",
+                "start": 7,
+                "end": 9,
+                "quote": "上周"
+              },
+              {
+                "span_id": "s6",
+                "start": 0,
+                "end": 16,
+                "quote": "查询3号断路器上周的红外测温记录"
+              },
+              {
+                "span_id": "s7",
+                "start": 17,
+                "end": 27,
+                "quote": "比较最近两次测温结果"
+              }
+            ],
+            "structured_task_draft": {
+              "protocol_version": "inspection-task-draft-v3.0",
+              "status": "draft_requires_review",
+              "target_equipment": [
+                {
+                  "entity_id": "e1",
+                  "identity_status": "unverified",
+                  "requires_registry_resolution": true
+                }
+              ],
+              "business_goals": [
+                "i1",
+                "i2"
+              ],
+              "required_data": [
+                "equipment_registry",
+                "thermometry_records",
+                "sampling_metadata"
+              ],
+              "preconditions": [
+                "真实设备身份核验",
+                "所需数据与采样元数据齐备",
+                "适用规程核验",
+                "人工复核草案"
+              ],
+              "task_dependencies": [
+                {
+                  "before_intent_id": "i1",
+                  "after_intent_id": "i2",
+                  "kind": "data_prerequisite",
+                  "source_span_ids": [
+                    "s1"
+                  ]
+                }
+              ],
+              "prohibitions": [
+                "本阶段禁止任何硬件执行或授权",
+                "不得据转写推测小数点、设备编号或现场故障"
+              ],
+              "evidence_requirements": [
+                "真实台账",
+                "原始测量及采样时间",
+                "适用规程与来源",
+                "原音频和人工确认"
+              ],
+              "human_confirmation_required": true,
+              "authorized": false,
+              "executable": false,
+              "hardware_commands_enabled": false,
+              "site_conclusion": null,
+              "original_request": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+              "source_span_ids": [
+                "s1"
+              ],
+              "reasoning_source": "mock_script"
+            }
+          },
+          "structured_task_draft": {
+            "protocol_version": "inspection-task-draft-v3.0",
+            "status": "draft_requires_review",
+            "target_equipment": [
+              {
+                "entity_id": "e1",
+                "identity_status": "unverified",
+                "requires_registry_resolution": true
+              }
+            ],
+            "business_goals": [
+              "i1",
+              "i2"
+            ],
+            "required_data": [
+              "equipment_registry",
+              "thermometry_records",
+              "sampling_metadata"
+            ],
+            "preconditions": [
+              "真实设备身份核验",
+              "所需数据与采样元数据齐备",
+              "适用规程核验",
+              "人工复核草案"
+            ],
+            "task_dependencies": [
+              {
+                "before_intent_id": "i1",
+                "after_intent_id": "i2",
+                "kind": "data_prerequisite",
+                "source_span_ids": [
+                  "s1"
+                ]
+              }
+            ],
+            "prohibitions": [
+              "本阶段禁止任何硬件执行或授权",
+              "不得据转写推测小数点、设备编号或现场故障"
+            ],
+            "evidence_requirements": [
+              "真实台账",
+              "原始测量及采样时间",
+              "适用规程与来源",
+              "原音频和人工确认"
+            ],
+            "human_confirmation_required": true,
+            "authorized": false,
+            "executable": false,
+            "hardware_commands_enabled": false,
+            "site_conclusion": null,
+            "original_request": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+            "source_span_ids": [
+              "s1"
+            ],
+            "reasoning_source": "mock_script"
+          }
+        },
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [
+            "设备唯一身份、数值及现场状况未核验；此结果仅为不可执行语义草案"
+          ],
+          "requires_human_confirmation": true
+        },
+        "model_candidate": {
+          "schema_version": "inspection-semantic-v3.0",
+          "original_request": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+          "intents": [
+            {
+              "intent_id": "i1",
+              "type": "thermometry_history",
+              "request_kind": "query",
+              "entity_ids": [
+                "e1"
+              ],
+              "metric_ids": [
+                "m1"
+              ],
+              "time_ids": [
+                "t1",
+                "t2"
+              ],
+              "source_span_ids": [
+                "s6"
+              ],
+              "uncertain": false
+            },
+            {
+              "intent_id": "i2",
+              "type": "temperature_comparison",
+              "request_kind": "query",
+              "entity_ids": [
+                "e1"
+              ],
+              "metric_ids": [
+                "m1"
+              ],
+              "time_ids": [
+                "t1",
+                "t2"
+              ],
+              "source_span_ids": [
+                "s7"
+              ],
+              "uncertain": false
+            }
+          ],
+          "equipment_entities": [
+            {
+              "entity_id": "e1",
+              "term_id": "circuit_breaker",
+              "standard_name": "断路器",
+              "equipment_category": "circuit_breaker",
+              "device_number": "3",
+              "explicit_identifier": null,
+              "entity_kind": "device",
+              "part_of": null,
+              "status": "active",
+              "identity_status": "unverified",
+              "source_span_ids": [
+                "s2"
+              ]
+            }
+          ],
+          "metric_entities": [
+            {
+              "entity_id": "m1",
+              "kind": "device_number",
+              "raw_value": "3",
+              "normalized_value": "3",
+              "raw_unit": "号",
+              "normalized_unit": "号",
+              "status": "active",
+              "verification_status": "text_only",
+              "owner_id": "e1",
+              "phase_entity_id": null,
+              "source_span_ids": [
+                "s3"
+              ]
+            }
+          ],
+          "temporal_constraints": [
+            {
+              "constraint_id": "t1",
+              "expression": "最近",
+              "role": "target",
+              "start": null,
+              "end": null,
+              "resolved": false,
+              "timezone": "Asia/Shanghai",
+              "end_exclusive": true,
+              "source_span_ids": [
+                "s4"
+              ]
+            },
+            {
+              "constraint_id": "t2",
+              "expression": "上周",
+              "role": "comparison_baseline",
+              "start": "2026-10-26T00:00:00+08:00",
+              "end": "2026-11-02T00:00:00+08:00",
+              "resolved": true,
+              "timezone": "Asia/Shanghai",
+              "end_exclusive": true,
+              "source_span_ids": [
+                "s5"
+              ]
+            }
+          ],
+          "negations": [],
+          "self_corrections": [],
+          "conditions": [],
+          "task_dependencies": [
+            {
+              "before_intent_id": "i1",
+              "after_intent_id": "i2",
+              "kind": "data_prerequisite",
+              "source_span_ids": [
+                "s1"
+              ]
+            }
+          ],
+          "required_data_sources": [
+            "equipment_registry",
+            "thermometry_records",
+            "sampling_metadata"
+          ],
+          "uncertainties": [
+            "时间范围未明确，请指定起止日期或最近几天",
+            "设备编号尚未与真实台账核对",
+            "待比较记录的目标时间范围未明确；上周只是比较基准，不默认本周",
+            "数值/单位/编号仅做格式解析，未验证原音频及真实测量，禁止推测小数点或诊断",
+            "原文证据仅为转写文本，设备身份及测量均未现场核验"
+          ],
+          "clarification_requests": [
+            "请用真实设备台账核实设备唯一身份；文本序号不是资产ID。",
+            "请确认待比较记录的目标时间范围。"
+          ],
+          "source_spans": [
+            {
+              "span_id": "s1",
+              "start": 0,
+              "end": 28,
+              "quote": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。"
+            },
+            {
+              "span_id": "s2",
+              "start": 2,
+              "end": 7,
+              "quote": "3号断路器"
+            },
+            {
+              "span_id": "s3",
+              "start": 2,
+              "end": 4,
+              "quote": "3号"
+            },
+            {
+              "span_id": "s4",
+              "start": 19,
+              "end": 21,
+              "quote": "最近"
+            },
+            {
+              "span_id": "s5",
+              "start": 7,
+              "end": 9,
+              "quote": "上周"
+            },
+            {
+              "span_id": "s6",
+              "start": 0,
+              "end": 16,
+              "quote": "查询3号断路器上周的红外测温记录"
+            },
+            {
+              "span_id": "s7",
+              "start": 17,
+              "end": 27,
+              "quote": "比较最近两次测温结果"
+            }
+          ],
+          "structured_task_draft": {
+            "protocol_version": "inspection-task-draft-v3.0",
+            "status": "draft_requires_review",
+            "target_equipment": [
+              {
+                "entity_id": "e1",
+                "identity_status": "unverified",
+                "requires_registry_resolution": true
+              }
+            ],
+            "business_goals": [
+              "i1",
+              "i2"
+            ],
+            "required_data": [
+              "equipment_registry",
+              "thermometry_records",
+              "sampling_metadata"
+            ],
+            "preconditions": [
+              "真实设备身份核验",
+              "所需数据与采样元数据齐备",
+              "适用规程核验",
+              "人工复核草案"
+            ],
+            "task_dependencies": [
+              {
+                "before_intent_id": "i1",
+                "after_intent_id": "i2",
+                "kind": "data_prerequisite",
+                "source_span_ids": [
+                  "s1"
+                ]
+              }
+            ],
+            "prohibitions": [
+              "本阶段禁止任何硬件执行或授权",
+              "不得据转写推测小数点、设备编号或现场故障"
+            ],
+            "evidence_requirements": [
+              "真实台账",
+              "原始测量及采样时间",
+              "适用规程与来源",
+              "原音频和人工确认"
+            ],
+            "human_confirmation_required": true,
+            "authorized": false,
+            "executable": false,
+            "hardware_commands_enabled": false,
+            "site_conclusion": null,
+            "original_request": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+            "source_span_ids": [
+              "s1"
+            ],
+            "reasoning_source": "mock_script"
+          }
+        },
+        "provider": {
+          "provider": "mock",
+          "available": true,
+          "is_real_llm": false,
+          "model": "mock-script",
+          "model_version": "1",
+          "label": "Mock脚本演示，非真实LLM"
+        },
+        "llm_inference_seconds": 7.262800136231817e-05,
+        "fallback_used": false,
+        "fallback_success": false,
+        "error": null,
+        "configuration_sha256": "9d030445bb15277e7fccc51f04d38e10849a473b5f715bfebbb717c53caab169",
+        "authorized": false,
+        "executable": false,
+        "hardware_commands_enabled": false,
+        "lexicon_version": "electrical-v2.3",
+        "lexicon_sha256": "fe43978ba1363d84905c556eb5b50f9da3d494cc7f8d026a7e46de5ba5eb24b7",
+        "reference_time": "2026-11-02T12:00:00+08:00",
+        "status": "validated_candidate",
+        "structured_task_draft": {
+          "protocol_version": "inspection-task-draft-v3.0",
+          "status": "draft_requires_review",
+          "target_equipment": [
+            {
+              "entity_id": "e1",
+              "identity_status": "unverified",
+              "requires_registry_resolution": true
+            }
+          ],
+          "business_goals": [
+            "i1",
+            "i2"
+          ],
+          "required_data": [
+            "equipment_registry",
+            "thermometry_records",
+            "sampling_metadata"
+          ],
+          "preconditions": [
+            "真实设备身份核验",
+            "所需数据与采样元数据齐备",
+            "适用规程核验",
+            "人工复核草案"
+          ],
+          "task_dependencies": [
+            {
+              "before_intent_id": "i1",
+              "after_intent_id": "i2",
+              "kind": "data_prerequisite",
+              "source_span_ids": [
+                "s1"
+              ]
+            }
+          ],
+          "prohibitions": [
+            "本阶段禁止任何硬件执行或授权",
+            "不得据转写推测小数点、设备编号或现场故障"
+          ],
+          "evidence_requirements": [
+            "真实台账",
+            "原始测量及采样时间",
+            "适用规程与来源",
+            "原音频和人工确认"
+          ],
+          "human_confirmation_required": true,
+          "authorized": false,
+          "executable": false,
+          "hardware_commands_enabled": false,
+          "site_conclusion": null,
+          "original_request": "查询3号断路器上周的红外测温记录，比较最近两次测温结果。",
+          "source_span_ids": [
+            "s1"
+          ],
+          "reasoning_source": "mock_script"
+        },
+        "total_seconds": 0.002034621998973307
+      },
+      "timings": {
+        "schema_seconds": 0.00029288999940035865,
+        "evidence_semantic_seconds": 0.0003727490002347622,
+        "schema_valid": true
+      },
+      "provider_timings": {},
+      "raw_response": null
+    }
+  ]
+}

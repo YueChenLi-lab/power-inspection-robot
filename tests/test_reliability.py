@@ -114,6 +114,7 @@ def scheduler_experiment(directory):
         submit_seconds=time.perf_counter()-started
         app.manager.cancel(m['mission_id'])
         still_blocked=worker.is_alive()
+        time.sleep(.1)  # Hold preflight while writes are already committed.
         net.release.set();worker.join(3)
         result={'network_wait_seconds':net.durations,'database_transaction_seconds':app.db.write_seconds,
                 'submission_seconds':submit_seconds,'transaction_open_during_preflight':transaction_open,

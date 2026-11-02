@@ -20,3 +20,6 @@ Provider.last_response 保存本次有界响应，timings 分别保存请求与�
 `tests/fixtures/semantic_cases.json` 是合成开发期望，含设备号、上周时间、否定与纠正。提供人工复核字段但 confirmed=false，不冒充人工语义金标准。smoke 区分 JSON 成功率、Schema 通过率、Validator 接受率、合成关键字段准确率、证据接受率、回退次数与延迟分布；human_gold_accuracy 为 null。原文 evidence 检查不等于现场事实验证。
 
 真实模型输出能否通过合同、Qwen3 质量/延迟和独立人工标注准确率均待实测。本版本只完成可调用接入实现与模拟接口验收，不声称已完成真实模型验收。
+
+
+Follow-up 中 Evidence Constraint Pass Rate 改为独立原文证据检查，覆盖区间、设备编号、数值单位、时间、否定和自我修正，不再复用完整 Validator 的 valid。JSON 解析只统计实际观测，Mock 无传输时为 null；各阶段保存分母，无观测为 null。Ollama 诊断区分 transport_failure、timeout、json_parse_failure 与响应合同错误。人工 Gold 未确认，human_gold_accuracy 保持 null；合成字段匹配不是人工语义正确率。

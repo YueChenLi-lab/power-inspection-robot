@@ -1,48 +1,44 @@
-# 本轮实现与验收记录
+# 可靠性 Follow-up 验收记录
 
-## 执行范围
+## 分支与历史
 
-分支 `feature/edge-task-runtime`，从已经合并文档 PR #1 的 main 继续。原 InspectionBrain 不重写；只扩展 Provider 配置与工厂，新增原生 Ollama 文件。原 v2、ASR、语音服务、原测试、示例历史与文档均保留。仓库没有底盘/导航/摄像头/云台控制源码，本轮没有创建或接入这些执行接口。
+本轮基线 fdc997e，原工作区干净，当前分支与 PR #2 的 head 均为 feature/edge-task-runtime。执行前 GitHub 显示 PR #2 已合并（与任务描述不同），因此未尝试重开或篡改；经用户选择建立[后续 Draft PR #3](https://github.com/YueChenLi-lab/power-inspection-robot/pull/3)。所有修复在原分支，不合并 main、不强推、不改原 v2、语音实验室或原测试。
 
-## 测试结果
+[上轮验收原文](experiments/followup-v1/validation_report-before.md)、原实验 JSON/JSONL 与时间戳全部保留。本轮新增实验在 experiments/followup-v1。
 
-| 套件 | 实际结果 | 边界 |
+## 实际本地结果
+
+| 项目 | 本轮实际结果 | 口径 |
 |---|---|---|
-| 原 Python 基线 | 121 项：111 通过、6 错误、4 跳过 | 6 项缺历史文件，4 项需真实 ASR 模型/音频 |
-| 原 Python 最终回归 | 121 项：111 通过、同样 6 错误、4 跳过 | 没有新增错误；不能称整套全通过 |
-| 原 Node 模拟测试 | 4 个文件中的 19 项检查通过 | 浏览器流程模拟，不是实际浏览器麦克风测试 |
-| 新增 Python | 31 项通过 | 包含模块、HTTP、集成、E2E 与故障注入；部分测试内含多组子场景 |
-| E1–E7 独立实验 | 7/7 通过 | 单机软件模拟与进程故障，非现场硬件验收 |
-| 性能实验 | 9 组 × 12 任务，恢复后 108/108 完成 | 一个 Worker、并发提交 1/4/8、模拟网络 |
-| 真实 Ollama smoke | 3 请求、0 接受 | 本地服务连接失败，真实模型未验证 |
+| 新增及原任务运行时套件 | 46 项通过 | 包含原 31 项及本轮恢复、调度、审批、业务与评测测试 |
+| 严格原 Python 回归 | 121 项：111 通过、6 缺资产错误、4 模型跳过 | 与本轮基线一致；退出码 1，不称全部通过 |
+| 原 Python 的显式 CI 资产策略 | 121 项：111 通过、0 失败/错误、10 跳过 | 6 缺历史资产 + 4 模型，跳过不计通过 |
+| 原 Node | 19 项通过 | 4 个文件，前端/浏览器流程模拟 |
+| E1–E7 重跑 | 7/7 通过 | E5 运行时重建，E6 执行内 SIGKILL |
+| Scheduler 解耦实验 | 预检查阻塞时另一连接可提交；取消后领取数 0 | 测量网络等待/事务/提交时长，另测并发 claim 与撤销审批 |
+| 性能重跑 | 9 × 12 个任务，网络恢复后 108/108 完成 | 单 Worker、固定 Mock，无真实模型性能 |
 
-统一测试命令 `python3 tools/validate.py` 已实际运行，退出码为 1；内部新套件 / 原套件 / Node 返回 `[0, 1, 0]`，如实保留原缺文件失败，见[统一日志](experiments/validation/unified-validation.log)。此入口重定向原可选 ASR 测试的报告写入，不覆盖历史报告。
+[严格全回归日志](experiments/followup-v1/strict-validation.log)记录新/原/Node 的退出码 `[0,1,0]`；[CI 资产策略本地日志](experiments/followup-v1/original-ci-local.log)与[机器可读计数](experiments/followup-v1/original-ci-local-summary.json)区分 passed / skipped。没有修改原断言或制造历史样本。
 
-原始记录：[原基线](experiments/validation/original-baseline.log)、[原最终回归](experiments/validation/original-final.log)、[Node](experiments/validation/node-final.log)、[新增套件](experiments/validation/new-tests.log)、[故障汇总](experiments/faults/summary.json)、[真实模型不可用记录](experiments/validation/real-ollama-unavailable.json)。
+## 本轮针对性证明
 
-### 原有 6 项错误
+- Worker / Recovery 使用同一策略，矩阵覆盖 retryable=False、非幂等、不确定副作用未声明安全、版本变化、预算耗尽和审批问题；取消任务不恢复。退避到期时再核验。
+- 网络请求不持有写事务或连接互斥锁；另一条真实 SQLite 连接先提交，网络后释放。期间取消或撤销审批令快照失效；双 claim 只生成一次 execution-start。
+- approve 仅接受 True / False，字符串 false/true、1、None 拒绝；actor/token 非空，重复或终态审批拒绝，凭据失败有审计。
+- Schema 合法的错设备头、错记录设备、越界时间、缺记录字段和不可信来源被业务 Validator 拒绝，不能 SUCCEEDED。正常单/多设备对三个 Mock 能力均验证。
+- 独立 Evidence Constraint 检查不读取 validation.valid，覆盖原文区间、设备、数值/单位、时间、否定和自我修正。Schema 可通过而 Evidence 失败；Evidence 可通过而完整 Validator 失败。无人工 Gold 不计算语义准确率。
+- 传输失败、超时和非法模型 JSON 分别记录；没有真实模型调用时不把 Mock 的指标归入模型效果。
 
-- test_domain_v2 的 test_multi_intent_and_real_cases、test_real_data_rules_and_switch_are_separate。
-- test_round2_audit 的 test_actual_export_is_read_and_preserved。
-- test_round2_scoring 的 test_complex_query_does_not_claim_complete_answer_from_one_keyword、test_import_preserves_history_and_excludes_unbound_old_metrics。
-- test_scoring_workflow 的 test_actual_record_without_reference_leakage。
+## GitHub Actions 真实运行
 
-前五项依赖根目录未提交的 voice-evaluation.json；第六项依赖 InspectionBrain/runtime/voice_lab/records/9bf3bee5bf3e48e3b60a3a33d6966bc5.json。未生成假样本，也未跳过或删除这些测试。若恢复原始已授权历史文件，可重跑验证。
+首轮修复代码提交 55097a0 的[真实运行 41391529726](https://github.com/YueChenLi-lab/power-inspection-robot/actions/runs/41391529726)已完成，5 个 Job 均 success：Python 3.10 运行时、Python 3.12 运行时、Brain v3、原回归、Node。每个运行时 Job 还重新执行 E1–E7。API 返回的实际 Job/Step 结果已[归档](experiments/followup-v1/actions-result.json)。本地与云端计数分开，不把本地日志冒充 Actions 日志。
 
-## 分阶段验收
+普通 CI 不下载模型，不要求 GPU/Ollama 或用户本地文件。6 项历史资产仅在确实不存在时标明 skipped，其余关键测试照常运行；原套件至少执行 100 项的防误配置检查保留。可选 jsonschema 对照及真实 ASR 的自带 skip 因环境而异，见 CI artifact 的 original-summary。
 
-- Stage 0：审计与基线已记录，见[实施计划](IMPLEMENTATION_PLAN.md)。默认沙箱不允许 socket 的错误在允许 loopback 的执行上下文中重跑排除；首次根目录错误工作目录也已纠正。
-- P0：原生 Ollama Schema Provider 和独立真实 smoke 可运行。T1–T3 验证原文、3号设备、上周、否定、自我修正和未解析时间；T4 拒绝非法 JSON、缺字段、类型、未知字段和枚举；T5 拒绝设备/时间/动作/否定冲突。Mock HTTP 不计为真实 Qwen3。
-- P1：三类 Mock Skill、生命周期、优先级/FIFO、版本、幂等、审批与运动拒绝；SQLite 状态/事件/outbox 原子提交。独立任务运行不需要模型。
-- P2：断网本地继续、远端等待，恢复重调度；ACK 丢失重投去重；幂等恢复、非幂等人工复核；真正执行期间进程 SIGKILL；SQLite 写失败、容量保护与审计保留。
-- P3：trace、阶段计时、P50/P95/P99、均值、吞吐、失败/重试/利用率/超时/积压及真实 SVG 图。
-- P4：Collector、背压、批写、JSONL 新文件导出、延迟同步、保护审计的保留策略、SHA256 篡改检测。
-- 集成 A：文本 → v3 Mock 或 v2 → 原校验 → Mock 映射 → OS → Skill → 事务事件 → 证据 → 延迟同步。B：离线/恢复。C：执行进程崩溃/重启。
+当前代理允许读取 Actions 状态 API，但完整日志下载的 results-receiver 域名仍受网络策略拦截；不能声称已下载原始云端日志。已保存精确域名的环境配置草稿，状态与 Job 成功证据不依赖日志下载。最终提交的 Actions 状态以 PR Checks 页面为准。
 
-## 安全证据与限制
+## 未完成的外部前置条件
 
-新增测试证明注册的非 Mock scope 或 motion 风险被拒绝，高风险未审批不领取，未知 Skill 不受理，模型授权字段为 true 被适配层拒绝。审批认证失败同样记录，网络恢复不能自动获得授权。执行中取消持久化且子进程回收，重试有预算；幂等键并发重提只创建一个任务。所有业务输出需 is_mock=true 和固定 Mock 来源。
+Git 历史和可达对象中没有两个原始历史文件，详见[历史资产与恢复路径](HISTORICAL_TEST_ASSETS.md)和[搜索记录](experiments/followup-v1/history-search.json)。严格回归仍有这 6 项未完成验证，需要原始授权归档，不能伪造。
 
-这是可信本地代码和本地操作员边界，不是恶意插件安全沙箱、生产身份服务或整机认证。未完成：真实 Qwen3 推理与独立人工金标准、真实 ASR 到 OS 的音频入口、跨 Skill DAG 执行、多 Worker、真实云端同步、真实台账、Xavier 部署与真机控制。内存缓冲未提交证据不承诺耐崩溃，容量限制是 admission 保护而非物理磁盘配额，投递为 at-least-once。
-
-后续先补真实模型与人工标注验收，并恢复原始历史测试资产；再在 Mock 环境扩展任务分解和外部身份/审批服务。未经独立设计与安全验收，不接硬件。
+真实 Qwen3 效果、人工 Gold、真实 ASR 到 OS、真实台账/巡检库、真机和生产认证均未验收。本轮不增加硬件权限，不声称绝对 Exactly-once 或生产部署成功。

@@ -49,3 +49,10 @@ class EvaluationLayerTests(unittest.TestCase):
         report=summarize([])
         self.assertIsNone(report['json_parse_success_rate']);self.assertIsNone(report['schema_pass_rate'])
         self.assertIsNone(report['evidence_constraint_pass_rate']);self.assertIsNone(report['human_gold_accuracy'])
+
+    def test_numeric_units_independently_checked(self):
+        r=SemanticEngine(provider=MockProvider()).analyze('3号断路器电流12.5A，不是125A',mode='v3_llm')
+        evidence=r['model_candidate'];wrong=deepcopy(evidence)
+        wrong['metric_entities'][0]['normalized_unit']='kV'
+        self.assertEqual(schema_errors(wrong),[])
+        self.assertFalse(check_evidence(wrong,evidence)['passed'])
