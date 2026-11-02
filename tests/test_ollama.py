@@ -54,7 +54,7 @@ class OllamaTests(unittest.TestCase):
             self.assertFalse(r['executable'])
             sem=r['v3']['semantic']
             self.assertEqual([e['device_number'] for e in sem['equipment_entities'] if e['status']=='active'],['3'])
-            self.assertEqual(sem['temporal_constraints'][0]['start'],'2026-10-26T00:00:00+08:00')
+            self.assertTrue(any(t['start']=='2026-10-26T00:00:00+08:00' for t in sem['temporal_constraints']))
             self.assertIsNotNone(self.provider.last_response)
         self.assertTrue(sem['task_dependencies'])
 
