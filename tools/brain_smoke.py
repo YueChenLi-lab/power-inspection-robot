@@ -87,10 +87,16 @@ def main():
     config = ProviderConfig(provider="mock") if a.mock else ProviderConfig.from_environment()
     if not a.mock and (config.provider != "ollama" or not config.enabled):
         p.error("真实smoke要求BRAIN_V3_PROVIDER=ollama且BRAIN_V3_ENABLE_LLM=true")
+    if a.output.exists():
+        p.error('报告已存在，请选择新输出路径；不会覆盖原始Smoke记录')
     rows = evaluate(config)
     a.output.parent.mkdir(parents=True, exist_ok=True)
     # Explicit private diagnostics export; caller must choose a non-public path.
-    a.output.write_text(json.dumps({"mock_http": False, "summary": summarize(rows), "rows": rows}, ensure_ascii=False, indent=2))
+    with a.output.open("x",encoding="utf-8") as report:
+        json.dump({"mock_http":False,"summary":summarize(rows),"rows":rows},report,ensure_ascii=False,indent=2)
+    from evaluation.diagnosis import diagnose_report
+    diagnosis=diagnose_report({"rows":rows})
+    print(json.dumps({"failure_stages":diagnosis["stages"],"sample_diagnostics":diagnosis["rows"]},ensure_ascii=False))
     print(json.dumps({"samples": len(rows), "accepted": sum(r["result"]["status"] == "validated_candidate" for r in rows),
                       "real_model_requested": not a.mock}))
     return 0 if all(r["result"]["status"] == "validated_candidate" for r in rows) else 1
