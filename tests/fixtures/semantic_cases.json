@@ -1,0 +1,10 @@
+{
+  "dataset_role": "synthetic_development_contract_NOT_human_gold",
+  "human_review": {"confirmed": false, "annotator": null},
+  "reference_time": "2026-11-02T12:00:00+08:00",
+  "cases": [
+    {"id":"T1","text":"查询3号断路器的上周告警。","expected":{"active_numbers":["3"],"negated_numbers":[],"week_start":"2026-10-26T00:00:00+08:00"}},
+    {"id":"T2","text":"不是2号断路器，是3号断路器。查询上周告警，但不要启动机器人。","expected":{"active_numbers":["3"],"negated_numbers":["2"],"week_start":"2026-10-26T00:00:00+08:00","requires_negation":true,"requires_correction":true}},
+    {"id":"T3","text":"查询3号断路器上周的红外测温记录，比较最近两次测温结果。","expected":{"active_numbers":["3"],"negated_numbers":[],"week_start":"2026-10-26T00:00:00+08:00","unresolved_target":true}}
+  ]
+}

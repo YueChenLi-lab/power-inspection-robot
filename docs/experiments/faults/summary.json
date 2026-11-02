@@ -1,0 +1,212 @@
+[
+  {
+    "experiment": "E1",
+    "conditions": {
+      "latency": 0.02,
+      "timeout": 0.01,
+      "seed": 11
+    },
+    "steps": [
+      "Register simulated remote-dependent skill",
+      "Inject latency above timeout",
+      "Run worker"
+    ],
+    "expected": "WAITING_NETWORK",
+    "actual": "WAITING_NETWORK",
+    "passed": true,
+    "raw_logs": [
+      "events.jsonl",
+      "network.jsonl"
+    ],
+    "is_mock": true
+  },
+  {
+    "experiment": "E2",
+    "conditions": {
+      "online": false
+    },
+    "steps": [
+      "Disconnect simulated network",
+      "Submit local and remote tasks",
+      "Drain available work"
+    ],
+    "expected": {
+      "local": "SUCCEEDED",
+      "cloud": "WAITING_NETWORK"
+    },
+    "actual": {
+      "local": "SUCCEEDED",
+      "cloud": "WAITING_NETWORK"
+    },
+    "passed": true,
+    "raw_logs": [
+      "events.jsonl",
+      "network.jsonl"
+    ],
+    "is_mock": true
+  },
+  {
+    "experiment": "E3",
+    "conditions": {
+      "disconnect_then_recover": true,
+      "ack_loss": true
+    },
+    "steps": [
+      "Complete local task offline",
+      "Fail sync",
+      "Restore network with ACK loss",
+      "Retry sync with same event IDs"
+    ],
+    "expected": "No loss; pending=0; receiver count equals local event count after ACK-loss retry",
+    "actual": {
+      "offline": {
+        "sent": 0,
+        "failed": 5,
+        "pending": 5
+      },
+      "lost_ack": {
+        "sent": 0,
+        "failed": 5,
+        "pending": 5
+      },
+      "recovered": {
+        "sent": 5,
+        "failed": 0,
+        "pending": 0
+      },
+      "receiver_unique_events": 5
+    },
+    "passed": true,
+    "raw_logs": [
+      "events.jsonl",
+      "network.jsonl"
+    ],
+    "is_mock": true
+  },
+  {
+    "experiment": "E4",
+    "conditions": {
+      "duplicate_submissions": 2
+    },
+    "steps": [
+      "Submit same key twice",
+      "Complete",
+      "Resubmit completed key"
+    ],
+    "expected": {
+      "same_id": true,
+      "missions": 1,
+      "executions": 1
+    },
+    "actual": {
+      "same_id": true,
+      "missions": 1,
+      "executions": 1
+    },
+    "passed": true,
+    "raw_logs": [
+      "events.jsonl",
+      "network.jsonl"
+    ],
+    "is_mock": true
+  },
+  {
+    "experiment": "E5",
+    "conditions": {
+      "process_exit": "worker object discarded after durable claim"
+    },
+    "steps": [
+      "Persist RUNNING and execution-start",
+      "Exit unexpectedly",
+      "Reopen database",
+      "Explicit recovery under lock",
+      "Drain"
+    ],
+    "expected": {
+      "recovered": 1,
+      "status": "SUCCEEDED",
+      "execution_statuses": [
+        "UNKNOWN",
+        "SUCCEEDED"
+      ]
+    },
+    "actual": {
+      "recovered": 1,
+      "status": "SUCCEEDED",
+      "execution_statuses": [
+        "UNKNOWN",
+        "SUCCEEDED"
+      ]
+    },
+    "passed": true,
+    "raw_logs": [
+      "events.jsonl",
+      "network.jsonl"
+    ],
+    "is_mock": true
+  },
+  {
+    "experiment": "E6",
+    "conditions": {
+      "process_exit": "SIGKILL inside mock Skill"
+    },
+    "steps": [
+      "Persist RUNNING and execution-start",
+      "Exit unexpectedly",
+      "Reopen database",
+      "Explicit recovery under lock",
+      "Drain"
+    ],
+    "expected": {
+      "recovered": 1,
+      "status": "SUCCEEDED",
+      "execution_statuses": [
+        "UNKNOWN",
+        "SUCCEEDED"
+      ]
+    },
+    "actual": {
+      "recovered": 1,
+      "status": "SUCCEEDED",
+      "execution_statuses": [
+        "UNKNOWN",
+        "SUCCEEDED"
+      ]
+    },
+    "passed": true,
+    "raw_logs": [
+      "events.jsonl",
+      "network.jsonl"
+    ],
+    "is_mock": true
+  },
+  {
+    "experiment": "E7",
+    "conditions": {
+      "max_missions": 1,
+      "policy": "admission cap; protect audit, not fill disk"
+    },
+    "steps": [
+      "Set deterministic mission capacity",
+      "Complete first mission",
+      "Attempt second admission",
+      "Verify evidence retained"
+    ],
+    "expected": {
+      "blocked": true,
+      "audit_retained": true,
+      "missions": 1
+    },
+    "actual": {
+      "blocked": true,
+      "audit_retained": true,
+      "missions": 1
+    },
+    "passed": true,
+    "raw_logs": [
+      "events.jsonl",
+      "network.jsonl"
+    ],
+    "is_mock": true
+  }
+]

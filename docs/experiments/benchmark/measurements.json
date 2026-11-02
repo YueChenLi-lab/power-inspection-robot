@@ -1,0 +1,814 @@
+{
+  "model_comparison": [
+    {
+      "provider": "mock",
+      "is_real_llm": false,
+      "summary": {
+        "samples": 3,
+        "dataset_role": "synthetic_development_contract_NOT_human_gold",
+        "human_gold_accuracy": null,
+        "json_parse_success_rate": 1.0,
+        "schema_pass_rate": 1.0,
+        "validator_acceptance_rate": 1.0,
+        "synthetic_key_fields_accuracy": 1.0,
+        "fallback_count": 0,
+        "evidence_consistency_acceptance_rate": 1.0,
+        "real_model_successes": 0,
+        "latency_seconds": {
+          "count": 3,
+          "mean": 0.0022017883334228827,
+          "p50": 0.002319869000075414,
+          "p95": 0.002712657999836665,
+          "p99": 0.002712657999836665
+        }
+      }
+    },
+    {
+      "provider": "rules",
+      "is_real_llm": false,
+      "summary": {
+        "samples": 3,
+        "dataset_role": "synthetic_development_contract_NOT_human_gold",
+        "human_gold_accuracy": null,
+        "json_parse_success_rate": 0.0,
+        "schema_pass_rate": 0.0,
+        "validator_acceptance_rate": 0.0,
+        "synthetic_key_fields_accuracy": 0.0,
+        "fallback_count": 0,
+        "evidence_consistency_acceptance_rate": 0.0,
+        "real_model_successes": 0,
+        "latency_seconds": {
+          "count": 3,
+          "mean": 0.0008448736666650802,
+          "p50": 0.000841762000163726,
+          "p95": 0.0009317469998677552,
+          "p99": 0.0009317469998677552
+        }
+      }
+    }
+  ],
+  "real_model_comparison": null,
+  "is_mock": true,
+  "real_model_tested": false,
+  "asr_tested": false,
+  "runs": [
+    {
+      "concurrency": 1,
+      "workers": 1,
+      "network_latency": 0,
+      "n": 12,
+      "before_recovery": {
+        "SUCCEEDED": 12
+      },
+      "after_recovery": {
+        "SUCCEEDED": 12
+      },
+      "metrics": {
+        "mission_latency_seconds": {
+          "count": 12,
+          "mean": 0.013458967208862305,
+          "p50": 0.013245344161987305,
+          "p95": 0.020226716995239258,
+          "p99": 0.020226716995239258
+        },
+        "queue_seconds": {
+          "count": 12,
+          "mean": 0.010960638523101807,
+          "p50": 0.010816574096679688,
+          "p95": 0.018214702606201172,
+          "p99": 0.018214702606201172
+        },
+        "skill_seconds": {
+          "count": 12,
+          "mean": 0.0018752170833901498,
+          "p50": 0.0014095329997871886,
+          "p95": 0.006016652999733196,
+          "p99": 0.006016652999733196
+        },
+        "storage_read_seconds": {
+          "count": 62,
+          "mean": 6.031166129750707e-05,
+          "p50": 5.532300019694958e-05,
+          "p95": 0.00014244399972085375,
+          "p99": 0.00031778700031281915
+        },
+        "storage_write_seconds": {
+          "count": 37,
+          "mean": 0.00039591621628681643,
+          "p50": 0.00022115100000519305,
+          "p95": 0.001560324999900331,
+          "p99": 0.003225466999992932
+        },
+        "network_seconds": {
+          "count": 12,
+          "mean": 7.91309999688868e-05,
+          "p50": 8.041999990382465e-05,
+          "p95": 9.586399983163574e-05,
+          "p99": 9.586399983163574e-05
+        },
+        "throughput_per_second": 346.8238364396126,
+        "failed_tasks": 0,
+        "terminal_tasks": 12,
+        "failure_rate": 0.0,
+        "retry_count": 0,
+        "worker_utilization": 0.6503699830184726,
+        "network_timeout_rate": 0.0,
+        "outbox_backlog": 60,
+        "unconnected_stages": {
+          "asr": null,
+          "real_qwen3": null
+        },
+        "observation_seconds": 0.03459969799996543
+      }
+    },
+    {
+      "concurrency": 1,
+      "workers": 1,
+      "network_latency": 0.005,
+      "n": 12,
+      "before_recovery": {
+        "SUCCEEDED": 12
+      },
+      "after_recovery": {
+        "SUCCEEDED": 12
+      },
+      "metrics": {
+        "mission_latency_seconds": {
+          "count": 12,
+          "mean": 0.03585592905680338,
+          "p50": 0.03126978874206543,
+          "p95": 0.06579160690307617,
+          "p99": 0.06579160690307617
+        },
+        "queue_seconds": {
+          "count": 12,
+          "mean": 0.03372100989023844,
+          "p50": 0.029192686080932617,
+          "p95": 0.06394410133361816,
+          "p99": 0.06394410133361816
+        },
+        "skill_seconds": {
+          "count": 12,
+          "mean": 0.0016294277500037424,
+          "p50": 0.0014985669999987294,
+          "p95": 0.0019469889998617873,
+          "p99": 0.0019469889998617873
+        },
+        "storage_read_seconds": {
+          "count": 61,
+          "mean": 5.1539557418556024e-05,
+          "p50": 5.399100018621539e-05,
+          "p95": 0.00012178199995105388,
+          "p99": 0.00015282899994417676
+        },
+        "storage_write_seconds": {
+          "count": 37,
+          "mean": 0.0019080440270536692,
+          "p50": 0.0002952529998765385,
+          "p95": 0.005380254000101559,
+          "p99": 0.0054190670002753905
+        },
+        "network_seconds": {
+          "count": 12,
+          "mean": 0.005086010750005698,
+          "p50": 0.005086237999876175,
+          "p95": 0.005102002000057837,
+          "p99": 0.005102002000057837
+        },
+        "throughput_per_second": 129.62755518873945,
+        "failed_tasks": 0,
+        "terminal_tasks": 12,
+        "failure_rate": 0.0,
+        "retry_count": 0,
+        "worker_utilization": 0.21121873558967366,
+        "network_timeout_rate": 0.0,
+        "outbox_backlog": 60,
+        "unconnected_stages": {
+          "asr": null,
+          "real_qwen3": null
+        },
+        "observation_seconds": 0.09257290999994439
+      }
+    },
+    {
+      "concurrency": 1,
+      "workers": 1,
+      "network_latency": 0.02,
+      "n": 12,
+      "before_recovery": {
+        "WAITING_NETWORK": 12
+      },
+      "after_recovery": {
+        "SUCCEEDED": 12
+      },
+      "metrics": {
+        "mission_latency_seconds": {
+          "count": 12,
+          "mean": 0.6855189998944601,
+          "p50": 0.725508451461792,
+          "p95": 0.9350285530090332,
+          "p99": 0.9350285530090332
+        },
+        "queue_seconds": {
+          "count": 12,
+          "mean": 0.012098729610443115,
+          "p50": 0.010993242263793945,
+          "p95": 0.022615909576416016,
+          "p99": 0.022615909576416016
+        },
+        "skill_seconds": {
+          "count": 12,
+          "mean": 0.001388933333297852,
+          "p50": 0.0012561240000650287,
+          "p95": 0.0021125030002622225,
+          "p99": 0.0021125030002622225
+        },
+        "storage_read_seconds": {
+          "count": 53,
+          "mean": 6.284496231393928e-05,
+          "p50": 5.1156999688828364e-05,
+          "p95": 0.00013690500009033713,
+          "p99": 0.0006603510000786628
+        },
+        "storage_write_seconds": {
+          "count": 49,
+          "mean": 0.019071617020425927,
+          "p50": 0.00034097100024155225,
+          "p95": 0.11363333100007367,
+          "p99": 0.1239259460003268
+        },
+        "network_seconds": {
+          "count": 101,
+          "mean": 0.008920759742576962,
+          "p50": 0.010100628000145662,
+          "p95": 0.010145935000309692,
+          "p99": 0.010269730999880267
+        },
+        "throughput_per_second": 12.536865986474737,
+        "failed_tasks": 0,
+        "terminal_tasks": 12,
+        "failure_rate": 0.0,
+        "retry_count": 0,
+        "worker_utilization": 0.017412871063702817,
+        "network_timeout_rate": 0.8811881188118812,
+        "outbox_backlog": 238,
+        "unconnected_stages": {
+          "asr": null,
+          "real_qwen3": null
+        },
+        "observation_seconds": 0.9571770180000385
+      }
+    },
+    {
+      "concurrency": 4,
+      "workers": 1,
+      "network_latency": 0,
+      "n": 12,
+      "before_recovery": {
+        "SUCCEEDED": 12
+      },
+      "after_recovery": {
+        "SUCCEEDED": 12
+      },
+      "metrics": {
+        "mission_latency_seconds": {
+          "count": 12,
+          "mean": 0.016554594039916992,
+          "p50": 0.016988515853881836,
+          "p95": 0.024823427200317383,
+          "p99": 0.024823427200317383
+        },
+        "queue_seconds": {
+          "count": 12,
+          "mean": 0.01441033681233724,
+          "p50": 0.015002727508544922,
+          "p95": 0.023131370544433594,
+          "p99": 0.023131370544433594
+        },
+        "skill_seconds": {
+          "count": 12,
+          "mean": 0.0017101921667214508,
+          "p50": 0.0014303650000329071,
+          "p95": 0.003912097000011272,
+          "p99": 0.003912097000011272
+        },
+        "storage_read_seconds": {
+          "count": 64,
+          "mean": 6.173562498190677e-05,
+          "p50": 5.572300005951547e-05,
+          "p95": 0.0001410720001331356,
+          "p99": 0.00026656999989427277
+        },
+        "storage_write_seconds": {
+          "count": 37,
+          "mean": 0.0002703100811084221,
+          "p50": 0.00024718100030440837,
+          "p95": 0.0005344619999050337,
+          "p99": 0.001048302000071999
+        },
+        "network_seconds": {
+          "count": 12,
+          "mean": 8.762041655548576e-05,
+          "p50": 8.210299984057201e-05,
+          "p95": 0.0001232249996974133,
+          "p99": 0.0001232249996974133
+        },
+        "throughput_per_second": 346.6251864167052,
+        "failed_tasks": 0,
+        "terminal_tasks": 12,
+        "failure_rate": 0.0,
+        "retry_count": 0,
+        "worker_utilization": 0.5927956785982118,
+        "network_timeout_rate": 0.0,
+        "outbox_backlog": 60,
+        "unconnected_stages": {
+          "asr": null,
+          "real_qwen3": null
+        },
+        "observation_seconds": 0.03461952699990434
+      }
+    },
+    {
+      "concurrency": 4,
+      "workers": 1,
+      "network_latency": 0.005,
+      "n": 12,
+      "before_recovery": {
+        "SUCCEEDED": 12
+      },
+      "after_recovery": {
+        "SUCCEEDED": 12
+      },
+      "metrics": {
+        "mission_latency_seconds": {
+          "count": 12,
+          "mean": 0.04426004489262899,
+          "p50": 0.039746999740600586,
+          "p95": 0.0815582275390625,
+          "p99": 0.0815582275390625
+        },
+        "queue_seconds": {
+          "count": 12,
+          "mean": 0.04194899400075277,
+          "p50": 0.037689208984375,
+          "p95": 0.07973670959472656,
+          "p99": 0.07973670959472656
+        },
+        "skill_seconds": {
+          "count": 12,
+          "mean": 0.0017287261666372917,
+          "p50": 0.0015532399997937318,
+          "p95": 0.0034331390002080298,
+          "p99": 0.0034331390002080298
+        },
+        "storage_read_seconds": {
+          "count": 63,
+          "mean": 6.216182537317518e-05,
+          "p50": 5.424100027084933e-05,
+          "p95": 0.0001491940001869807,
+          "p99": 0.00020631899997169967
+        },
+        "storage_write_seconds": {
+          "count": 37,
+          "mean": 0.0019136271621637453,
+          "p50": 0.0002878109999073786,
+          "p95": 0.005360498999834817,
+          "p99": 0.005454358999941178
+        },
+        "network_seconds": {
+          "count": 12,
+          "mean": 0.005084865999947397,
+          "p50": 0.005082882999886351,
+          "p95": 0.005095030999655137,
+          "p99": 0.005095030999655137
+        },
+        "throughput_per_second": 125.26770752989756,
+        "failed_tasks": 0,
+        "terminal_tasks": 12,
+        "failure_rate": 0.0,
+        "retry_count": 0,
+        "worker_utilization": 0.21655356384160124,
+        "network_timeout_rate": 0.0,
+        "outbox_backlog": 60,
+        "unconnected_stages": {
+          "asr": null,
+          "real_qwen3": null
+        },
+        "observation_seconds": 0.09579484000005323
+      }
+    },
+    {
+      "concurrency": 4,
+      "workers": 1,
+      "network_latency": 0.02,
+      "n": 12,
+      "before_recovery": {
+        "WAITING_NETWORK": 12
+      },
+      "after_recovery": {
+        "SUCCEEDED": 12
+      },
+      "metrics": {
+        "mission_latency_seconds": {
+          "count": 12,
+          "mean": 0.20330659548441568,
+          "p50": 0.21693038940429688,
+          "p95": 0.25516843795776367,
+          "p99": 0.25516843795776367
+        },
+        "queue_seconds": {
+          "count": 12,
+          "mean": 0.014724493026733398,
+          "p50": 0.013427019119262695,
+          "p95": 0.02811884880065918,
+          "p99": 0.02811884880065918
+        },
+        "skill_seconds": {
+          "count": 12,
+          "mean": 0.0019484995000690712,
+          "p50": 0.0018504549998397124,
+          "p95": 0.00266766100003224,
+          "p99": 0.00266766100003224
+        },
+        "storage_read_seconds": {
+          "count": 53,
+          "mean": 6.833054716617828e-05,
+          "p50": 5.1297000027261674e-05,
+          "p95": 0.000264115999925707,
+          "p99": 0.0003244869999434741
+        },
+        "storage_write_seconds": {
+          "count": 39,
+          "mean": 0.006379496564046023,
+          "p50": 0.0002563240000199585,
+          "p95": 0.07266297500018482,
+          "p99": 0.12454826399971353
+        },
+        "network_seconds": {
+          "count": 35,
+          "mean": 0.006665330628610328,
+          "p50": 0.010089730999879976,
+          "p95": 0.010169789999963541,
+          "p99": 0.010187085999859846
+        },
+        "throughput_per_second": 43.10031282104022,
+        "failed_tasks": 0,
+        "terminal_tasks": 12,
+        "failure_rate": 0.0,
+        "retry_count": 0,
+        "worker_utilization": 0.08398093798461745,
+        "network_timeout_rate": 0.6571428571428571,
+        "outbox_backlog": 106,
+        "unconnected_stages": {
+          "asr": null,
+          "real_qwen3": null
+        },
+        "observation_seconds": 0.27842025299969464
+      }
+    },
+    {
+      "concurrency": 8,
+      "workers": 1,
+      "network_latency": 0,
+      "n": 12,
+      "before_recovery": {
+        "SUCCEEDED": 12
+      },
+      "after_recovery": {
+        "SUCCEEDED": 12
+      },
+      "metrics": {
+        "mission_latency_seconds": {
+          "count": 12,
+          "mean": 0.0195273756980896,
+          "p50": 0.019060850143432617,
+          "p95": 0.03143644332885742,
+          "p99": 0.03143644332885742
+        },
+        "queue_seconds": {
+          "count": 12,
+          "mean": 0.01702229181925456,
+          "p50": 0.016523361206054688,
+          "p95": 0.029184579849243164,
+          "p99": 0.029184579849243164
+        },
+        "skill_seconds": {
+          "count": 12,
+          "mean": 0.001960350666687797,
+          "p50": 0.001906668999708927,
+          "p95": 0.003370069000084186,
+          "p99": 0.003370069000084186
+        },
+        "storage_read_seconds": {
+          "count": 64,
+          "mean": 7.700185936698745e-05,
+          "p50": 5.749599995397148e-05,
+          "p95": 0.00018057999977827421,
+          "p99": 0.0003569999998944695
+        },
+        "storage_write_seconds": {
+          "count": 37,
+          "mean": 0.0003536044324096725,
+          "p50": 0.0002594289999251487,
+          "p95": 0.0015116270001271914,
+          "p99": 0.0020019119997414236
+        },
+        "network_seconds": {
+          "count": 12,
+          "mean": 8.682933321324526e-05,
+          "p50": 7.788699986122083e-05,
+          "p95": 0.00013138699978298973,
+          "p99": 0.00013138699978298973
+        },
+        "throughput_per_second": 282.14078458416253,
+        "failed_tasks": 0,
+        "terminal_tasks": 12,
+        "failure_rate": 0.0,
+        "retry_count": 0,
+        "worker_utilization": 0.5530948751593812,
+        "network_timeout_rate": 0.0,
+        "outbox_backlog": 60,
+        "unconnected_stages": {
+          "asr": null,
+          "real_qwen3": null
+        },
+        "observation_seconds": 0.04253195799992682
+      }
+    },
+    {
+      "concurrency": 8,
+      "workers": 1,
+      "network_latency": 0.005,
+      "n": 12,
+      "before_recovery": {
+        "SUCCEEDED": 12
+      },
+      "after_recovery": {
+        "SUCCEEDED": 12
+      },
+      "metrics": {
+        "mission_latency_seconds": {
+          "count": 12,
+          "mean": 0.055381973584493004,
+          "p50": 0.0508880615234375,
+          "p95": 0.10133981704711914,
+          "p99": 0.10133981704711914
+        },
+        "queue_seconds": {
+          "count": 12,
+          "mean": 0.05226653814315796,
+          "p50": 0.04821181297302246,
+          "p95": 0.09579133987426758,
+          "p99": 0.09579133987426758
+        },
+        "skill_seconds": {
+          "count": 12,
+          "mean": 0.002489754499947594,
+          "p50": 0.0022780559997954697,
+          "p95": 0.00496548699993582,
+          "p99": 0.00496548699993582
+        },
+        "storage_read_seconds": {
+          "count": 64,
+          "mean": 6.68699687551566e-05,
+          "p50": 5.6383999890385894e-05,
+          "p95": 0.00014746099986950867,
+          "p99": 0.0003954029998567421
+        },
+        "storage_write_seconds": {
+          "count": 37,
+          "mean": 0.0019666203243104974,
+          "p50": 0.00029407100009848364,
+          "p95": 0.005509411999810254,
+          "p99": 0.006318450999970082
+        },
+        "network_seconds": {
+          "count": 12,
+          "mean": 0.005093560416715566,
+          "p50": 0.0050860170003943495,
+          "p95": 0.0051229629998488235,
+          "p99": 0.0051229629998488235
+        },
+        "throughput_per_second": 109.16147603091923,
+        "failed_tasks": 0,
+        "terminal_tasks": 12,
+        "failure_rate": 0.0,
+        "retry_count": 0,
+        "worker_utilization": 0.2717852761689026,
+        "network_timeout_rate": 0.0,
+        "outbox_backlog": 60,
+        "unconnected_stages": {
+          "asr": null,
+          "real_qwen3": null
+        },
+        "observation_seconds": 0.10992889099998138
+      }
+    },
+    {
+      "concurrency": 8,
+      "workers": 1,
+      "network_latency": 0.02,
+      "n": 12,
+      "before_recovery": {
+        "WAITING_NETWORK": 12
+      },
+      "after_recovery": {
+        "SUCCEEDED": 12
+      },
+      "metrics": {
+        "mission_latency_seconds": {
+          "count": 12,
+          "mean": 0.32394327720006305,
+          "p50": 0.3454747200012207,
+          "p95": 0.3824474811553955,
+          "p99": 0.3824474811553955
+        },
+        "queue_seconds": {
+          "count": 12,
+          "mean": 0.01598570744196574,
+          "p50": 0.014368295669555664,
+          "p95": 0.030704975128173828,
+          "p99": 0.030704975128173828
+        },
+        "skill_seconds": {
+          "count": 12,
+          "mean": 0.0021574229166769023,
+          "p50": 0.0021283209998728125,
+          "p95": 0.0031526379998467746,
+          "p99": 0.0031526379998467746
+        },
+        "storage_read_seconds": {
+          "count": 53,
+          "mean": 6.089981133180049e-05,
+          "p50": 5.1016999805142405e-05,
+          "p95": 0.00014137200014374685,
+          "p99": 0.00035950900019088294
+        },
+        "storage_write_seconds": {
+          "count": 40,
+          "mean": 0.009346937724978943,
+          "p50": 0.00025462199982939637,
+          "p95": 0.08230023100031758,
+          "p99": 0.12373693799963803
+        },
+        "network_seconds": {
+          "count": 47,
+          "mean": 0.007542425957465039,
+          "p50": 0.010084863999964,
+          "p95": 0.010133456999938062,
+          "p99": 0.010311232999811182
+        },
+        "throughput_per_second": 29.40155955429188,
+        "failed_tasks": 0,
+        "terminal_tasks": 12,
+        "failure_rate": 0.0,
+        "retry_count": 0,
+        "worker_utilization": 0.06343159836847002,
+        "network_timeout_rate": 0.7446808510638298,
+        "outbox_backlog": 130,
+        "unconnected_stages": {
+          "asr": null,
+          "real_qwen3": null
+        },
+        "observation_seconds": 0.40814161499974944
+      }
+    }
+  ],
+  "semantic_spans": [
+    {
+      "trace_id": "0e5ad83a2fcd48e3a42deaaca714d470",
+      "correlation_id": "6a6af1aafbf24b3595b6a747eaf07f96",
+      "mission_id": "fb801cc0b9904eae86e596b823e9ed29",
+      "skill_id": "mock.alarm_query",
+      "stage": "schema",
+      "seconds": 0.00031784700013304246,
+      "error": null
+    },
+    {
+      "trace_id": "0e5ad83a2fcd48e3a42deaaca714d470",
+      "correlation_id": "6a6af1aafbf24b3595b6a747eaf07f96",
+      "mission_id": "fb801cc0b9904eae86e596b823e9ed29",
+      "skill_id": "mock.alarm_query",
+      "stage": "evidence_semantic_validator",
+      "seconds": 0.0003712660000019241,
+      "error": null
+    },
+    {
+      "trace_id": "0e5ad83a2fcd48e3a42deaaca714d470",
+      "correlation_id": "6a6af1aafbf24b3595b6a747eaf07f96",
+      "mission_id": "fb801cc0b9904eae86e596b823e9ed29",
+      "skill_id": "mock.alarm_query",
+      "stage": "semantic_total",
+      "seconds": 0.008655238999836001,
+      "error": null
+    },
+    {
+      "trace_id": "e830b898592a4818a7c862501b7bb930",
+      "correlation_id": "12f8a936187e4a62b6cd2de91de26aa3",
+      "mission_id": "eafb385f7e43498586e77160c815f1ea",
+      "skill_id": "mock.alarm_query",
+      "stage": "schema",
+      "seconds": 0.00020785200013051508,
+      "error": null
+    },
+    {
+      "trace_id": "e830b898592a4818a7c862501b7bb930",
+      "correlation_id": "12f8a936187e4a62b6cd2de91de26aa3",
+      "mission_id": "eafb385f7e43498586e77160c815f1ea",
+      "skill_id": "mock.alarm_query",
+      "stage": "evidence_semantic_validator",
+      "seconds": 0.001359579000109079,
+      "error": null
+    },
+    {
+      "trace_id": "e830b898592a4818a7c862501b7bb930",
+      "correlation_id": "12f8a936187e4a62b6cd2de91de26aa3",
+      "mission_id": "eafb385f7e43498586e77160c815f1ea",
+      "skill_id": "mock.alarm_query",
+      "stage": "semantic_total",
+      "seconds": 0.0023893530001259933,
+      "error": null
+    },
+    {
+      "trace_id": "0432924605a54639977a3f5d262f6fae",
+      "correlation_id": "04052890aa4c420aab775af410c4c9d3",
+      "mission_id": "392a42f775c1472e8de8b345a14fca13",
+      "skill_id": "mock.alarm_query",
+      "stage": "schema",
+      "seconds": 0.00023540300026070327,
+      "error": null
+    },
+    {
+      "trace_id": "0432924605a54639977a3f5d262f6fae",
+      "correlation_id": "04052890aa4c420aab775af410c4c9d3",
+      "mission_id": "392a42f775c1472e8de8b345a14fca13",
+      "skill_id": "mock.alarm_query",
+      "stage": "evidence_semantic_validator",
+      "seconds": 0.0002357339999434771,
+      "error": null
+    },
+    {
+      "trace_id": "0432924605a54639977a3f5d262f6fae",
+      "correlation_id": "04052890aa4c420aab775af410c4c9d3",
+      "mission_id": "392a42f775c1472e8de8b345a14fca13",
+      "skill_id": "mock.alarm_query",
+      "stage": "semantic_total",
+      "seconds": 0.0012479010001698043,
+      "error": null
+    },
+    {
+      "trace_id": "1a9386fb8f7745a0ad25a04d79758108",
+      "correlation_id": "3b14be6bcb4f4a51957792bf8fa24389",
+      "mission_id": "97fad9a65ceb49cd96127a9d93131017",
+      "skill_id": "mock.alarm_query",
+      "stage": "schema",
+      "seconds": 0.00020740099989779992,
+      "error": null
+    },
+    {
+      "trace_id": "1a9386fb8f7745a0ad25a04d79758108",
+      "correlation_id": "3b14be6bcb4f4a51957792bf8fa24389",
+      "mission_id": "97fad9a65ceb49cd96127a9d93131017",
+      "skill_id": "mock.alarm_query",
+      "stage": "evidence_semantic_validator",
+      "seconds": 0.0002519979998396593,
+      "error": null
+    },
+    {
+      "trace_id": "1a9386fb8f7745a0ad25a04d79758108",
+      "correlation_id": "3b14be6bcb4f4a51957792bf8fa24389",
+      "mission_id": "97fad9a65ceb49cd96127a9d93131017",
+      "skill_id": "mock.alarm_query",
+      "stage": "semantic_total",
+      "seconds": 0.0013586370000666648,
+      "error": null
+    },
+    {
+      "trace_id": "eba9a47deccd4368810b0182ba0f761c",
+      "correlation_id": "7327a312ac5b4537b1bcc24e511c0bd9",
+      "mission_id": "c79b6200c07a4d86a11807c7c9e81ade",
+      "skill_id": "mock.alarm_query",
+      "stage": "schema",
+      "seconds": 0.00024189200030377833,
+      "error": null
+    },
+    {
+      "trace_id": "eba9a47deccd4368810b0182ba0f761c",
+      "correlation_id": "7327a312ac5b4537b1bcc24e511c0bd9",
+      "mission_id": "c79b6200c07a4d86a11807c7c9e81ade",
+      "skill_id": "mock.alarm_query",
+      "stage": "evidence_semantic_validator",
+      "seconds": 0.0004185779998806538,
+      "error": null
+    },
+    {
+      "trace_id": "eba9a47deccd4368810b0182ba0f761c",
+      "correlation_id": "7327a312ac5b4537b1bcc24e511c0bd9",
+      "mission_id": "c79b6200c07a4d86a11807c7c9e81ade",
+      "skill_id": "mock.alarm_query",
+      "stage": "semantic_total",
+      "seconds": 0.001434540999980527,
+      "error": null
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 上海电力大学大学生创新创业训练计划（大创）项目，面向电力设备巡检的移动机器人软件与系统工程实践。项目曾作为上海电力大学大创项目代表，在 **2026 年中国国际工业博览会（工博会）**进行现场展示。
 
-当前公开仓库以 [InspectionBrain](InspectionBrain/README.md) 语音与电力领域语义实验室为主。**理解查询意图不代表已接入真实业务系统，结构化任务草案不代表机器人可以执行任务。** InspectionOS 是下一阶段建设目标。
+当前公开仓库以 [InspectionBrain](InspectionBrain/README.md) 语音与电力领域语义实验室为主。**理解查询意图不代表已接入真实业务系统，结构化任务草案不代表机器人可以执行任务。** InspectionOS v0.1 已新增单机 Mock 任务内核；真实硬件任务系统仍是后续建设目标。
 
 ## 项目背景与应用场景
 
@@ -49,57 +49,43 @@
 
 据项目成员提供的信息，Qwen3 4B Instruct 已下载并通过 Ollama 命令行测试；**尚不能认定已完成 InspectionBrain v3 真实模型集成**。仍需验证模型输出能否通过现有 Schema 和 Validator，以及设备、数值、否定与条件关系是否保真。本项目没有训练专用电力大模型的成果声明。详见 [v3 技术说明](InspectionBrain/docs/V3.md)。
 
-### InspectionOS：下一阶段架构设计
+### InspectionOS：任务内核与后续设计
 
-规划 Mission Manager、Skill Registry、Scheduler、State Machine 和 Safety Supervisor，负责任务生命周期、调度、状态及独立安全监督。当前尚未完成，本次仅记录设计，不开发任务内核或接入硬件。
+已实现 Mission Manager、Skill Registry、Scheduler、State Machine 和 Safety Supervisor 的模拟版本，负责任务生命周期、调度、状态及独立安全监督。当前已实现独立的单机 Mock 任务内核，包含事务持久化、状态机、排队、审批、超时、恢复与三个模拟 Skill；尚未接入真实硬件。
 
 ## 系统总体架构
 
-下图为目标架构；节点文字与颜色共同表示状态，箭头不表示已经完成集成。文本输入可绕过 ASR；Provider 是可替换候选生成路径，不是所有查询都必须调用大模型。
+下图表示当前可运行的模拟链路。真实 ASR 仍为独立可选实验，真实 Ollama / Qwen3 推理尚未在本环境验收。
 
 ```mermaid
 flowchart TD
-    U[外部：用户语音 / 上位机输入] --> I[原型：麦克风与交互接口]
-    I --> A[已实现接口：SenseVoice 本地 ASR，需模型]
-    I --> T[已实现：原始文本证据 / 手动文本]
-    A --> T
-    T --> B[已实现：InspectionBrain 术语规范化、意图与实体]
-    B --> P[原型：可替换 LLM Provider，默认规则 / Mock]
-    P --> V[已实现原型校验：Schema / Validator]
-    V --> G[已实现：SafetyGuard，强制不可执行]
-    G --> D[原型输出：结构化任务草案]
-    D -.-> H[规划：独立安全监督与人工审批]
-    H -.-> M[规划：InspectionOS Mission Manager]
-    M -.-> S[规划：Scheduler / State Machine]
-    S -.-> R[规划：Skill Registry]
-    R -.-> K[规划：具体 Skill]
-    K -.-> X[规划：数据源 / 硬件适配器]
-    X -.-> E[外部：底盘、传感器、真实业务系统]
-    E -.-> F[规划：任务结果与巡检证据反馈]
-    F -.-> M
-    B --> Q[原型：Mock 查询 / 示例知识回答]
-    classDef implemented fill:#d9ead3,stroke:#38761d,color:#111;
-    classDef prototype fill:#fff2cc,stroke:#997300,color:#111;
-    classDef planned fill:#eeeeee,stroke:#666,stroke-dasharray:5 5,color:#111;
-    classDef external fill:#d9eaf7,stroke:#376890,color:#111;
-    class A,T,B,G implemented;
-    class I,P,V,D,Q prototype;
-    class H,M,S,R,K,X,F planned;
-    class U,E external;
+    T[文本 / 既有语音实验室] --> B[InspectionBrain v2 / v3]
+    B --> P[规则 / Mock / Ollama原生Schema Provider]
+    P --> V[Schema / Evidence Validator / SafetyGuard]
+    V --> D[不可执行任务草案]
+    D --> A[BrainAdapter：重新验证与Mock设备映射]
+    A --> M[InspectionOS Mission Manager / State Machine]
+    M --> S[Scheduler / Skill Registry / Safety Supervisor]
+    S --> W[单Worker / 可终止子进程]
+    W --> K[Mock告警 / 测温比较 / 复检建议]
+    K --> DB[(SQLite任务、事件、执行与证据)]
+    DB --> O[事务Outbox / 模拟网络 / Mock远端去重]
+    DB --> R[Recovery / Trace / Metrics / 数据管线]
+    HW[真实底盘、传感器、业务系统：未接入]
 ```
-
-现有 SafetyGuard 仅约束语义输出，不是整机安全认证或人工授权服务。规划中的执行安全监督必须独立于模型，不能将“校验通过”解释为允许运动。详见[总体架构](docs/ARCHITECTURE.md)。
 
 ## 软件模块划分
 
-| 模块 | 职责 | 边界 / 状态 |
+| 模块 | 职责 | 状态与边界 |
 |---|---|---|
-| 语音测试台与 ASR | 采集、上传、转写和对照展示 | 独立实验接口；本地模型需另行安装 |
-| InspectionBrain v2 | 术语、意图、实体、规则语义及示例知识 | 已有实现；不验证现场事实 |
-| InspectionBrain v3 | Provider 候选、Schema、证据校验、安全封装 | 独立原型；无运动执行权限 |
-| InspectionOS | 任务生命周期与 Skill 调度 | 规划中；不是 Brain 内的草案数据结构 |
-| Skill 与真实适配器 | 执行业务步骤、访问真实数据或硬件 | 后续建设；Mock 接口不等于真实接入 |
-| 数据与证据管理 | 原文、音频、来源、版本与分析记录 | 实验记录已有；整机证据闭环待建设 |
+| InspectionBrain v2 / v3 | 规则语义、模型候选、原文证据校验、不可执行草案 | 原有能力保留；新增 Ollama 原生接口通过 Mock HTTP，真实模型待验证 |
+| InspectionOS v0.1 | 任务、注册、审批、优先级 FIFO、截止时间和恢复 | 已实现单机 Mock 运行时，无真实设备权限 |
+| Mock Skills | 告警查询、测温与比较、复检建议 | 三个可运行模拟 Skill，明确标记数据来源 |
+| observability | trace、计时、指标、性能实验和 SVG 图 | 已实现本地模拟测量；ASR / 真实 Qwen3 指标未接入 |
+| data_pipeline | 有界缓冲、批写、SHA256、Outbox 同步、保留与容量保护 | 已实现轻量实验；真实云端与审计归档未接入 |
+| 真实适配器与控制 | 真实台账、现场数据和机器人动作 | 尚未建设，本轮未接硬件 |
+
+[当前系统架构](docs/SYSTEM_ARCHITECTURE.md) · [模块边界](docs/MODULE_BOUNDARIES.md) · [OS 设计](docs/INSPECTION_OS_DESIGN.md)
 
 ## 工博会现场问题与工程经验
 
@@ -122,10 +108,10 @@ flowchart TD
 | SenseVoice ASR | 已有本地识别接口和既有实验记录 | 源码及原技术文档；当前 checkout 不包含模型，不代表已部署 Xavier |
 | 电力术语规范化 | 已有规则实现 | 词库、规范化与原文保护代码 |
 | InspectionBrain v2 | 已有领域语义分析 | 规则与示例知识、Mock 数据 |
-| InspectionBrain v3 | 已有 Provider、Schema、Validator 原型 | 兼容客户端存在；真实模型效果待验证 |
+| InspectionBrain v3 | Provider、Schema、Validator 原型及 Ollama 原生接入 | Mock HTTP 验收通过；真实 Qwen3 效果待验证 |
 | Qwen3 4B Instruct | Ollama 命令行测试完成，真实项目接入待验证 | 项目成员提供的信息，非本仓库集成验收 |
-| Mission Manager / Skill Registry | 规划中 | 现有 mission.py 仅定义不可执行草案协议 |
-| InspectionOS | 尚未完成 | 无完整任务内核 |
+| Mission Manager / Skill Registry | 已有独立 Mock 内核实现 | 新模块位于 InspectionOS；原 mission.py 草案协议保留 |
+| InspectionOS | v0.1 单机 Mock 任务内核可运行 | 非真实硬件 OS、非分布式集群 |
 | 真实设备台账接入 | 待建设 | 当前为 Mock |
 | 真实巡检记录查询 | 待建设 | 当前为 Mock，现场记录展示不等于此仓库已接真实数据 |
 | 完整自主任务执行 | 未实现 | 公开语义链路不能执行机器人动作 |
@@ -133,11 +119,11 @@ flowchart TD
 ## 后续技术路线
 
 1. **Phase 1 · InspectionBrain v3**：接入真实文本模型，验证 Qwen3 结构化 JSON、Schema、原文证据、设备与数值关系、否定、自我修正和条件约束；记录拒绝、回退与实际耗时。
-2. **Phase 2 · InspectionOS v0.1**：使用 Python 建立独立任务内核，包含 Mission Manager、Skill Registry、Scheduler、State Machine、Safety Supervisor；先用模拟数据，不直接控制真实硬件。
-3. **Phase 3 · 模拟巡检任务系统**：开发告警查询、红外测温记录查询、历史测温比较、设备异常复检建议 Skill；模拟结果始终标识来源。
+2. **Phase 2 · InspectionOS v0.1**：已建立 Python 单机 Mock 任务内核，包含 Mission Manager、Skill Registry、Scheduler、State Machine、Safety Supervisor；后续继续扩展，不直接控制真实硬件。
+3. **Phase 3 · 模拟巡检任务系统**：已提供告警查询、红外测温与比较、复检建议三类 Mock Skill；后续完善复合任务分解，模拟结果始终标识来源。
 4. **Phase 4 · 硬件适配与可靠性**：逐步验证本地网络自治、控制接口适配、传感器接入、执行监控、故障恢复与人工接管。满足独立安全与现场验证条件后再讨论真机执行。
 
-以上均为后续路线，不代表现有能力。
+Phase 2–3 的 Mock 基础能力已在本轮实现；跨 Skill DAG、真实模型验收及 Phase 4 真实硬件接入仍属后续路线。
 
 ## 快速开始
 
@@ -157,9 +143,35 @@ python3 InspectionBrain/run_voice_lab.py --asr none --semantic-provider mock
 
 测试台仅监听本地回环地址，Ctrl+C 停止；此模式不执行真实语音识别。SenseVoice 安装、模型与音频验证要求见[语音实验说明](InspectionBrain/docs/VOICE_LAB.md)及[第二轮说明](InspectionBrain/docs/ROUND2.md)。不要把原文档中的历史机器路径当作当前部署路径。
 
+## 运行新增任务系统与测试
+
+Python >=3.10，Linux；使用标准库，无需安装模型也能运行完整 Mock 链路：
+
+```bash
+python3 -m InspectionOS --db /tmp/inspection-demo/local.db --idempotency-key demo-alarm
+python3 -m InspectionOS --db /tmp/inspection-demo/offline.db --offline --provider mock
+PYTHONPATH=InspectionBrain:. python3 -m unittest discover -s tests -v
+python3 -m InspectionOS.simulation.scenario_runner --output /tmp/inspection-faults
+python3 -m observability.benchmark --output /tmp/inspection-bench --tasks 12
+```
+
+测试中的本地 HTTP 需要允许 loopback socket。原有 Python / Node 测试保持独立：
+
+```bash
+(cd InspectionBrain && python3 -m unittest discover -s tests -v)
+(cd InspectionBrain && node --test tests/*.mjs)
+```
+
+本 checkout 缺少原历史导出与一份记录，原 Python 基线存在 6 项缺文件错误及 4 项真实 ASR 跳过；未伪造文件或改原测试。新增套件与原基线结果分别见[验收记录](docs/VALIDATION_REPORT.md)。真实模型 Smoke Test 见[Qwen3 接入说明](docs/QWEN3_INTEGRATION.md)，当前环境未完成真实推理验收。
+
 ## 文档导航
 
-- [系统总体架构与模块合同](docs/ARCHITECTURE.md)
+- [当前系统架构](docs/SYSTEM_ARCHITECTURE.md) · [模块边界](docs/MODULE_BOUNDARIES.md)
+- [InspectionOS 设计](docs/INSPECTION_OS_DESIGN.md) · [状态机](docs/MISSION_STATE_MACHINE.md) · [Skill 合同](docs/SKILL_CONTRACTS.md)
+- [安全模型](docs/SAFETY_MODEL.md) · [弱网自治](docs/OFFLINE_AUTONOMY.md) · [故障实验](docs/FAULT_INJECTION.md)
+- [可观测性](docs/OBSERVABILITY.md) · [性能报告](docs/PERFORMANCE_REPORT.md) · [数据管线](docs/DATA_PIPELINE.md)
+- [Qwen3 接入](docs/QWEN3_INTEGRATION.md) · [验收记录](docs/VALIDATION_REPORT.md) · [架构决策](docs/ADR/0001-single-machine-runtime.md)
+- [初始总体架构规划（历史快照）](docs/ARCHITECTURE.md)
 - [2026 年工博会工程复盘](docs/EXHIBITION_REVIEW.md)
 - [InspectionBrain 原有说明](InspectionBrain/README.md)
 - [v3 使用说明](InspectionBrain/docs/V3.md) · [v3 设计](InspectionBrain/docs/V3_DESIGN.md) · [既有验证报告](InspectionBrain/docs/V3_VALIDATION.md)
@@ -170,7 +182,7 @@ python3 InspectionBrain/run_voice_lab.py --asr none --semantic-provider mock
 - InspectionBrain 的语义理解不等于现场事实验证；Mock 数据不是真实设备台账或巡检记录。
 - 设备编号必须经过真实台账核验；示例知识不能代替现场规程和授权。
 - LLM 输出不能直接作为硬件控制命令，也不应获得底盘控制权限。
-- InspectionOS 当前属于后续建设目标，安全审批必须独立于模型输出。
+- InspectionOS 当前仅为 Mock 任务运行时；安全审批独立于模型输出，真实硬件执行仍未接入。
 - 当前公开仓库中的任务草案不可直接执行机器人动作；Schema 通过不授予执行权。
 
 本文中的硬件及展会经历来自项目成员提供的信息；软件状态以当前仓库源码为依据。未补充的硬件参数、现场数据和模型效果不作推定。

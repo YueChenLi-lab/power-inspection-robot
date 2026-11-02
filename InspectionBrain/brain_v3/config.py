@@ -22,8 +22,8 @@ class ProviderConfig:
     allow_external_text: bool = False
 
     def __post_init__(self):
-        if self.provider not in ("rules", "mock", "openai_compatible"):
-            raise ValueError("provider须为rules、mock或openai_compatible")
+        if self.provider not in ("rules", "mock", "openai_compatible", "ollama"):
+            raise ValueError("provider须为rules、mock、openai_compatible或ollama")
         if type(self.enabled) is not bool or type(self.allow_external_text) is not bool:
             raise ValueError("模型开关须为布尔值")
         if not isinstance(self.model, str) or len(self.model) > 200 or not isinstance(self.api_key, str):
@@ -47,7 +47,7 @@ class ProviderConfig:
             parsed.port
         except ValueError as exc:
             raise ValueError("端口无效") from exc
-        return self.base_url.rstrip("/") + "/chat/completions"
+        return self.base_url.rstrip("/") + ("/api/chat" if self.provider == "ollama" else "/chat/completions")
 
     def public(self):
         # Do not expose credential-bearing headers or any private prompt.
@@ -66,14 +66,15 @@ class ProviderConfig:
             if raw not in ("true", "false", "1", "0"):
                 raise ValueError(name + "须为true/false")
             return raw in ("true", "1")
+        ollama = os.environ.get("BRAIN_V3_PROVIDER") == "ollama"
         return cls(provider=os.environ.get("BRAIN_V3_PROVIDER", "rules"),
                    enabled=flag("BRAIN_V3_ENABLE_LLM"),
-                   base_url=os.environ.get("BRAIN_V3_BASE_URL", "http://127.0.0.1:11434/v1"),
-                   model=os.environ.get("BRAIN_V3_MODEL", ""),
+                   base_url=os.environ.get("BRAIN_V3_BASE_URL", os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434") if ollama else "http://127.0.0.1:11434/v1"),
+                   model=os.environ.get("BRAIN_V3_MODEL", os.environ.get("OLLAMA_MODEL", "qwen3:4b-instruct") if ollama else ""),
                    model_version=os.environ.get("BRAIN_V3_MODEL_VERSION", "unspecified"),
                    api_key=os.environ.get("BRAIN_V3_API_KEY", ""),
                    temperature=float(os.environ.get("BRAIN_V3_TEMPERATURE", "0")),
-                   timeout_seconds=float(os.environ.get("BRAIN_V3_TIMEOUT", "15")),
+                   timeout_seconds=float(os.environ.get("BRAIN_V3_TIMEOUT", os.environ.get("OLLAMA_TIMEOUT", "60") if ollama else "15")),
                    max_output_tokens=int(os.environ.get("BRAIN_V3_MAX_TOKENS", "4096")),
                    allow_external_text=flag("BRAIN_V3_ALLOW_EXTERNAL_TEXT"))
 

@@ -1,0 +1,15 @@
+{"operation": "outbox-send", "duration": 3.1849999686528463e-06, "error": "simulated offline", "timeout": false}
+{"operation": "outbox-send", "duration": 9.620002856536303e-07, "error": "simulated offline", "timeout": false}
+{"operation": "outbox-send", "duration": 6.609998308704235e-07, "error": "simulated offline", "timeout": false}
+{"operation": "outbox-send", "duration": 6.310001481324434e-07, "error": "simulated offline", "timeout": false}
+{"operation": "outbox-send", "duration": 4.70000031782547e-07, "error": "simulated offline", "timeout": false}
+{"operation": "outbox-send", "duration": 0.00010163200022361707, "error": null, "timeout": false}
+{"operation": "outbox-send", "duration": 9.074600029634894e-05, "error": null, "timeout": false}
+{"operation": "outbox-send", "duration": 8.499800014760694e-05, "error": null, "timeout": false}
+{"operation": "outbox-send", "duration": 7.769700005155755e-05, "error": null, "timeout": false}
+{"operation": "outbox-send", "duration": 7.344100004047505e-05, "error": null, "timeout": false}
+{"operation": "outbox-send", "duration": 7.535299982919241e-05, "error": null, "timeout": false}
+{"operation": "outbox-send", "duration": 7.488199980798527e-05, "error": null, "timeout": false}
+{"operation": "outbox-send", "duration": 7.450200018865871e-05, "error": null, "timeout": false}
+{"operation": "outbox-send", "duration": 0.00010160199963138439, "error": null, "timeout": false}
+{"operation": "outbox-send", "duration": 7.54530001358944e-05, "error": null, "timeout": false}

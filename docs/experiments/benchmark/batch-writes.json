@@ -1,0 +1,20 @@
+[
+  {
+    "batch_size": 1,
+    "records": 200,
+    "seconds": 0.009645740999985719,
+    "records_per_second": 20734.539731089204
+  },
+  {
+    "batch_size": 20,
+    "records": 200,
+    "seconds": 0.005463364000206639,
+    "records_per_second": 36607.48212867301
+  },
+  {
+    "batch_size": 100,
+    "records": 200,
+    "seconds": 0.005172166000193101,
+    "records_per_second": 38668.51914508024
+  }
+]

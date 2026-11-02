@@ -1,0 +1,259 @@
+test_aliases_and_phonetic_whitelist_do_not_touch_motion_variants (test_brain.DomainTests.test_aliases_and_phonetic_whitelist_do_not_touch_motion_variants) ... ok
+test_conflicting_identity_does_not_select_device (test_brain.DomainTests.test_conflicting_identity_does_not_select_device) ... ok
+test_distinct_equipment_types_never_alias (test_brain.DomainTests.test_distinct_equipment_types_never_alias) ... ok
+test_document_loader_rejects_missing_source_and_rebuilds_index (test_brain.DomainTests.test_document_loader_rejects_missing_source_and_rebuilds_index) ... ok
+test_draft_never_executes (test_brain.DomainTests.test_draft_never_executes) ... ok
+test_handwritten_golden_contracts (test_brain.DomainTests.test_handwritten_golden_contracts) ... ok
+test_homophone_entity_is_not_confirmed_identity (test_brain.DomainTests.test_homophone_entity_is_not_confirmed_identity) ... ok
+test_hotword_export_disabled_and_never_imports_asr (test_brain.DomainTests.test_hotword_export_disabled_and_never_imports_asr) ... ok
+test_invalid_input_and_naive_clock (test_brain.DomainTests.test_invalid_input_and_naive_clock) ... ok
+test_knowledge_missing_content_does_not_fabricate (test_brain.DomainTests.test_knowledge_missing_content_does_not_fabricate) ... ok
+test_lexicon_rejects_cross_type_alias_and_cycle (test_brain.DomainTests.test_lexicon_rejects_cross_type_alias_and_cycle) ... ok
+test_missing_retrieval_returns_undetermined (test_brain.DomainTests.test_missing_retrieval_returns_undetermined) ... ok
+test_mock_empty_records_cannot_confirm_normal (test_brain.DomainTests.test_mock_empty_records_cannot_confirm_normal) ... ok
+test_no_threshold_or_fake_normality (test_brain.DomainTests.test_no_threshold_or_fake_normality) ... ok
+test_number_identity_never_repaired (test_brain.DomainTests.test_number_identity_never_repaired) ... ok
+test_package_has_no_hardware_network_or_legacy_imports (test_brain.DomainTests.test_package_has_no_hardware_network_or_legacy_imports) ... ok
+test_provider_cannot_forge_citation_or_threshold (test_brain.DomainTests.test_provider_cannot_forge_citation_or_threshold) ... ok
+test_raw_operation_protected_even_with_correction_opt_in (test_brain.DomainTests.test_raw_operation_protected_even_with_correction_opt_in) ... ok
+test_sensor_temperature_is_not_an_electrical_asset_query (test_brain.DomainTests.test_sensor_temperature_is_not_an_electrical_asset_query) ... ok
+test_time_recent_is_uncertain_and_explicit_is_exact (test_brain.DomainTests.test_time_recent_is_uncertain_and_explicit_is_exact) ... ok
+test_unsupported_identifier_is_not_truncated_to_known_asset (test_brain.DomainTests.test_unsupported_identifier_is_not_truncated_to_known_asset) ... ok
+test_bounded_fallback_during_slow_provider_and_no_unbounded_queue (test_brain.RoutingTests.test_bounded_fallback_during_slow_provider_and_no_unbounded_queue) ... ok
+test_brain_cannot_return_an_authorized_operation (test_brain.RoutingTests.test_brain_cannot_return_an_authorized_operation) ... ok
+test_cli_route_flag_off_or_broken_data_does_not_load_block_old_path (test_brain.RoutingTests.test_cli_route_flag_off_or_broken_data_does_not_load_block_old_path) ... ok
+test_flag_off_preserves_exact_legacy_payload_and_raw_text (test_brain.RoutingTests.test_flag_off_preserves_exact_legacy_payload_and_raw_text) ... ok
+test_legacy_receives_original_only_on_normalized_knowledge_input (test_brain.RoutingTests.test_legacy_receives_original_only_on_normalized_knowledge_input) ... ok
+test_missing_failed_and_malformed_brain_fall_back (test_brain.RoutingTests.test_missing_failed_and_malformed_brain_fall_back) ... ok
+test_nested_proposal_authority_is_rejected_despite_safe_outer_flags (test_brain.RoutingTests.test_nested_proposal_authority_is_rejected_despite_safe_outer_flags) ... ok
+test_old_fixed_and_control_have_priority_even_when_brain_enabled (test_brain.RoutingTests.test_old_fixed_and_control_have_priority_even_when_brain_enabled) ... ok
+test_cleanup_requires_confirmation_for_restart (test_domain_v2.DomainV2Tests.test_cleanup_requires_confirmation_for_restart) ... ok
+test_exact_number_format_conversion (test_domain_v2.DomainV2Tests.test_exact_number_format_conversion) ... ok
+test_high_risk_only_candidates (test_domain_v2.DomainV2Tests.test_high_risk_only_candidates) ... ok
+test_legal_repeat_and_operations_preserved (test_domain_v2.DomainV2Tests.test_legal_repeat_and_operations_preserved) ... ok
+test_main_transformer_confusion_cannot_authorize_operations (test_domain_v2.DomainV2Tests.test_main_transformer_confusion_cannot_authorize_operations) ... ok
+test_main_transformer_confusion_requires_equipment_context (test_domain_v2.DomainV2Tests.test_main_transformer_confusion_requires_equipment_context) ... ok
+test_multi_intent_and_real_cases (test_domain_v2.DomainV2Tests.test_multi_intent_and_real_cases) ... ERROR
+test_negation_scope_and_conditions (test_domain_v2.DomainV2Tests.test_negation_scope_and_conditions) ... ok
+test_non_electrical_context_not_corrected (test_domain_v2.DomainV2Tests.test_non_electrical_context_not_corrected) ... ok
+test_numeric_values_never_guessed (test_domain_v2.DomainV2Tests.test_numeric_values_never_guessed) ... ok
+test_real_data_rules_and_switch_are_separate (test_domain_v2.DomainV2Tests.test_real_data_rules_and_switch_are_separate) ... ERROR
+test_separate_synthetic_challenges (test_domain_v2.DomainV2Tests.test_separate_synthetic_challenges) ... ok
+test_status_query_is_not_unknown (test_domain_v2.DomainV2Tests.test_status_query_is_not_unknown) ... ok
+test_real_wav_http_repeated_inference_and_export (test_real_sensevoice.RealSenseVoiceTests.test_real_wav_http_repeated_inference_and_export) ... skipped '需独立.venv-asr及官方模型；不能用手动文本替代真实模型测试'
+test_system_python_launcher_selects_isolated_environment (test_real_sensevoice.RealSenseVoiceTests.test_system_python_launcher_selects_isolated_environment) ... skipped '需独立.venv-asr及官方模型；不能用手动文本替代真实模型测试'
+test_contiguous_segments_never_drop_or_duplicate_samples (test_real_sensevoice.SegmentationTests.test_contiguous_segments_never_drop_or_duplicate_samples) ... ok
+test_actual_export_is_read_and_preserved (test_round2_audit.ActualExportTests.test_actual_export_is_read_and_preserved) ... ERROR
+test_complex_query_does_not_claim_complete_answer_from_one_keyword (test_round2_scoring.Round2ScoringTests.test_complex_query_does_not_claim_complete_answer_from_one_keyword) ... ERROR
+test_custom_reference_does_not_keep_wrong_question_id (test_round2_scoring.Round2ScoringTests.test_custom_reference_does_not_keep_wrong_question_id) ... ok
+test_import_preserves_history_and_excludes_unbound_old_metrics (test_round2_scoring.Round2ScoringTests.test_import_preserves_history_and_excludes_unbound_old_metrics) ... ERROR
+test_numeric_errors_not_hidden_by_term_score (test_round2_scoring.Round2ScoringTests.test_numeric_errors_not_hidden_by_term_score) ... ok
+test_sources_are_not_mixed_and_versions_grouped (test_round2_scoring.Round2ScoringTests.test_sources_are_not_mixed_and_versions_grouped) ... ok
+test_standard_binding_and_strict_cer (test_round2_scoring.Round2ScoringTests.test_standard_binding_and_strict_cer) ... ok
+test_missing_model_manual_flow_and_static_page (test_scoring_http.ScoringHTTPTests.test_missing_model_manual_flow_and_static_page) ... 127.0.0.1 - - [02/Nov/2026 03:35:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:26] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:26] "POST /api/evaluate HTTP/1.1" 400 -
+127.0.0.1 - - [02/Nov/2026 03:35:26] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:26] "GET /api/records HTTP/1.1" 200 -
+ok
+test_real_user_wav_scoring_upgrade_and_unique_sample (test_scoring_http.ScoringHTTPTests.test_real_user_wav_scoring_upgrade_and_unique_sample) ... skipped '需独立 ASR 环境、本地模型及已有真实 WAV；不使用文本伪造推理'
+test_actual_record_without_reference_leakage (test_scoring_workflow.HistorySemanticsTests.test_actual_record_without_reference_leakage) ... ERROR
+test_confusion_context_and_operation_protection (test_scoring_workflow.HistorySemanticsTests.test_confusion_context_and_operation_protection) ... ok
+test_temperature_intents_are_distinct (test_scoring_workflow.HistorySemanticsTests.test_temperature_intents_are_distinct) ... ok
+test_unseen_word_order_and_number_not_repaired (test_scoring_workflow.HistorySemanticsTests.test_unseen_word_order_and_number_not_repaired) ... ok
+test_week_boundary_uses_explicit_shanghai_timezone (test_scoring_workflow.HistorySemanticsTests.test_week_boundary_uses_explicit_shanghai_timezone) ... ok
+test_analysis_then_score_links_and_reuses_analysis (test_scoring_workflow.ScoringWorkflowTests.test_analysis_then_score_links_and_reuses_analysis) ... ok
+test_cannot_link_another_audio_as_parent (test_scoring_workflow.ScoringWorkflowTests.test_cannot_link_another_audio_as_parent) ... ok
+test_configuration_variants_and_retranscription_share_sample (test_scoring_workflow.ScoringWorkflowTests.test_configuration_variants_and_retranscription_share_sample) ... ok
+test_duplicate_clicks_and_restart_do_not_append (test_scoring_workflow.ScoringWorkflowTests.test_duplicate_clicks_and_restart_do_not_append) ... ok
+test_scored_statistics_deduplicate_hash_and_preserve_runs (test_scoring_workflow.ScoringWorkflowTests.test_scored_statistics_deduplicate_hash_and_preserve_runs) ... ok
+test_unconfirmed_score_is_rejected_and_manual_still_works (test_scoring_workflow.ScoringWorkflowTests.test_unconfirmed_score_is_rejected_and_manual_still_works) ... ok
+test_version_check_loaded_hash_and_disk_drift (test_scoring_workflow.ScoringWorkflowTests.test_version_check_loaded_hash_and_disk_drift) ... ok
+test_decimal_voltage_unit_phase_or_device_cannot_change (test_v3_engine.CandidateRejectionTests.test_decimal_voltage_unit_phase_or_device_cannot_change) ... ok
+test_negation_correction_and_condition_cannot_disappear (test_v3_engine.CandidateRejectionTests.test_negation_correction_and_condition_cannot_disappear) ... ok
+test_safety_seals_even_when_caller_supplies_trusted_validation (test_v3_engine.CandidateRejectionTests.test_safety_seals_even_when_caller_supplies_trusted_validation) ... ok
+test_schema_forbids_authorization_execution_tools_and_fake_site_conclusion (test_v3_engine.CandidateRejectionTests.test_schema_forbids_authorization_execution_tools_and_fake_site_conclusion) ... ok
+test_span_and_reference_forgery (test_v3_engine.CandidateRejectionTests.test_span_and_reference_forgery) ... ok
+test_unknown_field_enum_boolean_zero_and_missing_schema_rejected (test_v3_engine.CandidateRejectionTests.test_unknown_field_enum_boolean_zero_and_missing_schema_rejected) ... ok
+test_conditions_preserved_and_drafts_never_execute (test_v3_engine.EngineTests.test_conditions_preserved_and_drafts_never_execute) ... ok
+test_context_does_not_add_device_or_number (test_v3_engine.EngineTests.test_context_does_not_add_device_or_number) ... ok
+test_default_v2_no_model_calls (test_v3_engine.EngineTests.test_default_v2_no_model_calls) ... ok
+test_device_self_correction_keeps_both_quotes_and_rejects_two (test_v3_engine.EngineTests.test_device_self_correction_keeps_both_quotes_and_rejects_two) ... ok
+test_intent_cannot_target_another_devices_clause (test_v3_engine.EngineTests.test_intent_cannot_target_another_devices_clause) ... ok
+test_measurement_device_and_phase_association_are_not_interchangeable (test_v3_engine.EngineTests.test_measurement_device_and_phase_association_are_not_interchangeable) ... ok
+test_mock_is_explicit_and_no_reference_or_audio_in_prompt (test_v3_engine.EngineTests.test_mock_is_explicit_and_no_reference_or_audio_in_prompt) ... ok
+test_multi_intent_data_dependencies_and_time (test_v3_engine.EngineTests.test_multi_intent_data_dependencies_and_time) ... ok
+test_numeric_self_correction_preserves_decimal_and_exclusion (test_v3_engine.EngineTests.test_numeric_self_correction_preserves_decimal_and_exclusion) ... ok
+test_plan_with_negative_navigation_is_not_an_operation (test_v3_engine.EngineTests.test_plan_with_negative_navigation_is_not_an_operation) ... ok
+test_real_transcript_text_is_development_fixture_not_semantic_gold (test_v3_engine.EngineTests.test_real_transcript_text_is_development_fixture_not_semantic_gold) ... ok
+test_unavailable_llm_is_clear_and_auto_fallback_is_labelled (test_v3_engine.EngineTests.test_unavailable_llm_is_clear_and_auto_fallback_is_labelled) ... ok
+test_bad_optional_environment_does_not_block_v2_or_echo_secret (test_v3_engine.ProviderConfigTests.test_bad_optional_environment_does_not_block_v2_or_echo_secret) ... ok
+test_no_external_call_by_default_and_secrets_redacted (test_v3_engine.ProviderConfigTests.test_no_external_call_by_default_and_secrets_redacted) ... ok
+test_schema_matches_official_jsonschema_implementation_when_available (test_v3_engine.ProviderConfigTests.test_schema_matches_official_jsonschema_implementation_when_available) ... ok
+test_comparison_deduplicates_audio_and_requires_gold_per_dimension (test_v3_evaluation.SemanticEvaluationTests.test_comparison_deduplicates_audio_and_requires_gold_per_dimension) ... ok
+test_handwritten_semantic_contracts_not_only_text_accuracy (test_v3_evaluation.SemanticEvaluationTests.test_handwritten_semantic_contracts_not_only_text_accuracy) ... ok
+test_history_manifest_is_pending_deduplicated_and_read_only (test_v3_evaluation.SemanticEvaluationTests.test_history_manifest_is_pending_deduplicated_and_read_only) ... ok
+test_idempotent_runs_and_audio_sha_dedup (test_v3_evaluation.SemanticEvaluationTests.test_idempotent_runs_and_audio_sha_dedup) ... ok
+test_independent_relation_annotation_v2_v3_comparison (test_v3_evaluation.SemanticEvaluationTests.test_independent_relation_annotation_v2_v3_comparison) ... ok
+test_no_gold_or_unconfirmed_or_asr_gold_cannot_score (test_v3_evaluation.SemanticEvaluationTests.test_no_gold_or_unconfirmed_or_asr_gold_cannot_score) ... ok
+test_schema_rate_and_fallback_rate_are_not_semantic_accuracy (test_v3_evaluation.SemanticEvaluationTests.test_schema_rate_and_fallback_rate_are_not_semantic_accuracy) ... ok
+test_v2_existing_negation_condition_and_time_are_not_scored_as_absent (test_v3_evaluation.SemanticEvaluationTests.test_v2_existing_negation_condition_and_time_are_not_scored_as_absent) ... ok
+test_compatible_provider_actual_http_contract_no_reference_and_no_key_in_records (test_v3_http.SemanticHTTPTests.test_compatible_provider_actual_http_contract_no_reference_and_no_key_in_records) ... 127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/semantic HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/semantic/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/config HTTP/1.1" 200 -
+ok
+test_decode_tool_truncation_size_redirect_and_timeout_errors_are_clear (test_v3_http.SemanticHTTPTests.test_decode_tool_truncation_size_redirect_and_timeout_errors_are_clear) ... ok
+test_default_v2_and_manual_outage_fallback_do_not_change_voice_records (test_v3_http.SemanticHTTPTests.test_default_v2_and_manual_outage_fallback_do_not_change_voice_records) ... 127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/config HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /v3.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/semantic/schema HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/semantic HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/records HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/semantic/records HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/semantic HTTP/1.1" 403 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/navigate HTTP/1.1" 404 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/execute HTTP/1.1" 404 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/chassis HTTP/1.1" 404 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/switchgear HTTP/1.1" 404 -
+ok
+test_real_wav_sensevoice_v2_mock_validation_and_dedup_http (test_v3_http.SemanticHTTPTests.test_real_wav_sensevoice_v2_mock_validation_and_dedup_http) ... skipped '需已有真实WAV、SenseVoice模型及独立ASR环境；不会伪造真实推理'
+test_remote_hallucinated_device_rejected_then_v2_fallback (test_v3_http.SemanticHTTPTests.test_remote_hallucinated_device_rejected_then_v2_fallback) ... 127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/semantic HTTP/1.1" 200 -
+ok
+test_model_load_failure_is_not_a_transcript (test_voice_lab.ASRInterfaceTests.test_model_load_failure_is_not_a_transcript) ... ok
+test_sensevoice_cpu_stream_interface (test_voice_lab.ASRInterfaceTests.test_sensevoice_cpu_stream_interface) ... ok
+test_vosk_actual_interface_keeps_engine_segments (test_voice_lab.ASRInterfaceTests.test_vosk_actual_interface_keeps_engine_segments) ... ok
+test_bad_formats_bounds_and_truncation (test_voice_lab.AudioTests.test_bad_formats_bounds_and_truncation) ... ok
+test_mono_stereo_and_resample (test_voice_lab.AudioTests.test_mono_stereo_and_resample) ... ok
+test_stereo_average_has_no_interleaving (test_voice_lab.AudioTests.test_stereo_average_has_no_interleaving) ... ok
+test_actual_launcher_start_and_clean_stop (test_voice_lab.HTTPTests.test_actual_launcher_start_and_clean_stop) ... ok
+test_static_config_and_export_end_to_end (test_voice_lab.HTTPTests.test_static_config_and_export_end_to_end) ... 127.0.0.1 - - [02/Nov/2026 03:35:27] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /audio.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /pcm-worklet.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/config HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/audio HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/export?format=json HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/export?format=csv HTTP/1.1" 200 -
+ok
+test_token_origin_host_and_no_robot_routes (test_voice_lab.HTTPTests.test_token_origin_host_and_no_robot_routes) ... 127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/evaluate HTTP/1.1" 403 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/evaluate HTTP/1.1" 403 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/evaluate HTTP/1.1" 403 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/evaluate HTTP/1.1" 413 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/evaluate HTTP/1.1" 400 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "POST /api/robot/move HTTP/1.1" 404 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /../../RobotTerminal/backend/interaction.py HTTP/1.1" 404 -
+127.0.0.1 - - [02/Nov/2026 03:35:27] "GET /api/config HTTP/1.1" 403 -
+ok
+test_asr_is_immutable_even_with_manual_edits (test_voice_lab.LabTests.test_asr_is_immutable_even_with_manual_edits) ... ok
+test_csv_preserves_details_and_blocks_formula_cells (test_voice_lab.LabTests.test_csv_preserves_details_and_blocks_formula_cells) ... ok
+test_manual_provenance_and_separate_asr_aggregate (test_voice_lab.LabTests.test_manual_provenance_and_separate_asr_aggregate) ... ok
+test_operations_are_proposals_never_executed (test_voice_lab.LabTests.test_operations_are_proposals_never_executed) ... ok
+test_strict_inputs_and_question_list (test_voice_lab.LabTests.test_strict_inputs_and_question_list) ... ok
+test_upload_without_asr_never_fabricates (test_voice_lab.LabTests.test_upload_without_asr_never_fabricates) ... ok
+test_alias_terms_and_character_scores_are_separate (test_voice_lab.MetricTests.test_alias_terms_and_character_scores_are_separate) ... ok
+test_cer_definition (test_voice_lab.MetricTests.test_cer_definition) ... ok
+test_device_number_must_match_equipment_type (test_voice_lab.MetricTests.test_device_number_must_match_equipment_type) ... ok
+test_distinct_terms_not_collapsed (test_voice_lab.MetricTests.test_distinct_terms_not_collapsed) ... ok
+test_homophone_entities_are_only_diagnostic (test_voice_lab.MetricTests.test_homophone_entities_are_only_diagnostic) ... ok
+test_no_denominator_no_claim (test_voice_lab.MetricTests.test_no_denominator_no_claim) ... ok
+
+======================================================================
+ERROR: test_multi_intent_and_real_cases (test_domain_v2.DomainV2Tests.test_multi_intent_and_real_cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/power-inspection-robot/InspectionBrain/tests/test_domain_v2.py", line 114, in test_multi_intent_and_real_cases
+    rows=json.loads(SOURCE.read_text())["records"]
+                    ^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/power-inspection-robot/voice-evaluation.json'
+
+======================================================================
+ERROR: test_real_data_rules_and_switch_are_separate (test_domain_v2.DomainV2Tests.test_real_data_rules_and_switch_are_separate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/power-inspection-robot/InspectionBrain/tests/test_domain_v2.py", line 17, in test_real_data_rules_and_switch_are_separate
+    rows=json.loads(SOURCE.read_text())["records"]
+                    ^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/power-inspection-robot/voice-evaluation.json'
+
+======================================================================
+ERROR: test_actual_export_is_read_and_preserved (test_round2_audit.ActualExportTests.test_actual_export_is_read_and_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/power-inspection-robot/InspectionBrain/tests/test_round2_audit.py", line 13, in test_actual_export_is_read_and_preserved
+    original = SOURCE.read_bytes()
+               ^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/power-inspection-robot/voice-evaluation.json'
+
+======================================================================
+ERROR: test_complex_query_does_not_claim_complete_answer_from_one_keyword (test_round2_scoring.Round2ScoringTests.test_complex_query_does_not_claim_complete_answer_from_one_keyword)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/power-inspection-robot/InspectionBrain/tests/test_round2_scoring.py", line 59, in test_complex_query_does_not_claim_complete_answer_from_one_keyword
+    raw=json.loads(source.read_text())["records"][5]["original_transcript"]
+                   ^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/power-inspection-robot/voice-evaluation.json'
+
+======================================================================
+ERROR: test_import_preserves_history_and_excludes_unbound_old_metrics (test_round2_scoring.Round2ScoringTests.test_import_preserves_history_and_excludes_unbound_old_metrics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/power-inspection-robot/InspectionBrain/tests/test_round2_scoring.py", line 44, in test_import_preserves_history_and_excludes_unbound_old_metrics
+    self.assertEqual(self.lab.import_export(source),9)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/power-inspection-robot/InspectionBrain/voice_lab/server.py", line 263, in import_export
+    raw=Path(path).read_bytes()
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/power-inspection-robot/voice-evaluation.json'
+
+======================================================================
+ERROR: test_actual_record_without_reference_leakage (test_scoring_workflow.HistorySemanticsTests.test_actual_record_without_reference_leakage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/power-inspection-robot/InspectionBrain/tests/test_scoring_workflow.py", line 22, in test_actual_record_without_reference_leakage
+    saved = json.loads((ROOT/'runtime/voice_lab/records/9bf3bee5bf3e48e3b60a3a33d6966bc5.json').read_text())
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/power-inspection-robot/InspectionBrain/runtime/voice_lab/records/9bf3bee5bf3e48e3b60a3a33d6966bc5.json'
+
+----------------------------------------------------------------------
+Ran 121 tests in 1.258s
+
+FAILED (errors=6, skipped=4)

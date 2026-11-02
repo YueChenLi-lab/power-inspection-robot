@@ -32,3 +32,14 @@ reports/
 *.wav
 *.mp3
 *.flac
+
+# InspectionOS runtime is source code, not generated runtime data
+!InspectionOS/runtime/
+!InspectionOS/runtime/*.py
+*.db-wal
+*.db-shm
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+*.worker.lock
