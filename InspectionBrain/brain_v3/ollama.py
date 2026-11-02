@@ -11,6 +11,10 @@ from .providers import NoRedirect, ProviderError, ProviderResult, strict_json
 from .schema import SCHEMA
 
 
+PROMPT_VERSION = 'inspection-semantic-ollama-v1'
+SYSTEM_PROMPT = "只输出给定Schema的JSON。保留evidence的原文、设备、时间、否定和约束；reasoning_source为llm_candidate。不得添加动作、现场结论或执行权限。"
+
+
 class OllamaProvider:
     def __init__(self, config):
         self.config = config
@@ -19,6 +23,7 @@ class OllamaProvider:
         self.timings = {}
         self.diagnostics = {}
         self.last_candidate = None
+        self.response_metadata = {}
 
     def status(self):
         return {"provider": "ollama", "available": self.config.enabled and bool(self.config.model),
@@ -28,13 +33,14 @@ class OllamaProvider:
     def generate(self, request):
         self.last_response, self.timings = None, {}
         self.last_candidate = None
-        self.diagnostics = {'json_parse_success':None,'failure_kind':None}
+        self.diagnostics = {'json_parse_success':None,'failure_kind':None,'complete_response':False}
+        self.response_metadata = {}
         if not self.status()["available"]:
             self.diagnostics["failure_kind"] = "disabled"
             raise ProviderError("Ollama未启用；没有发出请求")
-        payload = {"model": self.config.model, "stream": False, "format": SCHEMA,
+        payload = {"model": self.config.model, "stream": False, "think": False, "format": SCHEMA,
                    "options": {"temperature": self.config.temperature, "num_predict": self.config.max_output_tokens},
-                   "messages": [{"role": "system", "content": "只输出给定Schema的JSON。保留evidence的原文、设备、时间、否定和约束；reasoning_source为llm_candidate。不得添加动作、现场结论或执行权限。"},
+                   "messages": [{"role": "system", "content": SYSTEM_PROMPT},
                                 {"role": "user", "content": json.dumps(request, ensure_ascii=False)}]}
         req = Request(self.config.endpoint(), json.dumps(payload, ensure_ascii=False).encode(),
                       {"Content-Type": "application/json"}, method="POST")
@@ -56,6 +62,12 @@ class OllamaProvider:
             if body.get("done") is not True or body.get("done_reason", "stop") != "stop":
                 self.diagnostics["failure_kind"] = "incomplete_response"
                 raise ProviderError("Ollama响应未完整结束")
+            self.diagnostics['complete_response'] = True
+            # Ollama reports durations in nanoseconds. Preserve numeric metadata
+            # only; never persist message.thinking or implicit reasoning here.
+            self.response_metadata = {k:body.get(k) for k in (
+                'model','created_at','total_duration','load_duration','prompt_eval_duration',
+                'eval_duration','prompt_eval_count','eval_count')}
             message = body["message"]
             if not isinstance(message, dict):
                 raise ProviderError("Ollama message必须为对象")

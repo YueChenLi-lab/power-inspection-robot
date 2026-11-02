@@ -1,0 +1,10 @@
+{
+  "browser": "system Chromium / Playwright",
+  "single": "ACCEPTED (MOCK)",
+  "batch_completed": 12,
+  "history_records": 13,
+  "annotations_created": 0,
+  "real_model_runs": 0,
+  "ollama_status": "unavailable",
+  "page_errors": []
+}
