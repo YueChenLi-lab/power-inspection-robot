@@ -1,0 +1,315 @@
+{
+  "schema_version": "semantic-annotation-set-v1",
+  "samples": [
+    {
+      "sample_id": "device-revision",
+      "dataset_role": "handwritten_synthetic_development_contract_NOT_blind_test",
+      "original_request": "不是2号断路器，是3号断路器",
+      "reference_time": "2026-10-09T12:00:00+08:00",
+      "semantic_annotation": {
+        "annotation_version": "semantic-gold-v1",
+        "annotation_source": "handwritten_synthetic",
+        "confirmed": true,
+        "annotator": "handwritten_contract_fixture",
+        "original_sha256": "64975e31c34934f82307387fa688b931f48cc27394fba76a14996f43bfc0f66f",
+        "expected": {
+          "equipment_relations": [
+            [
+              "circuit_breaker",
+              "2",
+              "negated",
+              null
+            ],
+            [
+              "circuit_breaker",
+              "3",
+              "active",
+              null
+            ]
+          ],
+          "self_corrections": [
+            [
+              "equipment",
+              [
+                [
+                  "circuit_breaker",
+                  "2",
+                  "negated"
+                ]
+              ],
+              [
+                [
+                  "circuit_breaker",
+                  "3",
+                  "active"
+                ]
+              ]
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "sample_id": "decimal-revision",
+      "dataset_role": "handwritten_synthetic_development_contract_NOT_blind_test",
+      "original_request": "67.8摄氏度，不是678摄氏度",
+      "reference_time": "2026-10-09T12:00:00+08:00",
+      "semantic_annotation": {
+        "annotation_version": "semantic-gold-v1",
+        "annotation_source": "handwritten_synthetic",
+        "confirmed": true,
+        "annotator": "handwritten_contract_fixture",
+        "original_sha256": "ec479a0ab8a9eb34e0f872653001e95b4c52e334be2dc5722c7fdea7647ada83",
+        "expected": {
+          "numeric_negation_relations": [
+            [
+              "measurement",
+              "67.8",
+              "℃",
+              "active"
+            ],
+            [
+              "measurement",
+              "678",
+              "℃",
+              "negated"
+            ]
+          ],
+          "self_corrections": [
+            [
+              "numeric",
+              [
+                [
+                  "measurement",
+                  "678",
+                  "℃",
+                  "negated"
+                ]
+              ],
+              [
+                [
+                  "measurement",
+                  "67.8",
+                  "℃",
+                  "active"
+                ]
+              ]
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "sample_id": "plan-no-navigation",
+      "dataset_role": "handwritten_synthetic_development_contract_NOT_blind_test",
+      "original_request": "制定巡检计划，但不要启动导航",
+      "reference_time": "2026-10-09T12:00:00+08:00",
+      "semantic_annotation": {
+        "annotation_version": "semantic-gold-v1",
+        "annotation_source": "handwritten_synthetic",
+        "confirmed": true,
+        "annotator": "handwritten_contract_fixture",
+        "original_sha256": "099a74926c4ba7fd5c4fe643e09a8d75fc5eb4c6f50e0dfdf383067ca38df1ac",
+        "expected": {
+          "intents": [
+            [
+              "inspection_plan_draft",
+              "task_draft"
+            ]
+          ],
+          "negations": [
+            [
+              "prohibition",
+              [
+                "但不要启动导航"
+              ]
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "sample_id": "multiple-needs",
+      "dataset_role": "handwritten_synthetic_development_contract_NOT_blind_test",
+      "original_request": "查询今天一号主变巡检记录，同时对比最近三次测温结果并生成复检建议。",
+      "reference_time": "2026-10-09T12:00:00+08:00",
+      "semantic_annotation": {
+        "annotation_version": "semantic-gold-v1",
+        "annotation_source": "handwritten_synthetic",
+        "confirmed": true,
+        "annotator": "handwritten_contract_fixture",
+        "original_sha256": "cb45537f640bd6df79f2d25812c672aaf4545ee7cf1d4c6a3777255fb23c2c74",
+        "expected": {
+          "intents": [
+            [
+              "inspection_history",
+              "query"
+            ],
+            [
+              "reinspection_recommendation",
+              "task_draft"
+            ],
+            [
+              "temperature_comparison",
+              "query"
+            ]
+          ],
+          "task_dependencies": [
+            [
+              "inspection_history",
+              "temperature_comparison",
+              "data_prerequisite"
+            ],
+            [
+              "temperature_comparison",
+              "reinspection_recommendation",
+              "data_prerequisite"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "sample_id": "conditional-advice",
+      "dataset_role": "handwritten_synthetic_development_contract_NOT_blind_test",
+      "original_request": "如果温度超过67.8摄氏度就生成复检建议",
+      "reference_time": "2026-10-09T12:00:00+08:00",
+      "semantic_annotation": {
+        "annotation_version": "semantic-gold-v1",
+        "annotation_source": "handwritten_synthetic",
+        "confirmed": true,
+        "annotator": "handwritten_contract_fixture",
+        "original_sha256": "4bf2e43b6940f28fbdba845c9d3e66c5712a0266fc6d1dd8c845bf2252d3e943",
+        "expected": {
+          "intents": [
+            [
+              "reinspection_recommendation",
+              "conditional_task"
+            ]
+          ],
+          "conditions": [
+            [
+              "如果温度超过67.8摄氏度就生成复检建议",
+              [
+                "reinspection_recommendation"
+              ]
+            ]
+          ],
+          "numeric_negation_relations": [
+            [
+              "measurement",
+              "67.8",
+              "℃",
+              "active"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "sample_id": "legitimate-two-assets",
+      "dataset_role": "handwritten_synthetic_development_contract_NOT_blind_test",
+      "original_request": "分别查询一号变压器和二号变压器的台账",
+      "reference_time": "2026-10-09T12:00:00+08:00",
+      "semantic_annotation": {
+        "annotation_version": "semantic-gold-v1",
+        "annotation_source": "handwritten_synthetic",
+        "confirmed": true,
+        "annotator": "handwritten_contract_fixture",
+        "original_sha256": "c548d97c76c18b4d452d20bf4c87b1df631b66f7ed9e61336ebddfca7e730cdf",
+        "expected": {
+          "equipment_relations": [
+            [
+              "transformer",
+              "1",
+              "active",
+              null
+            ],
+            [
+              "transformer",
+              "2",
+              "active",
+              null
+            ]
+          ],
+          "intents": [
+            [
+              "equipment_information",
+              "query"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "sample_id": "unchanged-unit",
+      "dataset_role": "handwritten_synthetic_development_contract_NOT_blind_test",
+      "original_request": "测量值是一百一十千伏，不是11000伏",
+      "reference_time": "2026-10-09T12:00:00+08:00",
+      "semantic_annotation": {
+        "annotation_version": "semantic-gold-v1",
+        "annotation_source": "handwritten_synthetic",
+        "confirmed": true,
+        "annotator": "handwritten_contract_fixture",
+        "original_sha256": "c39b10abfa4a8f03a4497b89964cfdbf2212cdac51772e5b04633eefc96e9466",
+        "expected": {
+          "numeric_negation_relations": [
+            [
+              "measurement",
+              "110",
+              "kV",
+              "active"
+            ],
+            [
+              "measurement",
+              "11000",
+              "V",
+              "negated"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "sample_id": "week-comparison",
+      "dataset_role": "handwritten_synthetic_development_contract_NOT_blind_test",
+      "original_request": "查询4号主变的红外测温记录，与上周对比",
+      "reference_time": "2026-10-09T12:00:00+08:00",
+      "semantic_annotation": {
+        "annotation_version": "semantic-gold-v1",
+        "annotation_source": "handwritten_synthetic",
+        "confirmed": true,
+        "annotator": "handwritten_contract_fixture",
+        "original_sha256": "6c66685b7c86c5069b7886ee81d06994d99b483a982274e524cfcddef4f754f8",
+        "expected": {
+          "intents": [
+            [
+              "temperature_comparison",
+              "query"
+            ],
+            [
+              "thermometry_history",
+              "query"
+            ]
+          ],
+          "temporal_constraints": [
+            [
+              "target",
+              null,
+              null,
+              null,
+              false
+            ],
+            [
+              "comparison_baseline",
+              "上周",
+              "2026-09-28T00:00:00+08:00",
+              "2026-10-05T00:00:00+08:00",
+              true
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

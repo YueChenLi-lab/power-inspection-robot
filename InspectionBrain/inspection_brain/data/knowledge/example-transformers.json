@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "id": "example-transformers",
+  "title": "示例：互感器类型与用途",
+  "revision": "example-v1",
+  "device_terms": [
+    "current_transformer",
+    "voltage_transformer"
+  ],
+  "source": {
+    "kind": "example",
+    "label": "InspectionBrain人工编写的离线示例（非行业标准/非现场资料）",
+    "uri": "example://example-transformers",
+    "is_example": true
+  },
+  "chunks": [
+    {
+      "id": "comparison",
+      "required_terms": [
+        "current_transformer",
+        "voltage_transformer"
+      ],
+      "intents": [
+        "equipment_knowledge"
+      ],
+      "keywords": [
+        "区别",
+        "比较"
+      ],
+      "text": "电流互感器用于把一次电流转换为适合测量或保护使用的二次电流；电压互感器用于把一次电压转换为适合测量或保护使用的二次电压。两者的被测量、接线和绝缘要求不同，不能当成同一种设备。具体使用与安全要求以设备说明书和现场规程为准。"
+    },
+    {
+      "id": "ct",
+      "required_terms": [
+        "current_transformer"
+      ],
+      "intents": [
+        "equipment_knowledge"
+      ],
+      "keywords": [
+        "什么",
+        "作用",
+        "原理",
+        "介绍"
+      ],
+      "text": "电流互感器属于测量或保护用互感器，主要关联电流量。仅凭名称无法确定变比、准确级、额定值和接线，需核对铭牌与说明书。"
+    },
+    {
+      "id": "pt",
+      "required_terms": [
+        "voltage_transformer"
+      ],
+      "intents": [
+        "equipment_knowledge"
+      ],
+      "keywords": [
+        "什么",
+        "作用",
+        "原理",
+        "介绍"
+      ],
+      "text": "电压互感器属于测量或保护用互感器，主要关联电压量。具体额定值、变比与接线需要设备台账、铭牌和说明书。"
+    }
+  ]
+}

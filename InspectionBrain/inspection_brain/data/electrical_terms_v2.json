@@ -1,0 +1,1416 @@
+{
+  "schema_version": 1,
+  "description": "增量领域词库；高风险混淆只给候选，所有身份和数值需人工核验",
+  "terms": [
+    {
+      "id": "transformer",
+      "standard_name": "变压器",
+      "category": "equipment",
+      "equipment_category": "transformer",
+      "aliases": [
+        "变压设备"
+      ],
+      "homophones": [
+        "变鸭器"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "transformer",
+      "confusion_candidates": [
+        "变鸭器"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "main_transformer",
+      "standard_name": "主变压器",
+      "category": "equipment",
+      "equipment_category": "main_transformer",
+      "aliases": [
+        "主变"
+      ],
+      "homophones": [
+        "主便",
+        "主片"
+      ],
+      "parent_id": "transformer",
+      "device_ids": [],
+      "term_id": "main_transformer",
+      "confusion_candidates": [
+        "主便",
+        "主片"
+      ],
+      "confusion_overrides": {
+        "主片": {
+          "replacement": "主变",
+          "context_keywords": [
+            "高压套管",
+            "变压器套管",
+            "高压侧",
+            "绕组温度",
+            "油温",
+            "变电",
+            "变压器"
+          ],
+          "excluded_context_keywords": [
+            "电影",
+            "影片",
+            "纪录片",
+            "视频"
+          ],
+          "require_context_for_confirmation": true
+        }
+      },
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "current_transformer",
+      "standard_name": "电流互感器",
+      "category": "equipment",
+      "equipment_category": "current_transformer",
+      "aliases": [
+        "CT",
+        "电流互感设备"
+      ],
+      "homophones": [
+        "电流互赶器",
+        "电流护管护感器"
+      ],
+      "parent_id": "instrument_transformer",
+      "device_ids": [],
+      "term_id": "current_transformer",
+      "confusion_candidates": [
+        "电流互赶器",
+        "电流护管护感器"
+      ],
+      "context_keywords": [
+        "二次",
+        "回路",
+        "电压互感器",
+        "开关柜"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "voltage_transformer",
+      "standard_name": "电压互感器",
+      "category": "equipment",
+      "equipment_category": "voltage_transformer",
+      "aliases": [
+        "PT",
+        "VT"
+      ],
+      "homophones": [
+        "电压互赶器"
+      ],
+      "parent_id": "instrument_transformer",
+      "device_ids": [],
+      "term_id": "voltage_transformer",
+      "confusion_candidates": [
+        "电压互赶器"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "instrument_transformer",
+      "standard_name": "互感器",
+      "category": "equipment",
+      "equipment_category": "instrument_transformer",
+      "aliases": [],
+      "homophones": [
+        "互赶器"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "instrument_transformer",
+      "confusion_candidates": [
+        "互赶器"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "circuit_breaker",
+      "standard_name": "断路器",
+      "category": "equipment",
+      "equipment_category": "circuit_breaker",
+      "aliases": [],
+      "homophones": [
+        "断录器"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "circuit_breaker",
+      "confusion_candidates": [
+        "断录器"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "disconnector",
+      "standard_name": "隔离开关",
+      "category": "equipment",
+      "equipment_category": "disconnector",
+      "aliases": [],
+      "homophones": [
+        "隔离开官"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "disconnector",
+      "confusion_candidates": [
+        "隔离开官"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "switchgear",
+      "standard_name": "开关柜",
+      "category": "equipment",
+      "equipment_category": "switchgear",
+      "aliases": [],
+      "homophones": [
+        "开关贵"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "switchgear",
+      "confusion_candidates": [
+        "开关贵"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "arrester",
+      "standard_name": "避雷器",
+      "category": "equipment",
+      "equipment_category": "arrester",
+      "aliases": [],
+      "homophones": [
+        "避雷气"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "arrester",
+      "confusion_candidates": [
+        "避雷气"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "busbar",
+      "standard_name": "母线",
+      "category": "equipment",
+      "equipment_category": "busbar",
+      "aliases": [],
+      "homophones": [
+        "母现"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "busbar",
+      "confusion_candidates": [
+        "母现"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "insulator",
+      "standard_name": "绝缘子",
+      "category": "equipment",
+      "equipment_category": "insulator",
+      "aliases": [],
+      "homophones": [
+        "绝缘籽"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "insulator",
+      "confusion_candidates": [
+        "绝缘籽"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "voltage",
+      "standard_name": "电压",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "voltage",
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "current",
+      "standard_name": "电流",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "电留"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "current",
+      "confusion_candidates": [
+        "电留"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "power",
+      "standard_name": "功率",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "功绿"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "power",
+      "confusion_candidates": [
+        "功绿"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "oil_temperature",
+      "standard_name": "油温",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [
+        "油温度"
+      ],
+      "homophones": [
+        "油问"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "oil_temperature",
+      "confusion_candidates": [
+        "油问"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "winding_temperature",
+      "standard_name": "绕组温度",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [
+        "绕组温"
+      ],
+      "homophones": [
+        "绕祖温度",
+        "绕阻温度"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "winding_temperature",
+      "confusion_candidates": [
+        "绕祖温度",
+        "绕阻温度"
+      ],
+      "context_keywords": [
+        "主变",
+        "变压器",
+        "油温",
+        "负载率"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "load_rate",
+      "standard_name": "负载率",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "负载绿"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "load_rate",
+      "confusion_candidates": [
+        "负载绿"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "overheating",
+      "standard_name": "过热",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "overheating",
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "oil_leak",
+      "standard_name": "渗漏油",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [
+        "漏油",
+        "渗油"
+      ],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "oil_leak",
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "partial_discharge",
+      "standard_name": "局部放电",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [
+        "局放"
+      ],
+      "homophones": [
+        "局部放店"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "partial_discharge",
+      "confusion_candidates": [
+        "局部放店"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "insulation_fault",
+      "standard_name": "绝缘异常",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [
+        "绝缘问题"
+      ],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "insulation_fault",
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "poor_contact",
+      "standard_name": "接触不良",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "接触不凉"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "poor_contact",
+      "confusion_candidates": [
+        "接触不凉"
+      ],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "inspection_point",
+      "standard_name": "巡检点",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [
+        "巡检点位"
+      ],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "inspection_point",
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "inspection_task",
+      "standard_name": "巡检任务",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "inspection_task",
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "reinspection",
+      "standard_name": "复检",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "reinspection",
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "alarm",
+      "standard_name": "告警",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [
+        "报警"
+      ],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "alarm",
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "defect_record",
+      "standard_name": "缺陷记录",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "defect_record",
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "变电",
+        "巡检",
+        "设备",
+        "型号",
+        "温度",
+        "电压",
+        "电流",
+        "油温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "asset_registry",
+      "standard_name": "设备台账",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [
+        "设备台帐"
+      ],
+      "homophones": [
+        "设备抬杠"
+      ],
+      "parent_id": null,
+      "device_ids": [],
+      "term_id": "asset_registry",
+      "confusion_candidates": [
+        "设备抬杠"
+      ],
+      "context_keywords": [
+        "设备",
+        "巡检",
+        "历史",
+        "规程"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in"
+    },
+    {
+      "id": "switching_state",
+      "term_id": "switching_state",
+      "standard_name": "分合闸",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "分和闸"
+      ],
+      "confusion_candidates": [
+        "分和闸"
+      ],
+      "context_keywords": [
+        "断路器",
+        "状态",
+        "开关柜"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "relay_protection",
+      "term_id": "relay_protection",
+      "standard_name": "继电保护",
+      "category": "equipment",
+      "equipment_category": "relay_protection",
+      "aliases": [],
+      "homophones": [
+        "祭奠保护"
+      ],
+      "confusion_candidates": [
+        "祭奠保护"
+      ],
+      "context_keywords": [
+        "装置",
+        "告警",
+        "开关柜",
+        "断路器"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "ct_secondary_circuit",
+      "term_id": "ct_secondary_circuit",
+      "standard_name": "电流互感器二次回路",
+      "category": "equipment",
+      "equipment_category": "ct_secondary_circuit",
+      "aliases": [],
+      "homophones": [
+        "电流护管护感器二次回路"
+      ],
+      "confusion_candidates": [
+        "电流护管护感器二次回路"
+      ],
+      "context_keywords": [
+        "开关柜",
+        "零序",
+        "电流",
+        "检查",
+        "状态"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "human_review",
+      "term_id": "human_review",
+      "standard_name": "人工复核",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "人工复合"
+      ],
+      "confusion_candidates": [
+        "人工复合"
+      ],
+      "context_keywords": [
+        "证据",
+        "缺陷",
+        "等待",
+        "巡检"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "onload_tap_changer",
+      "term_id": "onload_tap_changer",
+      "standard_name": "有载分接开关",
+      "category": "equipment",
+      "equipment_category": "onload_tap_changer",
+      "aliases": [],
+      "homophones": [
+        "由窄分接开关"
+      ],
+      "confusion_candidates": [
+        "由窄分接开关"
+      ],
+      "context_keywords": [
+        "主变",
+        "变压器",
+        "冷却",
+        "运行"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "insulator_flashover",
+      "term_id": "insulator_flashover",
+      "standard_name": "绝缘子污闪",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "绝缘子钨闪"
+      ],
+      "confusion_candidates": [
+        "绝缘子钨闪"
+      ],
+      "context_keywords": [
+        "痕迹",
+        "巡检",
+        "绝缘",
+        "故障"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "pollution_flashover",
+      "term_id": "pollution_flashover",
+      "standard_name": "污闪",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "钨闪"
+      ],
+      "confusion_candidates": [
+        "钨闪"
+      ],
+      "context_keywords": [
+        "绝缘子",
+        "痕迹",
+        "巡检"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "switching_operation",
+      "term_id": "switching_operation",
+      "standard_name": "倒闸操作",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "道闸操作"
+      ],
+      "confusion_candidates": [
+        "道闸操作"
+      ],
+      "context_keywords": [
+        "电力",
+        "电站",
+        "巡检",
+        "执行",
+        "授权"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "sf6",
+      "term_id": "sf6",
+      "standard_name": "六氟化硫",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [
+        "SF6"
+      ],
+      "homophones": [
+        "6伏化流",
+        "6氟化硫"
+      ],
+      "confusion_candidates": [
+        "6伏化流",
+        "6氟化硫"
+      ],
+      "context_keywords": [
+        "气体",
+        "压力",
+        "开关柜",
+        "绝缘"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "sf6_pressure",
+      "term_id": "sf6_pressure",
+      "standard_name": "六氟化硫气体压力",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "6伏化流气体压力",
+        "6氟化硫气体压力"
+      ],
+      "confusion_candidates": [
+        "6伏化流气体压力",
+        "6氟化硫气体压力"
+      ],
+      "context_keywords": [
+        "兆帕",
+        "MPa",
+        "为",
+        "异常",
+        "开关柜"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "phase_a_joint",
+      "term_id": "phase_a_joint",
+      "standard_name": "A相接头",
+      "category": "equipment",
+      "equipment_category": "phase_a_joint",
+      "aliases": [
+        "a相接头"
+      ],
+      "homophones": [
+        "a箱接头",
+        "A箱接头"
+      ],
+      "confusion_candidates": [
+        "a箱接头",
+        "A箱接头"
+      ],
+      "context_keywords": [
+        "开关柜",
+        "温度",
+        "温升",
+        "测温"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "phase_b_joint",
+      "term_id": "phase_b_joint",
+      "standard_name": "B相接头",
+      "category": "equipment",
+      "equipment_category": "phase_b_joint",
+      "aliases": [
+        "b相接头"
+      ],
+      "homophones": [
+        "b箱接头",
+        "B箱接头"
+      ],
+      "confusion_candidates": [
+        "b箱接头",
+        "B箱接头"
+      ],
+      "context_keywords": [
+        "开关柜",
+        "温度",
+        "温升",
+        "测温"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "phase_a",
+      "term_id": "phase_a",
+      "standard_name": "A相",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [
+        "a相"
+      ],
+      "homophones": [
+        "a箱",
+        "A箱"
+      ],
+      "confusion_candidates": [
+        "a箱",
+        "A箱"
+      ],
+      "context_keywords": [
+        "接头",
+        "温度",
+        "开关柜"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "phase_b",
+      "term_id": "phase_b",
+      "standard_name": "B相",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [
+        "b相"
+      ],
+      "homophones": [
+        "b箱",
+        "B箱"
+      ],
+      "confusion_candidates": [
+        "b箱",
+        "B箱"
+      ],
+      "context_keywords": [
+        "接头",
+        "温度",
+        "开关柜"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "cooling_fan",
+      "term_id": "cooling_fan",
+      "standard_name": "冷却风机",
+      "category": "equipment",
+      "equipment_category": "cooling_fan",
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "变压器",
+        "运行"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "busbar_joint_rise",
+      "term_id": "busbar_joint_rise",
+      "standard_name": "母线接头温升",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "母线",
+        "接头"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "busbar_joint",
+      "term_id": "busbar_joint",
+      "standard_name": "母线接头",
+      "category": "equipment",
+      "equipment_category": "busbar_joint",
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "温升",
+        "检查"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "transformer_bushing",
+      "term_id": "transformer_bushing",
+      "standard_name": "变压器套管",
+      "category": "equipment",
+      "equipment_category": "transformer_bushing",
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "渗漏油",
+        "外观"
+      ],
+      "risk_level": "medium",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "hv_joint",
+      "term_id": "hv_joint",
+      "standard_name": "高压侧接头",
+      "category": "equipment",
+      "equipment_category": "hv_joint",
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "温度",
+        "过热"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "zero_sequence_current",
+      "term_id": "zero_sequence_current",
+      "standard_name": "零序电流",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "二次回路",
+        "保护"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "supply_reliability",
+      "term_id": "supply_reliability",
+      "standard_name": "供电可靠性",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "电力",
+        "影响"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "grounding_switch",
+      "term_id": "grounding_switch",
+      "standard_name": "接地刀闸",
+      "category": "equipment",
+      "equipment_category": "grounding_switch",
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "位置",
+        "状态"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "bushing",
+      "term_id": "bushing",
+      "standard_name": "套管",
+      "category": "equipment",
+      "equipment_category": "bushing",
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "主变",
+        "变压器",
+        "红外测温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "hv_bushing",
+      "term_id": "hv_bushing",
+      "standard_name": "高压套管",
+      "category": "equipment",
+      "equipment_category": "hv_bushing",
+      "aliases": [],
+      "homophones": [
+        "电压高套管"
+      ],
+      "confusion_candidates": [
+        "电压高套管"
+      ],
+      "context_keywords": [
+        "主变",
+        "变压器",
+        "红外测温"
+      ],
+      "risk_level": "high",
+      "correction_policy": "candidate_only",
+      "parent_id": "bushing",
+      "device_ids": [],
+      "confusion_overrides": {
+        "电压高套管": {
+          "require_context_for_confirmation": true,
+          "excluded_context_keywords": [
+            "小说",
+            "网名",
+            "电影",
+            "影片"
+          ]
+        }
+      }
+    },
+    {
+      "id": "infrared_thermometry_record",
+      "term_id": "infrared_thermometry_record",
+      "standard_name": "红外测温记录",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [
+        "红外测温历史记录"
+      ],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "主变",
+        "变压器",
+        "红外测温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "infrared_thermometry",
+      "term_id": "infrared_thermometry",
+      "standard_name": "红外测温",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "confusion_candidates": [],
+      "context_keywords": [
+        "主变",
+        "变压器",
+        "红外测温"
+      ],
+      "risk_level": "low",
+      "correction_policy": "context_readonly_opt_in",
+      "parent_id": null,
+      "device_ids": []
+    }
+  ],
+  "lexicon_version": "electrical-v2.3"
+}

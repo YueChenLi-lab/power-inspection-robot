@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "enabled": false,
+  "engine": "vosk",
+  "mode": "grammar_candidate_export_only",
+  "requires_dynamic_graph_model_verification": true,
+  "production_integration": false,
+  "phrases": [
+    "电流互感器",
+    "电压互感器",
+    "变压器",
+    "局部放电",
+    "绕组温度",
+    "[unk]"
+  ],
+  "note": "语法约束不等于软热词加权。仅离线导出候选，不加载ASR、不改变生产识别器；SenseVoice不提供该热词配置。"
+}

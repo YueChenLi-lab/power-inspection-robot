@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "is_example": true,
+  "devices": [
+    {
+      "asset_id": "EXAMPLE-T-001",
+      "device_id": "T-001",
+      "local_number": "1",
+      "term_ids": [
+        "transformer",
+        "main_transformer"
+      ],
+      "display_name": "示例一号主变",
+      "location": "虚构示例区域A",
+      "model": null,
+      "manufacturer": null,
+      "is_example": true
+    },
+    {
+      "asset_id": "EXAMPLE-CT-002",
+      "device_id": "CT-002",
+      "local_number": "2",
+      "term_ids": [
+        "current_transformer"
+      ],
+      "display_name": "示例二号电流互感器",
+      "location": "虚构示例区域B",
+      "model": null,
+      "manufacturer": null,
+      "is_example": true
+    }
+  ]
+}

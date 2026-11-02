@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "example-anomaly",
+  "title": "示例：异常信息复核",
+  "revision": "example-v1",
+  "device_terms": [
+    "overheating",
+    "oil_leak",
+    "insulation_fault",
+    "poor_contact"
+  ],
+  "source": {
+    "kind": "example",
+    "label": "InspectionBrain人工编写的离线示例（非行业标准/非现场资料）",
+    "uri": "example://example-anomaly",
+    "is_example": true
+  },
+  "chunks": [
+    {
+      "id": "review",
+      "required_terms": [
+        "overheating"
+      ],
+      "intents": [
+        "anomaly_procedure_explanation"
+      ],
+      "keywords": [
+        "什么",
+        "解释",
+        "原因"
+      ],
+      "text": "过热是需要结合运行工况复核的异常描述。温度变化可能与负载、环境、冷却和连接状态相关；没有有效测温、适用设备限值及可比工况时，不能判定异常原因或严重程度。"
+    },
+    {
+      "id": "leak",
+      "required_terms": [
+        "oil_leak"
+      ],
+      "intents": [
+        "anomaly_procedure_explanation"
+      ],
+      "keywords": [
+        "什么",
+        "解释",
+        "原因",
+        "规程"
+      ],
+      "text": "渗漏油观察应记录位置、时间、可见范围与设备背景，并依适用现场规程复核。仅凭文本不能确定原因或缺陷等级，不应自动生成检修动作。"
+    }
+  ]
+}

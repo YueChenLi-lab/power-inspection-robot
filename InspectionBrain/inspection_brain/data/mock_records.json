@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "is_example": true,
+  "records": [
+    {
+      "record_id": "EXAMPLE-OBS-001",
+      "asset_id": "EXAMPLE-T-001",
+      "kind": "inspection",
+      "sampled_at": "2026-10-01T09:00:00+08:00",
+      "note": "示例观察记录；未接入真实设备",
+      "temperature_c": null,
+      "measurement_valid": false,
+      "alarm": null,
+      "is_example": true
+    }
+  ]
+}

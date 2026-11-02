@@ -1,0 +1,21 @@
+{
+  "source": "独立编写的合成挑战集；与真实9条规则开发记录分开，不是未见真实音频",
+  "cases": [
+    {"text":"不要移动。请查询二号隔离开关是否异常", "required_intent":"equipment_status_query", "positive_operation":false},
+    {"text":"解释合闸原理", "positive_operation":false},
+    {"text":"左转，但不能合闸", "positive_operation":true},
+    {"text":"请不要启动导航", "positive_operation":false},
+    {"text":"查询四号主变昨天巡检记录并给出复检建议", "required_intent":"inspection_history", "positive_operation":false},
+    {"text":"制定复检计划但禁止移动机器人", "positive_operation":false},
+    {"text":"只是讨论祭奠保护习俗", "unchanged":true},
+    {"text":"人工复合材料厂家介绍", "unchanged":true},
+    {"text":"a箱是我的收纳箱", "unchanged":true},
+    {"text":"分别检查三号变压器和四号变压器", "unchanged":true},
+    {"text":"5号的开关柜资料", "positive_operation":false},
+    {"text":"油温901℃是否异常", "unchanged":true},
+    {"text":"电流010A是否正常", "unchanged":true},
+    {"text":"电压22000伏，请核实单位", "unchanged":true},
+    {"text":"如果授权通过再后退", "positive_operation":true},
+    {"text":"一号变压器不要合闸，二号变压器也不能送电", "positive_operation":false}
+  ]
+}

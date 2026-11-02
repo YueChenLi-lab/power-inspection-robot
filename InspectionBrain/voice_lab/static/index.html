@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>InspectionBrain 本地语音测试台</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<h1>InspectionBrain 本地语音测试台</h1>
+<p>离线评测。没有机器人控制接口。原音频、原始转写和增强文本分别保留。</p>
+<p>流程：录音 / 上传 → SenseVoice 转写 → 领域分析 → 校对并确认人工参考文本 → 评分并保存。评分不需要重新录音或重新识别。</p>
+<pre id="version-status">等待实际运行词库版本自检。</pre>
+<p id="asr-status">正在检查 ASR 配置…</p><p id="message" role="status"></p>
+<fieldset><legend>1. 选择题目（可选）</legend>
+<label>术语 / 问题 <select id="question"><option value="">自定义题目</option></select></label>
+<p>所选题目的标准文本</p><pre id="question-standard">自定义题目</pre>
+</fieldset>
+<fieldset><legend>2. 录音 / 上传 WAV / 粘贴识别文本</legend>
+<button id="record-start" type="button">麦克风录音</button><button id="record-stop" type="button" disabled>结束录音</button>
+<button id="retranscribe" type="button" disabled>重新识别原 WAV（仅重跑 ASR，不评分）</button>
+<span id="record-status">尚未录音（最多30秒）</span>
+<label>或上传 WAV（16-bit PCM，单/双声道，8～48 kHz，最长60秒）<input id="wav-file" type="file" accept=".wav,audio/wav,audio/x-wav"></label>
+<audio id="playback" controls></audio><a id="download-audio" hidden>下载本次原 WAV</a>
+<p id="audio-status">没有上传音频。</p>
+<p aria-live="polite"><span id="upload-stage">尚未上传</span> · <span id="recognition-stage">尚未识别</span> · <span id="analysis-stage">尚未分析</span> · <span id="reference-stage">尚未输入人工标准文本</span> · <span id="score-stage">未计分：尚未确认人工标准文本</span></p>
+<h3>1. ASR 原始转写（上传 / 结束录音后自动显示）</h3>
+<pre id="raw-asr" aria-live="polite">暂无实际 ASR 结果；不会用参考文本或粘贴文本伪造识别结果。</pre>
+<button id="analyze-asr" type="button" disabled>领域分析 / 重新分析本次识别结果（不计分）</button>
+<p>分析允许没有参考文本，此时明确不计分。同一音频、转写和配置重复点击不会新增记录；切换规则可对照，但不会增加独立样本数。</p>
+<label>分析输入来源 <select id="input-source"><option value="manual">手动粘贴转写（不计入 ASR 统计）</option><option value="windows_external">Windows 外部转写（单独统计，不是本地 SenseVoice）</option><option value="asr">本次音频的实际本地 ASR 原始转写</option></select></label>
+<label>Windows外部识别器名称 / 版本（如适用）<input id="external-engine" maxlength="100"><input id="external-version" maxlength="100"></label>
+<label>手动粘贴识别文本（独立保存，不覆盖 ASR）<textarea id="manual" rows="2" maxlength="2000" placeholder="ASR 未配置时，在此粘贴已有转写；参考文本不能替代转写结果"></textarea></label>
+<button id="analyze-text" type="button">分析手动 / 外部转写（不计分）</button>
+<label><input id="homophones" type="checkbox">启用只读问题的白名单同音候选纠正（默认关闭；操作文本保持原文）</label>
+</fieldset>
+<fieldset><legend>3. 校对人工标准文本 → 评分并保存</legend>
+<button id="copy-reference" type="button">用选中题目填参考文本</button>
+<label>人工参考文本（按实际朗读核实，不能自动采用 ASR 作为答案）<textarea id="reference" rows="2" maxlength="2000"></textarea></label>
+<label><input id="reference-confirmed" type="checkbox">我已核实参考文本确实对应本次朗读 / 转写，不是另一道题</label>
+<p id="reference-kind">自定义参考</p>
+<button id="evaluate" type="button">评分并保存（使用当前音频，无需重录）</button>
+<p>请先校对上方人工标准文本并勾选确认；系统不会把 ASR 输出填成标准答案。评分会关联当前分析记录，原始音频、参考文本和历史结果均保留。</p>
+<p id="current-result-status">尚未保存本次结果。</p>
+</fieldset>
+<section><h2>独立结果与完整修改轨迹</h2>
+<p>本次分析的原始输入及来源</p><pre id="original-input">尚未分析。</pre>
+<h3>2. 电力术语增强后的文本</h3><pre id="enhanced">尚未分析。</pre><details><summary>增强规则与候选</summary><pre id="normalization"></pre></details>
+<h3>口语整理后的可读文本（仅展示）</h3><pre id="cleaned">尚未分析。</pre>
+<div id="candidates"></div><p>不确定重复与高风险词仅给候选；确认后需再次分析保存。数字、小数点及电压等级不自动修复。</p>
+<details><summary>修改位置、原因与置信级别</summary><pre id="trace"></pre></details>
+<h3>数值 / 单位 / 相别 / 设备编号核验</h3><pre id="numbers" class="risk">仅文本格式解析，未经原音频、台账及仪表核验，不得作为异常结论。</pre>
+<h3>3. 电力设备与巡检实体提取</h3><pre id="entities">尚未分析。纠错后实体仅为文本候选，不表示真实设备身份。</pre>
+<h3>4. 领域意图识别及解释</h3><pre id="intent">尚未分析。</pre>
+</section>
+<section><h2>本条评测与已保存记录</h2><p>严格 CER 包含原始字符、标点和空白，旧兼容 CER 单列。术语报告精确率/召回率及别名等价指标；设备编号和数值槽位独立计分。无有效参考或无相关实体时显示“无分母”。历史旧记录保留旧口径；重新确认参考后新增记录才进入新汇总。</p>
+<pre id="metrics">尚未评测。</pre>
+<p><a href="/api/export?format=json" download>导出 JSON（完整原文）</a> · <a href="/api/export?format=csv" download>导出 CSV（适用于 Excel）</a> <button id="refresh" type="button">刷新记录</button></p>
+<div class="table-scroll"><table><thead><tr><th>时间 / 来源 / 题目</th><th>人工标准文本</th><th>原始输入 → 增强文本</th><th>CER 前 / 后</th><th>重新分析</th></tr></thead><tbody id="records"></tbody></table></div>
+<h3>分组汇总</h3><pre id="aggregate">尚未加载。</pre>
+<h3>独立样本与运行次数（音频按 SHA256 去重）</h3><pre id="sample-statistics">尚未加载。</pre>
+<h3>按来源 / 模型版本 / 词库版本 / 纠错开关比较</h3><pre id="comparison-groups"></pre>
+</section>
+<section><h2>v3 独立语义对照（不改变上方 v2 分析和 CER 评分）</h2>
+<p>原文证据 → 多意图候选 → 独立校验 → 不可执行草案。人工参考文本不发送给模型。默认未连接真实 LLM；Mock 是脚本演示。没有机器人控制或执行按钮。</p>
+<pre id="v3-provider-status">等待独立语义配置；默认 v2 规则。</pre>
+<label>对照模式 <select id="v3-mode"><option value="v2_rules">v2规则（默认，不调用模型）</option><option value="v3_llm">v3 LLM（Mock会明确标记）</option><option value="auto_fallback">自动回退（模型异常时保留v2）</option></select></label>
+<button id="v3-analyze" type="button">对照分析当前输入（不计 CER、不重跑 ASR）</button>
+<p id="v3-status" role="status">尚未运行独立语义对照。</p>
+<h3>原始 ASR / 手动输入</h3><pre id="v3-original">尚未对照。</pre>
+<h3>v2 规则语义结果</h3><pre id="v3-v2">尚未对照。</pre>
+<h3>v3 语义 / 明确标记的回退</h3><pre id="v3-semantic">尚未对照。</pre>
+<h3>不可执行结构化任务草案</h3><pre id="v3-draft">尚未对照。</pre>
+<h3>独立校验及失败原因</h3><pre id="v3-validation">尚未对照。</pre>
+<details><summary>未作为可信事实的模型候选（可能校验失败）</summary><pre id="v3-candidate"></pre></details>
+<p><a href="/api/semantic/schema" target="_blank" rel="noopener">查看 JSON Schema</a> · <a href="/api/semantic/export" download>导出独立语义记录 JSON</a></p>
+<h3>语义运行统计（真实音频按 SHA256 去重；未确认标注不计正确率）</h3><pre id="v3-summary">尚未运行。</pre>
+</section>
+<p>记录保存在 WSL 本地，停止服务不会删除记录。人工文本实验不能证明真实 ASR 的 WER/CER 改善。</p>
+<script type="module" src="/app.js"></script>
+</body></html>

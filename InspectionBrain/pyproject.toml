@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inspection-brain"
+version = "0.1.0"
+description = "Offline electrical inspection terminology, intent and grounded knowledge demo"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+inspection-brain = "inspection_brain.cli:main"
+inspection-brain-voice-lab = "voice_lab.server:main"
+
+[tool.setuptools.packages.find]
+include = ["inspection_brain*", "voice_lab*", "brain_v3*"]
+
+[tool.setuptools.package-data]
+inspection_brain = ["data/*.json", "data/knowledge/*.json"]
+voice_lab = ["static/*.html", "static/*.js", "static/*.css", "static/package.json"]
+brain_v3 = ["semantic-v3.schema.json"]

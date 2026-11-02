@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "description": "人工维护的示例词库；同音候选不表示ASR质量或设备身份已验证",
+  "terms": [
+    {
+      "id": "transformer",
+      "standard_name": "变压器",
+      "category": "equipment",
+      "equipment_category": "transformer",
+      "aliases": [
+        "变压设备"
+      ],
+      "homophones": [
+        "变鸭器"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "main_transformer",
+      "standard_name": "主变压器",
+      "category": "equipment",
+      "equipment_category": "main_transformer",
+      "aliases": [
+        "主变"
+      ],
+      "homophones": [
+        "主便"
+      ],
+      "parent_id": "transformer",
+      "device_ids": []
+    },
+    {
+      "id": "current_transformer",
+      "standard_name": "电流互感器",
+      "category": "equipment",
+      "equipment_category": "current_transformer",
+      "aliases": [
+        "CT",
+        "电流互感设备"
+      ],
+      "homophones": [
+        "电流互赶器"
+      ],
+      "parent_id": "instrument_transformer",
+      "device_ids": []
+    },
+    {
+      "id": "voltage_transformer",
+      "standard_name": "电压互感器",
+      "category": "equipment",
+      "equipment_category": "voltage_transformer",
+      "aliases": [
+        "PT",
+        "VT"
+      ],
+      "homophones": [
+        "电压互赶器"
+      ],
+      "parent_id": "instrument_transformer",
+      "device_ids": []
+    },
+    {
+      "id": "instrument_transformer",
+      "standard_name": "互感器",
+      "category": "equipment",
+      "equipment_category": "instrument_transformer",
+      "aliases": [],
+      "homophones": [
+        "互赶器"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "circuit_breaker",
+      "standard_name": "断路器",
+      "category": "equipment",
+      "equipment_category": "circuit_breaker",
+      "aliases": [],
+      "homophones": [
+        "断录器"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "disconnector",
+      "standard_name": "隔离开关",
+      "category": "equipment",
+      "equipment_category": "disconnector",
+      "aliases": [],
+      "homophones": [
+        "隔离开官"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "switchgear",
+      "standard_name": "开关柜",
+      "category": "equipment",
+      "equipment_category": "switchgear",
+      "aliases": [],
+      "homophones": [
+        "开关贵"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "arrester",
+      "standard_name": "避雷器",
+      "category": "equipment",
+      "equipment_category": "arrester",
+      "aliases": [],
+      "homophones": [
+        "避雷气"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "busbar",
+      "standard_name": "母线",
+      "category": "equipment",
+      "equipment_category": "busbar",
+      "aliases": [],
+      "homophones": [
+        "母现"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "insulator",
+      "standard_name": "绝缘子",
+      "category": "equipment",
+      "equipment_category": "insulator",
+      "aliases": [],
+      "homophones": [
+        "绝缘籽"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "voltage",
+      "standard_name": "电压",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "current",
+      "standard_name": "电流",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "电留"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "power",
+      "standard_name": "功率",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "功绿"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "oil_temperature",
+      "standard_name": "油温",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [
+        "油温度"
+      ],
+      "homophones": [
+        "油问"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "winding_temperature",
+      "standard_name": "绕组温度",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [
+        "绕组温"
+      ],
+      "homophones": [
+        "绕祖温度"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "load_rate",
+      "standard_name": "负载率",
+      "category": "metric",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "负载绿"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "overheating",
+      "standard_name": "过热",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "oil_leak",
+      "standard_name": "渗漏油",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [
+        "漏油",
+        "渗油"
+      ],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "partial_discharge",
+      "standard_name": "局部放电",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [
+        "局放"
+      ],
+      "homophones": [
+        "局部放店"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "insulation_fault",
+      "standard_name": "绝缘异常",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [
+        "绝缘问题"
+      ],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "poor_contact",
+      "standard_name": "接触不良",
+      "category": "defect",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [
+        "接触不凉"
+      ],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "inspection_point",
+      "standard_name": "巡检点",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [
+        "巡检点位"
+      ],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "inspection_task",
+      "standard_name": "巡检任务",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "reinspection",
+      "standard_name": "复检",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "alarm",
+      "standard_name": "告警",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [
+        "报警"
+      ],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "defect_record",
+      "standard_name": "缺陷记录",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    },
+    {
+      "id": "asset_registry",
+      "standard_name": "设备台账",
+      "category": "business",
+      "equipment_category": null,
+      "aliases": [
+        "设备台帐"
+      ],
+      "homophones": [],
+      "parent_id": null,
+      "device_ids": []
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Official PyPI CPU wheels; tested with isolated CPython 3.14.4 on Linux x86_64.
+# Download URLs and wheel SHA256 recorded in reports/asr_pip_install.json.
+sherpa-onnx==1.13.8
+sherpa-onnx-core==1.13.8
+numpy==2.5.3

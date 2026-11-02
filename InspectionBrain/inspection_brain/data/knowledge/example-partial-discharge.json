@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "example-partial-discharge",
+  "title": "示例：局部放电概念",
+  "revision": "example-v1",
+  "device_terms": [
+    "partial_discharge"
+  ],
+  "source": {
+    "kind": "example",
+    "label": "InspectionBrain人工编写的离线示例（非行业标准/非现场资料）",
+    "uri": "example://example-partial-discharge",
+    "is_example": true
+  },
+  "chunks": [
+    {
+      "id": "definition",
+      "required_terms": [
+        "partial_discharge"
+      ],
+      "intents": [
+        "anomaly_procedure_explanation",
+        "equipment_knowledge"
+      ],
+      "keywords": [
+        "什么",
+        "解释",
+        "原理"
+      ],
+      "text": "局部放电是绝缘中的局部电气放电现象，并非整个绝缘路径完全击穿。单凭图像、声音或一句描述不能确认现场发生局部放电，需要适用检测方法、采样条件、设备背景和专业复核。此示例不提供现场诊断结论。"
+    }
+  ]
+}

@@ -1,0 +1,1260 @@
+{
+  "schema_version": 1,
+  "dataset_kind": "handwritten_synthetic_text",
+  "reference_time": "2026-10-08T12:00:00+08:00",
+  "audio_samples": 0,
+  "cases": [
+    {
+      "id": "case-001",
+      "raw_text": "电流互感器和电压互感器有什么区别？",
+      "intent": "equipment_knowledge",
+      "term_ids": [
+        "current_transformer",
+        "voltage_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "current_transformer",
+          "device_number": null,
+          "device_id": null
+        },
+        {
+          "term_id": "voltage_transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "电流互感器和电压互感器有什么区别？",
+      "apply_homophones": false,
+      "status": "knowledge_answer",
+      "expected_document": "example-transformers",
+      "expected_route": null
+    },
+    {
+      "id": "case-002",
+      "raw_text": "变压器巡检一般检查哪些项目？",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "变压器巡检一般检查哪些项目？",
+      "apply_homophones": false,
+      "status": "knowledge_answer",
+      "expected_document": "example-transformer-inspection",
+      "expected_route": null
+    },
+    {
+      "id": "case-003",
+      "raw_text": "什么是局部放电？",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "partial_discharge"
+      ],
+      "entities": [],
+      "normalized_text": "什么是局部放电？",
+      "apply_homophones": false,
+      "status": "knowledge_answer",
+      "expected_document": "example-partial-discharge",
+      "expected_route": null
+    },
+    {
+      "id": "case-004",
+      "raw_text": "检查一号变压器需要哪些信息？",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "检查一号变压器需要哪些信息？",
+      "apply_homophones": false,
+      "status": "knowledge_answer",
+      "expected_document": "example-transformer-inspection",
+      "expected_route": null
+    },
+    {
+      "id": "case-005",
+      "raw_text": "一号主变最近有没有温度异常？",
+      "intent": "temperature_alarm_query",
+      "term_ids": [
+        "main_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "main_transformer",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "一号主变压器最近有没有温度异常？",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-006",
+      "raw_text": "CT和PT有什么区别？",
+      "intent": "equipment_knowledge",
+      "term_ids": [
+        "current_transformer",
+        "voltage_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "current_transformer",
+          "device_number": null,
+          "device_id": null
+        },
+        {
+          "term_id": "voltage_transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "电流互感器和电压互感器有什么区别？",
+      "apply_homophones": false,
+      "status": "knowledge_answer",
+      "expected_document": "example-transformers",
+      "expected_route": null
+    },
+    {
+      "id": "case-007",
+      "raw_text": "什么是VT？",
+      "intent": "equipment_knowledge",
+      "term_ids": [
+        "voltage_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "voltage_transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "什么是电压互感器？",
+      "apply_homophones": false,
+      "status": "knowledge_answer",
+      "expected_document": "example-transformers",
+      "expected_route": null
+    },
+    {
+      "id": "case-008",
+      "raw_text": "什么是局放？",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "partial_discharge"
+      ],
+      "entities": [],
+      "normalized_text": "什么是局部放电？",
+      "apply_homophones": false,
+      "status": "knowledge_answer",
+      "expected_document": "example-partial-discharge",
+      "expected_route": null
+    },
+    {
+      "id": "case-009",
+      "raw_text": "什么是局部放店？",
+      "intent": "unknown",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "什么是局部放店？",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-010",
+      "raw_text": "什么是局部放店？",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "partial_discharge"
+      ],
+      "entities": [],
+      "normalized_text": "什么是局部放电？",
+      "apply_homophones": true,
+      "status": "knowledge_answer",
+      "expected_document": "example-partial-discharge",
+      "expected_route": null
+    },
+    {
+      "id": "case-011",
+      "raw_text": "电流互赶器是什么？",
+      "intent": "unknown",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "电流互赶器是什么？",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-012",
+      "raw_text": "电流互赶器是什么？",
+      "intent": "equipment_knowledge",
+      "term_ids": [
+        "current_transformer"
+      ],
+      "entities": [],
+      "normalized_text": "电流互感器是什么？",
+      "apply_homophones": true,
+      "status": "knowledge_answer",
+      "expected_document": "example-transformers",
+      "expected_route": null
+    },
+    {
+      "id": "case-013",
+      "raw_text": "一号变压器今天有没有过热告警？",
+      "intent": "temperature_alarm_query",
+      "term_ids": [
+        "transformer",
+        "overheating",
+        "alarm"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "一号变压器今天有没有过热告警？",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-014",
+      "raw_text": "查询二号电流互感器设备台帐",
+      "intent": "equipment_information",
+      "term_ids": [
+        "current_transformer",
+        "asset_registry"
+      ],
+      "entities": [
+        {
+          "term_id": "current_transformer",
+          "device_number": "2",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "查询二号电流互感器设备台账",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-015",
+      "raw_text": "查询变压器编号T-001的设备资料",
+      "intent": "equipment_information",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": null,
+          "device_id": "T-001"
+        }
+      ],
+      "normalized_text": "查询变压器编号T-001的设备资料",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-016",
+      "raw_text": "查询T-999变压器的型号",
+      "intent": "equipment_information",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": null,
+          "device_id": "T-999"
+        }
+      ],
+      "normalized_text": "查询T-999变压器的型号",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-017",
+      "raw_text": "一号主变近7天巡检记录",
+      "intent": "inspection_history",
+      "term_ids": [
+        "main_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "main_transformer",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "一号主变压器近7天巡检记录",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-018",
+      "raw_text": "查询一号变压器历史缺陷记录",
+      "intent": "inspection_history",
+      "term_ids": [
+        "transformer",
+        "defect_record"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "查询一号变压器历史缺陷记录",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-019",
+      "raw_text": "机器人电池电量多少？",
+      "intent": "robot_sensor_status",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "机器人电池电量多少？",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-020",
+      "raw_text": "雷达当前状态正常吗？",
+      "intent": "robot_sensor_status",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "雷达当前状态正常吗？",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-021",
+      "raw_text": "查询云台状态",
+      "intent": "robot_sensor_status",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "查询云台状态",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-022",
+      "raw_text": "创建一号变压器巡检计划草案",
+      "intent": "inspection_plan_draft",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "创建一号变压器巡检计划草案",
+      "apply_homophones": false,
+      "status": "draft_requires_review",
+      "expected_document": null,
+      "expected_route": "brain"
+    },
+    {
+      "id": "case-023",
+      "raw_text": "制定二号开关柜复检计划",
+      "intent": "inspection_plan_draft",
+      "term_ids": [
+        "switchgear",
+        "reinspection"
+      ],
+      "entities": [
+        {
+          "term_id": "switchgear",
+          "device_number": "2",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "制定二号开关柜复检计划",
+      "apply_homophones": false,
+      "status": "draft_requires_review",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-024",
+      "raw_text": "解释变压器渗漏油原因",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "transformer",
+        "oil_leak"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "解释变压器渗漏油原因",
+      "apply_homophones": false,
+      "status": "knowledge_answer",
+      "expected_document": "example-anomaly",
+      "expected_route": null
+    },
+    {
+      "id": "case-025",
+      "raw_text": "解释过热原因",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "overheating"
+      ],
+      "entities": [],
+      "normalized_text": "解释过热原因",
+      "apply_homophones": false,
+      "status": "knowledge_answer",
+      "expected_document": "example-anomaly",
+      "expected_route": null
+    },
+    {
+      "id": "case-026",
+      "raw_text": "绝缘子是什么？",
+      "intent": "equipment_knowledge",
+      "term_ids": [
+        "insulator"
+      ],
+      "entities": [
+        {
+          "term_id": "insulator",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "绝缘子是什么？",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-027",
+      "raw_text": "我想吃面条",
+      "intent": "unknown",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "我想吃面条",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-028",
+      "raw_text": "你好",
+      "intent": "unknown",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "你好",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-029",
+      "raw_text": "ACT节目介绍",
+      "intent": "unknown",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "ACT节目介绍",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-030",
+      "raw_text": "01号变压器设备资料",
+      "intent": "equipment_information",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "01",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "01号变压器设备资料",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-031",
+      "raw_text": "十二号变压器型号",
+      "intent": "equipment_information",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "12",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "十二号变压器型号",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-032",
+      "raw_text": "一百号变压器型号",
+      "intent": "equipment_information",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "一百号变压器型号",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-033",
+      "raw_text": "一号或二号主变设备资料",
+      "intent": "equipment_information",
+      "term_ids": [
+        "main_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "main_transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "一号或二号主变压器设备资料",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-034",
+      "raw_text": "查询1.5千伏电压",
+      "intent": "unknown",
+      "term_ids": [
+        "voltage"
+      ],
+      "entities": [],
+      "normalized_text": "查询1.5千伏电压",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-035",
+      "raw_text": "一号变压器油温80℃是否异常？",
+      "intent": "temperature_alarm_query",
+      "term_ids": [
+        "transformer",
+        "oil_temperature"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "一号变压器油温80℃是否异常？",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-036",
+      "raw_text": "查询一号变压器2026-02-30温度告警",
+      "intent": "temperature_alarm_query",
+      "term_ids": [
+        "transformer",
+        "alarm"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "查询一号变压器2026-02-30温度告警",
+      "apply_homophones": false,
+      "status": "undetermined",
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-037",
+      "raw_text": "前进到一号变压器",
+      "intent": "operation_proposal",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "前进到一号变压器",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-038",
+      "raw_text": "不要前进，解释局放",
+      "intent": "operation_proposal",
+      "term_ids": [
+        "partial_discharge"
+      ],
+      "entities": [],
+      "normalized_text": "不要前进，解释局放",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-039",
+      "raw_text": "后退并查询CT资料",
+      "intent": "operation_proposal",
+      "term_ids": [
+        "current_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "current_transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "后退并查询CT资料",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-040",
+      "raw_text": "云台左转",
+      "intent": "operation_proposal",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "云台左转",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-041",
+      "raw_text": "关闭遇障停车",
+      "intent": "operation_proposal",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "关闭遇障停车",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-042",
+      "raw_text": "给一号断路器合闸",
+      "intent": "operation_proposal",
+      "term_ids": [
+        "circuit_breaker"
+      ],
+      "entities": [
+        {
+          "term_id": "circuit_breaker",
+          "device_number": "1",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "给一号断路器合闸",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-043",
+      "raw_text": "去到二号变压器检查局部放店",
+      "intent": "operation_proposal",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": "2",
+          "device_id": null
+        }
+      ],
+      "normalized_text": "去到二号变压器检查局部放店",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-044",
+      "raw_text": "请启动机器人跟随",
+      "intent": "operation_proposal",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "请启动机器人跟随",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-045",
+      "raw_text": "stop now",
+      "intent": "operation_proposal",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "stop now",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-046",
+      "raw_text": "查询温度，然后前进",
+      "intent": "operation_proposal",
+      "term_ids": [],
+      "entities": [],
+      "normalized_text": "查询温度，然后前进",
+      "apply_homophones": true,
+      "status": "requires_human_confirmation",
+      "expected_document": null,
+      "expected_route": "legacy"
+    },
+    {
+      "id": "case-047",
+      "raw_text": "变压器",
+      "intent": "unknown",
+      "term_ids": [
+        "transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "变压器",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-048",
+      "raw_text": "主变压器",
+      "intent": "unknown",
+      "term_ids": [
+        "main_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "main_transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "主变压器",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-049",
+      "raw_text": "电流互感器",
+      "intent": "unknown",
+      "term_ids": [
+        "current_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "current_transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "电流互感器",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-050",
+      "raw_text": "电压互感器",
+      "intent": "unknown",
+      "term_ids": [
+        "voltage_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "voltage_transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "电压互感器",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-051",
+      "raw_text": "互感器",
+      "intent": "unknown",
+      "term_ids": [
+        "instrument_transformer"
+      ],
+      "entities": [
+        {
+          "term_id": "instrument_transformer",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "互感器",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-052",
+      "raw_text": "断路器",
+      "intent": "unknown",
+      "term_ids": [
+        "circuit_breaker"
+      ],
+      "entities": [
+        {
+          "term_id": "circuit_breaker",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "断路器",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-053",
+      "raw_text": "隔离开关",
+      "intent": "unknown",
+      "term_ids": [
+        "disconnector"
+      ],
+      "entities": [
+        {
+          "term_id": "disconnector",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "隔离开关",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-054",
+      "raw_text": "开关柜",
+      "intent": "unknown",
+      "term_ids": [
+        "switchgear"
+      ],
+      "entities": [
+        {
+          "term_id": "switchgear",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "开关柜",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-055",
+      "raw_text": "避雷器",
+      "intent": "unknown",
+      "term_ids": [
+        "arrester"
+      ],
+      "entities": [
+        {
+          "term_id": "arrester",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "避雷器",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-056",
+      "raw_text": "母线",
+      "intent": "unknown",
+      "term_ids": [
+        "busbar"
+      ],
+      "entities": [
+        {
+          "term_id": "busbar",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "母线",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-057",
+      "raw_text": "绝缘子",
+      "intent": "unknown",
+      "term_ids": [
+        "insulator"
+      ],
+      "entities": [
+        {
+          "term_id": "insulator",
+          "device_number": null,
+          "device_id": null
+        }
+      ],
+      "normalized_text": "绝缘子",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-058",
+      "raw_text": "电压",
+      "intent": "unknown",
+      "term_ids": [
+        "voltage"
+      ],
+      "entities": [],
+      "normalized_text": "电压",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-059",
+      "raw_text": "电流",
+      "intent": "unknown",
+      "term_ids": [
+        "current"
+      ],
+      "entities": [],
+      "normalized_text": "电流",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-060",
+      "raw_text": "功率",
+      "intent": "unknown",
+      "term_ids": [
+        "power"
+      ],
+      "entities": [],
+      "normalized_text": "功率",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-061",
+      "raw_text": "油温",
+      "intent": "unknown",
+      "term_ids": [
+        "oil_temperature"
+      ],
+      "entities": [],
+      "normalized_text": "油温",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-062",
+      "raw_text": "绕组温度",
+      "intent": "unknown",
+      "term_ids": [
+        "winding_temperature"
+      ],
+      "entities": [],
+      "normalized_text": "绕组温度",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-063",
+      "raw_text": "负载率",
+      "intent": "unknown",
+      "term_ids": [
+        "load_rate"
+      ],
+      "entities": [],
+      "normalized_text": "负载率",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-064",
+      "raw_text": "过热",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "overheating"
+      ],
+      "entities": [],
+      "normalized_text": "过热",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-065",
+      "raw_text": "渗漏油",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "oil_leak"
+      ],
+      "entities": [],
+      "normalized_text": "渗漏油",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-066",
+      "raw_text": "局部放电",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "partial_discharge"
+      ],
+      "entities": [],
+      "normalized_text": "局部放电",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-067",
+      "raw_text": "绝缘异常",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "insulation_fault"
+      ],
+      "entities": [],
+      "normalized_text": "绝缘异常",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-068",
+      "raw_text": "接触不良",
+      "intent": "anomaly_procedure_explanation",
+      "term_ids": [
+        "poor_contact"
+      ],
+      "entities": [],
+      "normalized_text": "接触不良",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-069",
+      "raw_text": "巡检点",
+      "intent": "unknown",
+      "term_ids": [
+        "inspection_point"
+      ],
+      "entities": [],
+      "normalized_text": "巡检点",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-070",
+      "raw_text": "巡检任务",
+      "intent": "unknown",
+      "term_ids": [
+        "inspection_task"
+      ],
+      "entities": [],
+      "normalized_text": "巡检任务",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-071",
+      "raw_text": "复检",
+      "intent": "unknown",
+      "term_ids": [
+        "reinspection"
+      ],
+      "entities": [],
+      "normalized_text": "复检",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-072",
+      "raw_text": "告警",
+      "intent": "unknown",
+      "term_ids": [
+        "alarm"
+      ],
+      "entities": [],
+      "normalized_text": "告警",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-073",
+      "raw_text": "缺陷记录",
+      "intent": "inspection_history",
+      "term_ids": [
+        "defect_record"
+      ],
+      "entities": [],
+      "normalized_text": "缺陷记录",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    },
+    {
+      "id": "case-074",
+      "raw_text": "设备台账",
+      "intent": "equipment_information",
+      "term_ids": [
+        "asset_registry"
+      ],
+      "entities": [],
+      "normalized_text": "设备台账",
+      "apply_homophones": false,
+      "status": null,
+      "expected_document": null,
+      "expected_route": null
+    }
+  ]
+}

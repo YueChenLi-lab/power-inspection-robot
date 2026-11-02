@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "example-transformer-inspection",
+  "title": "示例：变压器巡检信息清单",
+  "revision": "example-v1",
+  "device_terms": [
+    "transformer",
+    "main_transformer"
+  ],
+  "source": {
+    "kind": "example",
+    "label": "InspectionBrain人工编写的离线示例（非行业标准/非现场资料）",
+    "uri": "example://example-transformer-inspection",
+    "is_example": true
+  },
+  "chunks": [
+    {
+      "id": "items",
+      "required_terms": [
+        "transformer"
+      ],
+      "intents": [
+        "equipment_knowledge",
+        "anomaly_procedure_explanation"
+      ],
+      "keywords": [
+        "巡检",
+        "检查"
+      ],
+      "text": "示例巡检项目：外观和可见渗漏、现场允许读取的温度与负载记录、运行声音及告警、冷却装置状态、连接部位和历史缺陷。设备结构可能不同，应先核对型号和适用规程。本示例不规定报警阈值，也不构成现场操作指令。"
+    },
+    {
+      "id": "requirements",
+      "required_terms": [
+        "transformer"
+      ],
+      "intents": [
+        "anomaly_procedure_explanation"
+      ],
+      "keywords": [
+        "需要",
+        "信息"
+      ],
+      "text": "检查指定变压器前，需确认台账唯一编号、安装位置、型号与说明书、适用巡检规程、巡检项目、历史缺陷、温度/负载记录与有效采样时间、现场许可和人员安排。当前未接入真实台账，不能把“一号”自动认定为某台实际设备。"
+    }
+  ]
+}
